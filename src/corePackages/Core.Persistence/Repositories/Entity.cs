@@ -2,7 +2,7 @@
 
 public class Entity
 {
-    //Bütün Tablolarda bu Id lazım olduğu için genel şekilde tanımlanadı.
+    //Bütün Tablolarda bu Id lazım olduğu için genel şekilde tanımlandı.
     public int Id { get; set; }
 
     public Entity()
