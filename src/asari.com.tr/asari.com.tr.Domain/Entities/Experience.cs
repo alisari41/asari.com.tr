@@ -15,6 +15,8 @@ public class Experience : Entity
     public string Description { get; set; }
     public string? ProfileHeadline { get; set; }
 
+    public virtual ICollection<ExperienceSkill> ExperienceSkills { get; set; }
+
     public Experience()
     {
 

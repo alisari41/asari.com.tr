@@ -12,6 +12,8 @@ public class LicenseAndCertification : Entity
     public string? CredentialId { get; set; }
     public string? CredentialUrl { get; set; }
 
+    public virtual ICollection<LicenseAndCertificationSkill> LicenseAndCertificationSkills { get; set; }
+
     public LicenseAndCertification()
     {
 

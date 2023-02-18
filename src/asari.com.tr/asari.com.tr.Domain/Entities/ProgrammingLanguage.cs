@@ -5,7 +5,10 @@ namespace asari.com.tr.Domain.Entities;
 public class ProgrammingLanguage : Entity
 {
     public string Name { get; set; }
+
     public virtual ICollection<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; } // Bir programlama dilinin birden fazla teknolojisi olabileceği için bu şekilde yazıldı
+    public virtual ICollection<ProjectProgrammingLanguage> ProjectProgrammingLanguages { get; set; } 
+
     public ProgrammingLanguage()
     {
 

@@ -14,6 +14,8 @@ public class Education : Entity
     public string? Description { get; set; }
     public string? MediaUrl { get; set; }
 
+    public virtual ICollection<EducationSkill> EducationSkills { get; set; }
+
     public Education()
     {
 

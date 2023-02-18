@@ -1,5 +1,11 @@
-﻿namespace asari.com.tr.Application;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-public class ApplicationServiceRegistration
+namespace asari.com.tr.Application;
+
+public static class ApplicationServiceRegistration
 {
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
+        return services;
+    }
 }

@@ -6,6 +6,11 @@ public class Skill : Entity
 {
     public string Name { get; set; }
 
+    public virtual ICollection<ProjectSkill> ProjectSkills { get; set; }
+    public virtual ICollection<ExperienceSkill> ExperienceSkills { get; set; }
+    public virtual ICollection<EducationSkill> EducationSkills { get; set; }
+    public virtual ICollection<LicenseAndCertificationSkill> LicenseAndCertificationSkills { get; set; }
+
     public Skill()
     {
 

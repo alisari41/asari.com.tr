@@ -9,6 +9,8 @@ public class Technology : Entity
     public string? ImageUrl { get; set; }
     public string Content { get; set; }
 
+    public virtual ICollection<TecgnologyProject> TecgnologyProjects { get; set; }
+
     public Technology()
     {
 
