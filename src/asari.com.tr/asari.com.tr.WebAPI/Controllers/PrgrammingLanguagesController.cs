@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
@@ -42,5 +43,13 @@ public class PrgrammingLanguagesController : BaseController
         var result = await Mediator.Send(updateProgrammingLanguageCommand);
 
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
+    {
+        var result = await Mediator.Send(deleteProgrammingLanguageCommand);
+
+        return Ok(result);
     }
 }
