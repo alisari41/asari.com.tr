@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,13 @@ public class PrgrammingLanguagesController : BaseController
         GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
 
         ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
+    {
+        var result = await Mediator.Send(getByIdProgrammingLanguageQuery);
         return Ok(result);
     }
 }

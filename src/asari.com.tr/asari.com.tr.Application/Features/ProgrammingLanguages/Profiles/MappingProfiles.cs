@@ -15,9 +15,15 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         // AutoMapper'in Profile Sınıfından gelir Amacı: Neyi Neye maplicez Source:kaynak Destination: Hedef
+
+
         #region Get List
         CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap(); // ProgrammingLanguageListModel sınıfı IPaginate sınıfıyla Maplenir
         CreateMap<ProgrammingLanguage, ProgrammingLanguageDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
         #endregion
     }
 }
