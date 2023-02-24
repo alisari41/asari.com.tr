@@ -32,4 +32,11 @@ public class ProgrammingLanguageRules
         var result = await _programmingLanguageRepository.Query().Where(x => x.Name.ToLower() == name.ToLower()).AnyAsync(); // Aynı isimde veri var mı
         if (result) throw new BusinessException("Progralama Dili kullanılmaktadır!"); // BusinessException için "Core.CrossCuttingConcerns" dan Referans almak gerekir
     }
+
+    public async Task ProgrammingLanguageConNotBeDuplicatedWhenUpdated(ProgrammingLanguage? programmingLanguage)
+    {
+        var result = await _programmingLanguageRepository.Query().Where(x => (x.Id != programmingLanguage.Id) && (x.Name.ToLower() == programmingLanguage.Name.ToLower())).AnyAsync();
+
+        if (result) throw new BusinessException("Progralama Dili kullanılmaktadır!");
+    }
 }
