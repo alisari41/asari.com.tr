@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\asari.com.tr.Application\asari.com.tr.Application.csproj" />
     <ProjectReference Include="..\asari.com.tr.Infrastructure\asari.com.tr.Infrastructure.csproj" />
     <ProjectReference Include="..\asari.com.tr.Persistence\asari.com.tr.Persistence.csproj" />
