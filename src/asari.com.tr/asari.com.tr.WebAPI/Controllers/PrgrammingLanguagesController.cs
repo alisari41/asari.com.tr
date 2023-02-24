@@ -1,4 +1,6 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
@@ -24,5 +26,12 @@ public class PrgrammingLanguagesController : BaseController
     {
         var result = await Mediator.Send(getByIdProgrammingLanguageQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
+    {
+        CreatedProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }

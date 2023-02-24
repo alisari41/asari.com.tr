@@ -20,9 +20,16 @@ public class ProgrammingLanguageRules
 
         if (programmingLanguage == null) throw new BusinessException("Programlama dili mevcut değildir.");
     }
+
     public async Task ProgrammingLanguageShouldExistWhenRequested(int id)
     {
         var result = await _programmingLanguageRepository.Query().Where(x => x.Id == id).AnyAsync();
         if (!result) throw new BusinessException("Programlama dili mevcut değildir.");
+    }
+
+    public async Task ProgrammingLanguageConNotBeDuplicatedWhenInserted(string name)
+    {
+        var result = await _programmingLanguageRepository.Query().Where(x => x.Name.ToLower() == name.ToLower()).AnyAsync(); // Aynı isimde veri var mı
+        if (result) throw new BusinessException("Progralama Dili kullanılmaktadır!"); // BusinessException için "Core.CrossCuttingConcerns" dan Referans almak gerekir
     }
 }

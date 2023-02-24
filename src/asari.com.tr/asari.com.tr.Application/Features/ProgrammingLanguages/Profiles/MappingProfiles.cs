@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -24,6 +25,11 @@ public class MappingProfiles : Profile
 
         #region Get By Id
         CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<ProgrammingLanguage, CreatedProgrammingLanguageDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommand>().ReverseMap();
         #endregion
     }
 }
