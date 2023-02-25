@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
+using asari.com.tr.Domain.Entities;
 using Core.CrossCuttingConcerns.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,14 @@ public class ProgrammingLanguageTechnologyRules
 
     public async Task TechnologyNameCanNotBeDuplicatedWhenIserted(string name)
     {
-        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => x.Name == name).AnyAsync(); // Aynı isimde veri var mı
+        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => x.Name.ToLower() == name.ToLower()).AnyAsync(); // Aynı isimde veri var mı
+        if (result) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
+    }
+
+    public async Task TechnologyNameConNotBeDuplicatedWhenUpdated(ProgrammingLanguageTechnology? programmingLanguageTechnology)
+    {
+        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => (x.Id != programmingLanguageTechnology.Id) && (x.Name.ToLower() == programmingLanguageTechnology.Name.ToLower())).AnyAsync();
+
         if (result) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
     }
 }

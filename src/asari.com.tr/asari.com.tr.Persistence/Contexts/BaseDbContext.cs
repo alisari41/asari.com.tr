@@ -55,7 +55,7 @@ public class BaseDbContext : DbContext
             a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(50).IsRequired();
-            a.HasAlternateKey(p => p.Name); // Benzersiz alan
+            //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
             a.HasMany(p => p.ProgrammingLanguageTechnologies); // Bir programlama dilinin birden fazla teknolojisi olabileceği için bu şekilde yazıldı
@@ -67,9 +67,9 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("ProgrammingLanguageTechnologies").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.ProgrramingLanguageId).HasColumnName("ProgrammingLanguageId"); // FK ( yabancıl anahtar / foreing key )
+            a.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId"); // FK ( yabancıl anahtar / foreing key )
             a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(100).IsRequired();
-            a.HasAlternateKey(p => p.Name); // Benzersiz alan
+            //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
             a.HasOne(p => p.ProgrammingLanguage); // Bir teknolojinin Bir programlama dili olur 
@@ -88,7 +88,7 @@ public class BaseDbContext : DbContext
             a.Property(p => p.FolderUrl).HasColumnName("FolderUrl").HasColumnType("NVARCHAR").IsRequired(false);
             a.Property(p => p.CreateDate).HasColumnName("CreateDate").IsRequired();
 
-            a.HasAlternateKey(p => new { p.Title, p.GithubLink }); // Benzersiz alanlar
+            //a.HasAlternateKey(p => new { p.Title, p.GithubLink }); // Benzersiz alanlar
 
             #region İlişkiler
             a.HasMany(p => p.ProjectProgrammingLanguages);
@@ -156,7 +156,7 @@ public class BaseDbContext : DbContext
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(200).IsRequired();
 
-            a.HasAlternateKey(p => p.Name); // Benzersiz alan
+            //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
             a.HasMany(p => p.ProjectSkills);
@@ -191,7 +191,7 @@ public class BaseDbContext : DbContext
             a.Property(p => p.CredentialId).HasColumnName("CredentialId").HasColumnType("NVARCHAR").IsRequired(false);
             a.Property(p => p.CredentialUrl).HasColumnName("CredentialUrl").HasColumnType("NVARCHAR").IsRequired(false);
 
-            a.HasAlternateKey(p => new { p.Name, p.CredentialId, p.CredentialUrl }); // Benzersiz alanlar
+            //a.HasAlternateKey(p => new { p.Name, p.CredentialId, p.CredentialUrl }); // Benzersiz alanlar
 
             #region İlişkiler
             a.HasMany(p => p.LicenseAndCertificationSkills);
@@ -225,7 +225,7 @@ public class BaseDbContext : DbContext
             a.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").IsRequired(false);
             a.Property(p => p.MediaUrl).HasColumnName("MediaUrl").HasColumnType("NVARCHAR").IsRequired(false);
 
-            a.HasAlternateKey(p => p.Name); // Benzersiz alanlar
+            //a.HasAlternateKey(p => p.Name); // Benzersiz alanlar
 
             #region İlişkiler
             a.HasMany(p => p.EducationSkills);

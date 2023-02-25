@@ -74,8 +74,6 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Name");
-
                     b.ToTable("Educations", (string)null);
                 });
 
@@ -207,12 +205,10 @@ namespace asari.com.tr.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CredentialId")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("CredentialId");
 
                     b.Property<string>("CredentialUrl")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("CredentialUrl");
 
@@ -240,8 +236,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name", "CredentialId", "CredentialUrl");
 
                     b.ToTable("LicensesAndCertifications", (string)null);
                 });
@@ -289,8 +283,6 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Name");
-
                     b.ToTable("ProgrammingLanguages", (string)null);
                 });
 
@@ -309,17 +301,11 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnType("NVARCHAR(100)")
                         .HasColumnName("Name");
 
-                    b.Property<int?>("ProgrammingLanguageId")
-                        .HasColumnType("int")
-                        .HasColumnName("ProgrammingLanguageId1");
-
-                    b.Property<int>("ProgrramingLanguageId")
+                    b.Property<int>("ProgrammingLanguageId")
                         .HasColumnType("int")
                         .HasColumnName("ProgrammingLanguageId");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name");
 
                     b.HasIndex("ProgrammingLanguageId");
 
@@ -355,7 +341,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("FolderUrl");
 
                     b.Property<string>("GithubLink")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("GithubLink");
 
@@ -370,8 +355,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Title");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Title", "GithubLink");
 
                     b.ToTable("Projects", (string)null);
                 });
@@ -444,8 +427,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name");
 
                     b.ToTable("Skills", (string)null);
                 });
@@ -717,7 +698,9 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     b.HasOne("asari.com.tr.Domain.Entities.ProgrammingLanguage", "ProgrammingLanguage")
                         .WithMany("ProgrammingLanguageTechnologies")
-                        .HasForeignKey("ProgrammingLanguageId");
+                        .HasForeignKey("ProgrammingLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProgrammingLanguage");
                 });

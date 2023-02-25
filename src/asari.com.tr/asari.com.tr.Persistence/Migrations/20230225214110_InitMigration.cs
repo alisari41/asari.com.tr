@@ -28,7 +28,6 @@ namespace asari.com.tr.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Educations", x => x.Id);
-                    table.UniqueConstraint("AK_Educations_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,13 +63,12 @@ namespace asari.com.tr.Persistence.Migrations
                     IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ImagegUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    CredentialId = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    CredentialUrl = table.Column<string>(type: "NVARCHAR", nullable: false)
+                    CredentialId = table.Column<string>(type: "NVARCHAR", nullable: true),
+                    CredentialUrl = table.Column<string>(type: "NVARCHAR", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LicensesAndCertifications", x => x.Id);
-                    table.UniqueConstraint("AK_LicensesAndCertifications_Name_CredentialId_CredentialUrl", x => new { x.Name, x.CredentialId, x.CredentialUrl });
                 });
 
             migrationBuilder.CreateTable(
@@ -97,7 +95,6 @@ namespace asari.com.tr.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgrammingLanguages", x => x.Id);
-                    table.UniqueConstraint("AK_ProgrammingLanguages_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,14 +107,13 @@ namespace asari.com.tr.Persistence.Migrations
                     Description = table.Column<string>(type: "NVARCHAR", nullable: false),
                     ImageUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
                     Content = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    GithubLink = table.Column<string>(type: "NVARCHAR", nullable: false),
+                    GithubLink = table.Column<string>(type: "NVARCHAR", nullable: true),
                     FolderUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
-                    table.UniqueConstraint("AK_Projects_Title_GithubLink", x => new { x.Title, x.GithubLink });
                 });
 
             migrationBuilder.CreateTable(
@@ -131,7 +127,6 @@ namespace asari.com.tr.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
-                    table.UniqueConstraint("AK_Skills_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,18 +171,17 @@ namespace asari.com.tr.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProgrammingLanguageId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
-                    ProgrammingLanguageId1 = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgrammingLanguageTechnologies", x => x.Id);
-                    table.UniqueConstraint("AK_ProgrammingLanguageTechnologies_Name", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_ProgrammingLanguageTechnologies_ProgrammingLanguages_ProgrammingLanguageId1",
-                        column: x => x.ProgrammingLanguageId1,
+                        name: "FK_ProgrammingLanguageTechnologies_ProgrammingLanguages_ProgrammingLanguageId",
+                        column: x => x.ProgrammingLanguageId,
                         principalTable: "ProgrammingLanguages",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -430,9 +424,9 @@ namespace asari.com.tr.Persistence.Migrations
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgrammingLanguageTechnologies_ProgrammingLanguageId1",
+                name: "IX_ProgrammingLanguageTechnologies_ProgrammingLanguageId",
                 table: "ProgrammingLanguageTechnologies",
-                column: "ProgrammingLanguageId1");
+                column: "ProgrammingLanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectProgrammingLanguages_ProgrammingLanguageId",

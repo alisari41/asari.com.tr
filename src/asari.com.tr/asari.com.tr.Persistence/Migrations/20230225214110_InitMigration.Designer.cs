@@ -12,7 +12,7 @@ using asari.com.tr.Persistence.Contexts;
 namespace asari.com.tr.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20230218154853_InitMigration")]
+    [Migration("20230225214110_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,8 +75,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("StartDate");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name");
 
                     b.ToTable("Educations", (string)null);
                 });
@@ -209,12 +207,10 @@ namespace asari.com.tr.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CredentialId")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("CredentialId");
 
                     b.Property<string>("CredentialUrl")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("CredentialUrl");
 
@@ -242,8 +238,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name", "CredentialId", "CredentialUrl");
 
                     b.ToTable("LicensesAndCertifications", (string)null);
                 });
@@ -291,8 +285,6 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Name");
-
                     b.ToTable("ProgrammingLanguages", (string)null);
                 });
 
@@ -311,17 +303,11 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnType("NVARCHAR(100)")
                         .HasColumnName("Name");
 
-                    b.Property<int?>("ProgrammingLanguageId")
-                        .HasColumnType("int")
-                        .HasColumnName("ProgrammingLanguageId1");
-
-                    b.Property<int>("ProgrramingLanguageId")
+                    b.Property<int>("ProgrammingLanguageId")
                         .HasColumnType("int")
                         .HasColumnName("ProgrammingLanguageId");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name");
 
                     b.HasIndex("ProgrammingLanguageId");
 
@@ -357,7 +343,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("FolderUrl");
 
                     b.Property<string>("GithubLink")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("GithubLink");
 
@@ -372,8 +357,6 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Title");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Title", "GithubLink");
 
                     b.ToTable("Projects", (string)null);
                 });
@@ -447,8 +430,6 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Name");
-
                     b.ToTable("Skills", (string)null);
                 });
 
@@ -516,115 +497,138 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("OperationClaims");
+                    b.ToTable("OperationClaims", (string)null);
                 });
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Created");
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CreatedByIp");
 
                     b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Expires");
 
                     b.Property<string>("ReasonRevoked")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ReasonRevoked");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ReplacedByToken");
 
                     b.Property<DateTime?>("Revoked")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Revoked");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("RevokedByIp");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Token");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("Core.Security.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AuthenticatorType")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("AuthenticatorType");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Email");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("FirstName");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LastName");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PasswordSalt");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Core.Security.Entities.UserOperationClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("OperationClaimId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("OperationClaimId");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
 
                     b.HasKey("Id");
 
@@ -632,7 +636,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserOperationClaims");
+                    b.ToTable("UserOperationClaims", (string)null);
                 });
 
             modelBuilder.Entity("asari.com.tr.Domain.Entities.EducationSkill", b =>
@@ -696,7 +700,9 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     b.HasOne("asari.com.tr.Domain.Entities.ProgrammingLanguage", "ProgrammingLanguage")
                         .WithMany("ProgrammingLanguageTechnologies")
-                        .HasForeignKey("ProgrammingLanguageId");
+                        .HasForeignKey("ProgrammingLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProgrammingLanguage");
                 });
