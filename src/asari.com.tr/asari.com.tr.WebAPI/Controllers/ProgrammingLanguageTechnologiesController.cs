@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanguageTechnology;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanuguageTechnologyByDynamic;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
@@ -28,5 +29,12 @@ public class ProgrammingLanguageTechnologiesController : BaseController
 
         var result = await Mediator.Send(getListProgrammingLanuguageTechnologyByDynamicQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageTechnologyCommand createProgrammingLanguageTechnologyCommand)
+    {
+        var result = await Mediator.Send(createProgrammingLanguageTechnologyCommand);
+        return Created("", result);
     }
 }
