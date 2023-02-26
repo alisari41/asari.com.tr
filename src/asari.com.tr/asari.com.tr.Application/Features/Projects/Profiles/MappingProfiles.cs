@@ -20,5 +20,9 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Project>, ProjectListModel>().ReverseMap(); // ProjectListModel sınıfı IPaginate sınıfıyla Maplenir
         CreateMap<Project, ProjectDto>().ReverseMap();
         #endregion
+
+        #region Get By Id
+        CreateMap<Project, ProjectGetByIdDto>().ReverseMap();
+        #endregion
     }
 }
