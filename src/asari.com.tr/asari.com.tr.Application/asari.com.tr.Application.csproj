@@ -9,6 +9,9 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
+    <Folder Include="Features\Projects\Commands\" />
+    <Folder Include="Features\Projects\Constants\" />
+    <Folder Include="Features\Projects\Rules\" />
   </ItemGroup>
 
   <ItemGroup>
