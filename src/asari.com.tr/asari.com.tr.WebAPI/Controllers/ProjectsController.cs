@@ -1,7 +1,9 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using asari.com.tr.Application.Features.Projects.Queries.GetByIdProject;
+using asari.com.tr.Application.Features.Projects.Queries.GetListProjectByDynamic;
 using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asari.com.tr.WebAPI.Controllers;
@@ -23,6 +25,15 @@ public class ProjectsController : BaseController
     public async Task<IActionResult> GetById([FromRoute] GetByIdProjectQuery getByIdProjectQuery) // route'daki Id ile GetByIdProjectQuery Id işlemini mapleme yapacak. Id yazılımları aynı olmak zorunda 
     {
         var result = await Mediator.Send(getByIdProjectQuery);
+        return Ok(result);
+    }
+
+    [HttpPost("GetList/ByDynamic")]
+    public async Task<ActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic) // Dynamic olduğu için HttpPost kullanıldı
+    {
+        GetListProjectByDynamicQuery getListProjectByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+
+        var result = await Mediator.Send(getListProjectByDynamicQuery);
         return Ok(result);
     }
 }
