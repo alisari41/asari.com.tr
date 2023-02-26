@@ -19,4 +19,10 @@ public class ProjectRules
         var result = await _projectRepository.Query().Where(x => x.Id == id).AnyAsync();
         if (!result) throw new BusinessException("Proje mevcut değildir.");
     }
+
+    public async Task ProjectTitleConNotBeDuplicatedWhenInserted(string title)
+    {
+        var result = await _projectRepository.Query().Where(x => x.Title.ToLower() == title.ToLower()).AnyAsync(); // Aynı isimde veri var mı
+        if (result) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
+    }
 }

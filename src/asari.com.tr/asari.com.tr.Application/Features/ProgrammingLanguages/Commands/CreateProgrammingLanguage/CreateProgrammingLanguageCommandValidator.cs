@@ -10,5 +10,6 @@ public class CreateProgrammingLanguageCommandValidator : AbstractValidator<Creat
     public CreateProgrammingLanguageCommandValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name Boş Geçilemez"); // Boş Geçilemez
+        RuleFor(x => x.Name).MaximumLength(50).WithMessage("Programlama Dilinin adı 50 karakterden uzun olamaz.");
     }
 }

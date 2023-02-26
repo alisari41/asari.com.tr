@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace asari.com.tr.Persistence.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class InitMigrationFluentAPIMappingişlemleriKaldirildi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,15 +15,15 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "NVARCHAR(500)", maxLength: 500, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Degree = table.Column<double>(type: "float", nullable: false),
-                    FieldOfStudy = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDateOrExcepted = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Grade = table.Column<string>(type: "NVARCHAR(500)", maxLength: 500, nullable: true),
-                    ActivityAndCommunity = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    Description = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    MediaUrl = table.Column<string>(type: "NVARCHAR", nullable: true)
+                    Grade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActivityAndCommunity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MediaUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,16 +36,16 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "NVARCHAR(500)", maxLength: 500, nullable: false),
-                    EmploymentType = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
-                    CompanyName = table.Column<string>(type: "NVARCHAR(250)", maxLength: 250, nullable: false),
-                    Location = table.Column<string>(type: "NVARCHAR(250)", maxLength: 250, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmploymentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Statu = table.Column<bool>(type: "bit", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Industry = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    ProfileHeadline = table.Column<string>(type: "NVARCHAR(250)", maxLength: 250, nullable: true)
+                    Industry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfileHeadline = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,13 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "NVARCHAR(500)", maxLength: 500, nullable: false),
-                    IssuingOrganization = table.Column<string>(type: "NVARCHAR", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IssuingOrganization = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ImagegUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    CredentialId = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    CredentialUrl = table.Column<string>(type: "NVARCHAR", nullable: true)
+                    ImagegUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CredentialId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CredentialUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,7 +90,7 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,12 +103,12 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "NVARCHAR(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    ImageUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    Content = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    GithubLink = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    FolderUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GithubLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FolderUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -122,7 +122,7 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "NVARCHAR(200)", maxLength: 200, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,10 +135,10 @@ namespace asari.com.tr.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "NVARCHAR(250)", maxLength: 250, nullable: false),
-                    Description = table.Column<string>(type: "NVARCHAR", nullable: false),
-                    ImageUrl = table.Column<string>(type: "NVARCHAR", nullable: true),
-                    Content = table.Column<string>(type: "NVARCHAR", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -171,7 +171,7 @@ namespace asari.com.tr.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProgrammingLanguageId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

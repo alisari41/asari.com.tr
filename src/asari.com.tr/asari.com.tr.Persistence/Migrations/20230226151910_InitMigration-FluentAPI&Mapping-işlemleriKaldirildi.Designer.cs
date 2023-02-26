@@ -12,8 +12,8 @@ using asari.com.tr.Persistence.Contexts;
 namespace asari.com.tr.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20230225214110_InitMigration")]
-    partial class InitMigration
+    [Migration("20230226151910_InitMigration-FluentAPI&Mapping-işlemleriKaldirildi")]
+    partial class InitMigrationFluentAPIMappingişlemleriKaldirildi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace asari.com.tr.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ActivityAndCommunity")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ActivityAndCommunity");
 
                     b.Property<double>("Degree")
@@ -42,7 +42,7 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Degree");
 
                     b.Property<string>("Description")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<DateTime?>("EndDateOrExcepted")
@@ -51,23 +51,20 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("FieldOfStudy")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("FieldOfStudy");
 
                     b.Property<string>("Grade")
-                        .HasMaxLength(500)
-                        .HasColumnType("NVARCHAR(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Grade");
 
                     b.Property<string>("MediaUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("MediaUrl");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("NVARCHAR(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime>("StartDate")
@@ -116,19 +113,17 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("CompanyName");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<string>("EmploymentType")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("EmploymentType");
 
                     b.Property<DateTime?>("EndDate")
@@ -137,19 +132,16 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Industry")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Industry");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Location");
 
                     b.Property<string>("ProfileHeadline")
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ProfileHeadline");
 
                     b.Property<DateTime>("StartDate")
@@ -162,8 +154,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("NVARCHAR(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
                     b.HasKey("Id");
@@ -207,11 +198,11 @@ namespace asari.com.tr.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CredentialId")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("CredentialId");
 
                     b.Property<string>("CredentialUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("CredentialUrl");
 
                     b.Property<DateTime?>("ExpirationDate")
@@ -219,7 +210,7 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("ExpirationDate");
 
                     b.Property<string>("ImagegUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImagegUrl");
 
                     b.Property<DateTime?>("IssueDate")
@@ -228,13 +219,12 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("IssuingOrganization")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("IssuingOrganization");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("NVARCHAR(500)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
@@ -279,8 +269,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
@@ -299,8 +288,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<int>("ProgrammingLanguageId")
@@ -325,7 +313,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Content");
 
                     b.Property<DateTime?>("CreateDate")
@@ -335,25 +323,24 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<string>("FolderUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("FolderUrl");
 
                     b.Property<string>("GithubLink")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("GithubLink");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageUrl");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("NVARCHAR(200)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
                     b.HasKey("Id");
@@ -424,8 +411,7 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("NVARCHAR(200)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
@@ -470,22 +456,21 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Content");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("NVARCHAR")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageUrl");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("NVARCHAR(250)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
                     b.HasKey("Id");

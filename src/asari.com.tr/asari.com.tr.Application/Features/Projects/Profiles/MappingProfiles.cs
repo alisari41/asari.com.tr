@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Projects.Dtos;
+﻿using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
+using asari.com.tr.Application.Features.Projects.Dtos;
 using asari.com.tr.Application.Features.Projects.Models;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -23,6 +24,11 @@ public class MappingProfiles : Profile
 
         #region Get By Id
         CreateMap<Project, ProjectGetByIdDto>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<Project, CreatedProjectDto>().ReverseMap();
+        CreateMap<Project, CreateProjectCommand>().ReverseMap();
         #endregion
     }
 }

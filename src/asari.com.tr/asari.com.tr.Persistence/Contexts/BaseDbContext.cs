@@ -54,7 +54,7 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(50).IsRequired();
+            a.Property(p => p.Name).HasColumnName("Name").IsRequired();
             //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
@@ -68,7 +68,7 @@ public class BaseDbContext : DbContext
             a.ToTable("ProgrammingLanguageTechnologies").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId"); // FK ( yabancıl anahtar / foreing key )
-            a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(100).IsRequired();
+            a.Property(p => p.Name).HasColumnName("Name").IsRequired();
             //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
@@ -80,12 +80,12 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("Projects").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Title).HasColumnName("Title").HasColumnType("NVARCHAR").HasMaxLength(200).IsRequired();
-            a.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").IsRequired();
-            a.Property(p => p.ImageUrl).HasColumnName("ImageUrl").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.Content).HasColumnName("Content").HasColumnType("NVARCHAR").IsRequired();
-            a.Property(p => p.GithubLink).HasColumnName("GithubLink").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.FolderUrl).HasColumnName("FolderUrl").HasColumnType("NVARCHAR").IsRequired(false);
+            a.Property(p => p.Title).HasColumnName("Title").IsRequired();
+            a.Property(p => p.Description).HasColumnName("Description").IsRequired();
+            a.Property(p => p.ImageUrl).HasColumnName("ImageUrl").IsRequired(false);
+            a.Property(p => p.Content).HasColumnName("Content").IsRequired();
+            a.Property(p => p.GithubLink).HasColumnName("GithubLink").IsRequired(false);
+            a.Property(p => p.FolderUrl).HasColumnName("FolderUrl").IsRequired(false);
             a.Property(p => p.CreateDate).HasColumnName("CreateDate").IsRequired();
 
             //a.HasAlternateKey(p => new { p.Title, p.GithubLink }); // Benzersiz alanlar
@@ -127,10 +127,10 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("Technologies").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Title).HasColumnName("Title").HasColumnType("NVARCHAR").HasMaxLength(250).IsRequired();
-            a.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").IsRequired();
-            a.Property(p => p.ImageUrl).HasColumnName("ImageUrl").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.Content).HasColumnName("Content").HasColumnType("NVARCHAR").IsRequired();
+            a.Property(p => p.Title).HasColumnName("Title").IsRequired();
+            a.Property(p => p.Description).HasColumnName("Description").IsRequired();
+            a.Property(p => p.ImageUrl).HasColumnName("ImageUrl").IsRequired(false);
+            a.Property(p => p.Content).HasColumnName("Content").IsRequired();
 
             #region İlişkiler
             a.HasMany(p => p.TecgnologyProjects);
@@ -154,7 +154,7 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("Skills").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(200).IsRequired();
+            a.Property(p => p.Name).HasColumnName("Name").IsRequired();
 
             //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
@@ -183,13 +183,13 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("LicensesAndCertifications").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(500).IsRequired();
-            a.Property(p => p.IssuingOrganization).HasColumnName("IssuingOrganization").HasColumnType("NVARCHAR").IsRequired();
+            a.Property(p => p.Name).HasColumnName("Name").IsRequired();
+            a.Property(p => p.IssuingOrganization).HasColumnName("IssuingOrganization").IsRequired();
             a.Property(p => p.IssueDate).HasColumnName("IssueDate").IsRequired(false);
             a.Property(p => p.ExpirationDate).HasColumnName("ExpirationDate").IsRequired(false);
-            a.Property(p => p.ImagegUrl).HasColumnName("ImagegUrl").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.CredentialId).HasColumnName("CredentialId").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.CredentialUrl).HasColumnName("CredentialUrl").HasColumnType("NVARCHAR").IsRequired(false);
+            a.Property(p => p.ImagegUrl).HasColumnName("ImagegUrl").IsRequired(false);
+            a.Property(p => p.CredentialId).HasColumnName("CredentialId").IsRequired(false);
+            a.Property(p => p.CredentialUrl).HasColumnName("CredentialUrl").IsRequired(false);
 
             //a.HasAlternateKey(p => new { p.Name, p.CredentialId, p.CredentialUrl }); // Benzersiz alanlar
 
@@ -215,15 +215,15 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("Educations").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(500).IsRequired();
+            a.Property(p => p.Name).HasColumnName("Name").IsRequired();
             a.Property(p => p.Degree).HasColumnName("Degree").IsRequired();
-            a.Property(p => p.FieldOfStudy).HasColumnName("FieldOfStudy").HasColumnType("NVARCHAR").HasMaxLength(100).IsRequired();
+            a.Property(p => p.FieldOfStudy).HasColumnName("FieldOfStudy").IsRequired();
             a.Property(p => p.StartDate).HasColumnName("StartDate").IsRequired();
             a.Property(p => p.EndDateOrExcepted).HasColumnName("EndDateOrExcepted").IsRequired(false);
-            a.Property(p => p.Grade).HasColumnName("Grade").HasColumnType("NVARCHAR").HasMaxLength(500).IsRequired(false);
-            a.Property(p => p.ActivityAndCommunity).HasColumnName("ActivityAndCommunity").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").IsRequired(false);
-            a.Property(p => p.MediaUrl).HasColumnName("MediaUrl").HasColumnType("NVARCHAR").IsRequired(false);
+            a.Property(p => p.Grade).HasColumnName("Grade").IsRequired(false);
+            a.Property(p => p.ActivityAndCommunity).HasColumnName("ActivityAndCommunity").IsRequired(false);
+            a.Property(p => p.Description).HasColumnName("Description").IsRequired(false);
+            a.Property(p => p.MediaUrl).HasColumnName("MediaUrl").IsRequired(false);
 
             //a.HasAlternateKey(p => p.Name); // Benzersiz alanlar
 
@@ -249,16 +249,16 @@ public class BaseDbContext : DbContext
         {
             a.ToTable("Experiences").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.Title).HasColumnName("Title").HasColumnType("NVARCHAR").HasMaxLength(500).IsRequired();
-            a.Property(p => p.EmploymentType).HasColumnName("EmploymentType").HasColumnType("NVARCHAR").HasMaxLength(100).IsRequired();
-            a.Property(p => p.CompanyName).HasColumnName("CompanyName").HasColumnType("NVARCHAR").HasMaxLength(250).IsRequired();
-            a.Property(p => p.Location).HasColumnName("Location").HasColumnType("NVARCHAR").HasMaxLength(250).IsRequired();
+            a.Property(p => p.Title).HasColumnName("Title").IsRequired();
+            a.Property(p => p.EmploymentType).HasColumnName("EmploymentType").IsRequired();
+            a.Property(p => p.CompanyName).HasColumnName("CompanyName").IsRequired();
+            a.Property(p => p.Location).HasColumnName("Location").IsRequired();
             a.Property(p => p.Statu).HasColumnName("Statu").IsRequired();
             a.Property(p => p.StartDate).HasColumnName("StartDate").IsRequired();
             a.Property(p => p.EndDate).HasColumnName("EndDate").IsRequired(false);
-            a.Property(p => p.Industry).HasColumnName("Industry").HasColumnType("NVARCHAR").HasMaxLength(100).IsRequired();
-            a.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").IsRequired();
-            a.Property(p => p.ProfileHeadline).HasColumnName("ProfileHeadline").HasColumnType("NVARCHAR").HasMaxLength(250).IsRequired(false);
+            a.Property(p => p.Industry).HasColumnName("Industry").IsRequired();
+            a.Property(p => p.Description).HasColumnName("Description").IsRequired();
+            a.Property(p => p.ProfileHeadline).HasColumnName("ProfileHeadline").IsRequired(false);
 
             #region İlişkiler
             a.HasMany(p => p.ExperienceSkills);
