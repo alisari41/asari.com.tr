@@ -34,11 +34,11 @@ public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgra
         {
             ProgrammingLanguageTechnology? programmingLanguageTechnology = await _programmingLanguageTechnologyRepository.GetAsync(x => x.Id == request.Id); // Buna ilerde ihtiyacımız olabilir. Çünkü ilerde belirli alanları alır diğer alanları almazsam buradan dönmesini sağlayabilirim.
 
-            await _programmingLanguageTechnologyRules.TechnologyShouldExistWhenRequested(request.Id);
+            await _programmingLanguageTechnologyRules.ProgrammingLanguageTechnologyShouldExistWhenRequested(request.Id);
             await _programmingLanguageRules.ProgrammingLanguageShouldExistWhenRequested(request.ProgrammingLanguageId);
 
             _mapper.Map(request, programmingLanguageTechnology);
-            await _programmingLanguageTechnologyRules.TechnologyNameConNotBeDuplicatedWhenUpdated(programmingLanguageTechnology); // Güncelleme işleminden önce mapleme yapılması gerekir.
+            await _programmingLanguageTechnologyRules.ProgrammingLanguageTechnologyNameConNotBeDuplicatedWhenUpdated(programmingLanguageTechnology); // Güncelleme işleminden önce mapleme yapılması gerekir.
 
             ProgrammingLanguageTechnology updatedProgrammingLanguageTechnology = await _programmingLanguageTechnologyRepository.UpdateAsync(programmingLanguageTechnology);
             UpdatedProgrammingLanguageTechnologyDto mappedUpdatedProgrammingLanguageTechnologyDto = _mapper.Map<UpdatedProgrammingLanguageTechnologyDto>(updatedProgrammingLanguageTechnology);

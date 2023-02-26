@@ -31,7 +31,7 @@ public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgra
 
         public async Task<CreatedProgrammingLanguageTechnologyDto> Handle(CreateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
         {
-            await _programmingLanguageTechnologyRules.TechnologyNameCanNotBeDuplicatedWhenIserted(request.Name);
+            await _programmingLanguageTechnologyRules.ProgrammingLanguageTechnologyNameCanNotBeDuplicatedWhenIserted(request.Name);
             await _programmingLanguageRules.ProgrammingLanguageShouldExistWhenRequested(request.ProgrammingLanguageId);
 
             ProgrammingLanguageTechnology mappedProgrammingLanguageTechnology = _mapper.Map<ProgrammingLanguageTechnology>(request);
