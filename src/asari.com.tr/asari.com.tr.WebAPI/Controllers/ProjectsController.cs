@@ -1,7 +1,8 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
-using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
+﻿using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
+using asari.com.tr.Application.Features.Projects.Commands.DeleteProject;
 using asari.com.tr.Application.Features.Projects.Commands.UpdateProject;
 using asari.com.tr.Application.Features.Projects.Queries.GetByIdProject;
+using asari.com.tr.Application.Features.Projects.Queries.GetListProject;
 using asari.com.tr.Application.Features.Projects.Queries.GetListProjectByDynamic;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
@@ -16,9 +17,9 @@ public class ProjectsController : BaseController
     [HttpGet("get-list")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
-        GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
+        GetListProjectQuery getListProjectQuery = new() { PageRequest = pageRequest };
 
-        var result = await Mediator.Send(getListProgrammingLanguageQuery);
+        var result = await Mediator.Send(getListProjectQuery);
         return Ok(result);
     }
 
@@ -50,5 +51,12 @@ public class ProjectsController : BaseController
     {
         var result = await Mediator.Send(updateProjectCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteProjectCommand deleteProjectCommand)
+    {
+        var result = await Mediator.Send(deleteProjectCommand);
+        return Ok(result);
     }
 }
