@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
+using asari.com.tr.Domain.Entities;
 using Core.CrossCuttingConcerns.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,13 @@ public class ProjectRules
     public async Task ProjectTitleConNotBeDuplicatedWhenInserted(string title)
     {
         var result = await _projectRepository.Query().Where(x => x.Title.ToLower() == title.ToLower()).AnyAsync(); // Aynı isimde veri var mı
+        if (result) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
+    }
+
+    public async Task ProjectTitleConNotBeDuplicatedWhenUpdated(Project? project)
+    {
+        var result = await _projectRepository.Query().Where(x => (x.Id != project.Id) && (x.Title.ToLower() == project.Title.ToLower())).AnyAsync();
+
         if (result) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
     }
 }

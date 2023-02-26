@@ -1,8 +1,6 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
+using asari.com.tr.Application.Features.Projects.Commands.UpdateProject;
 using asari.com.tr.Application.Features.Projects.Queries.GetByIdProject;
 using asari.com.tr.Application.Features.Projects.Queries.GetListProjectByDynamic;
 using Core.Application.Requests;
@@ -44,6 +42,13 @@ public class ProjectsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateProjectCommand createProjectCommand)
     {
         var result = await Mediator.Send(createProjectCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateProjectCommand updateProjectCommand)
+    {
+        var result = await Mediator.Send(updateProjectCommand);
         return Created("", result);
     }
 }
