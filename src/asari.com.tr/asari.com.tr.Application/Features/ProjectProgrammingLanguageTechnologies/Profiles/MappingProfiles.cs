@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
+﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Models;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -34,6 +35,11 @@ public class MappingProfiles : Profile
         #endregion
         #endregion
         CreateMap<IPaginate<ProjectProgrammingLanguageTechnology>, ProjectProgrammingLanguageTechnologyListModel>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<ProjectProgrammingLanguageTechnology, CreatedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProjectProgrammingLanguageTechnology, CreateProjectProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
     }
 }
