@@ -13,7 +13,7 @@ public class BaseDbContext : DbContext
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
     public DbSet<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
     public DbSet<Project> Projects { get; set; }
-    public DbSet<ProjectProgrammingLanguage> ProjectProgrammingLanguages { get; set; } //
+    public DbSet<ProjectProgrammingLanguageTechnology> ProjectProgrammingLanguageTechnologies { get; set; } //
     public DbSet<TecgnologyProject> TecgnologyProjects { get; set; } //
     public DbSet<Technology> Technologies { get; set; }
     public DbSet<ProjectSkill> ProjectSkills { get; set; } //
@@ -59,7 +59,6 @@ public class BaseDbContext : DbContext
 
             #region İlişkiler
             a.HasMany(p => p.ProgrammingLanguageTechnologies); // Bir programlama dilinin birden fazla teknolojisi olabileceği için bu şekilde yazıldı
-            a.HasMany(p => p.ProjectProgrammingLanguages);
             #endregion
         });
 
@@ -72,7 +71,12 @@ public class BaseDbContext : DbContext
             //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 
             #region İlişkiler
+            #region Has One
             a.HasOne(p => p.ProgrammingLanguage); // Bir teknolojinin Bir programlama dili olur 
+            #endregion
+            #region Has Many
+            a.HasMany(p => p.ProjectProgrammingLanguageTechnologies);
+            #endregion
             #endregion
         });
 
@@ -91,21 +95,21 @@ public class BaseDbContext : DbContext
             //a.HasAlternateKey(p => new { p.Title, p.GithubLink }); // Benzersiz alanlar
 
             #region İlişkiler
-            a.HasMany(p => p.ProjectProgrammingLanguages);
+            a.HasMany(p => p.ProjectProgrammingLanguageTechnologies);
             a.HasMany(p => p.TecgnologyProjects);
             a.HasMany(p => p.ProjectSkills);
             #endregion
         });
 
-        modelBuilder.Entity<ProjectProgrammingLanguage>(a =>
+        modelBuilder.Entity<ProjectProgrammingLanguageTechnology>(a =>
         {
-            a.ToTable("ProjectProgrammingLanguages").HasKey(k => k.Id);
+            a.ToTable("ProjectProgrammingLanguageTechnologies").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
-            a.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId");
+            a.Property(p => p.ProgrammingLanguageTechnologyId).HasColumnName("ProgrammingLanguageTechnologyId");
             a.Property(p => p.ProjectId).HasColumnName("ProjectId");
 
             #region İlişkiler
-            a.HasOne(p => p.ProgrammingLanguage);
+            a.HasOne(p => p.ProgrammingLanguageTechnology);
             a.HasOne(p => p.Project);
             #endregion
         });

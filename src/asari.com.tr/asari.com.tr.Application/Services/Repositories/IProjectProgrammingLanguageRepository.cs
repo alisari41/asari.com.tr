@@ -3,6 +3,6 @@ using Core.Persistence.Repositories;
 
 namespace asari.com.tr.Application.Services.Repositories;
 
-public interface IProjectProgrammingLanguageRepository : IAsyncRepository<ProjectProgrammingLanguage>, IRepository<ProjectProgrammingLanguage>
+public interface IProjectProgrammingLanguageRepository : IAsyncRepository<ProjectProgrammingLanguageTechnology>, IRepository<ProjectProgrammingLanguageTechnology>
 {
 }

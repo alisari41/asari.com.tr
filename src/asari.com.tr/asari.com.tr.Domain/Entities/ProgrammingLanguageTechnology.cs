@@ -8,6 +8,7 @@ public class ProgrammingLanguageTechnology : Entity
     public string Name { get; set; }
     public virtual ProgrammingLanguage? ProgrammingLanguage { get; set; } // Bir teknolojinin Bir programlama dili olur 
                                                                           // Bir çok ORM için kullanılabilinmesi için "virtual" olarak süsledik
+    public virtual ICollection<ProjectProgrammingLanguageTechnology> ProjectProgrammingLanguageTechnologies { get; set; }
 
     // Programlama dili bir tane olduğu için ProgrammingLanguage şeklinde kullanıldı ilerde mesela progralama dilleri olsa List<...> şeklinde yazılır.
 

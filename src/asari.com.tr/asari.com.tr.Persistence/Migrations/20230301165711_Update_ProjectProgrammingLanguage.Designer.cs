@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using asari.com.tr.Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using asari.com.tr.Persistence.Contexts;
 namespace asari.com.tr.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230301165711_Update_ProjectProgrammingLanguage")]
+    partial class Update_ProjectProgrammingLanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -346,7 +348,7 @@ namespace asari.com.tr.Persistence.Migrations
                     b.ToTable("Projects", (string)null);
                 });
 
-            modelBuilder.Entity("asari.com.tr.Domain.Entities.ProjectProgrammingLanguageTechnology", b =>
+            modelBuilder.Entity("asari.com.tr.Domain.Entities.ProjectProgrammingLanguage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -354,6 +356,9 @@ namespace asari.com.tr.Persistence.Migrations
                         .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("ProgrammingLanguageId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProgrammingLanguageTechnologyId")
                         .HasColumnType("int")
@@ -365,11 +370,13 @@ namespace asari.com.tr.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProgrammingLanguageId");
+
                     b.HasIndex("ProgrammingLanguageTechnologyId");
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectProgrammingLanguageTechnologies", (string)null);
+                    b.ToTable("ProjectProgrammingLanguages", (string)null);
                 });
 
             modelBuilder.Entity("asari.com.tr.Domain.Entities.ProjectSkill", b =>
@@ -690,16 +697,20 @@ namespace asari.com.tr.Persistence.Migrations
                     b.Navigation("ProgrammingLanguage");
                 });
 
-            modelBuilder.Entity("asari.com.tr.Domain.Entities.ProjectProgrammingLanguageTechnology", b =>
+            modelBuilder.Entity("asari.com.tr.Domain.Entities.ProjectProgrammingLanguage", b =>
                 {
+                    b.HasOne("asari.com.tr.Domain.Entities.ProgrammingLanguage", null)
+                        .WithMany("ProjectProgrammingLanguages")
+                        .HasForeignKey("ProgrammingLanguageId");
+
                     b.HasOne("asari.com.tr.Domain.Entities.ProgrammingLanguageTechnology", "ProgrammingLanguageTechnology")
-                        .WithMany("ProjectProgrammingLanguageTechnologies")
+                        .WithMany()
                         .HasForeignKey("ProgrammingLanguageTechnologyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("asari.com.tr.Domain.Entities.Project", "Project")
-                        .WithMany("ProjectProgrammingLanguageTechnologies")
+                        .WithMany("ProjectProgrammingLanguages")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -795,16 +806,13 @@ namespace asari.com.tr.Persistence.Migrations
             modelBuilder.Entity("asari.com.tr.Domain.Entities.ProgrammingLanguage", b =>
                 {
                     b.Navigation("ProgrammingLanguageTechnologies");
-                });
 
-            modelBuilder.Entity("asari.com.tr.Domain.Entities.ProgrammingLanguageTechnology", b =>
-                {
-                    b.Navigation("ProjectProgrammingLanguageTechnologies");
+                    b.Navigation("ProjectProgrammingLanguages");
                 });
 
             modelBuilder.Entity("asari.com.tr.Domain.Entities.Project", b =>
                 {
-                    b.Navigation("ProjectProgrammingLanguageTechnologies");
+                    b.Navigation("ProjectProgrammingLanguages");
 
                     b.Navigation("ProjectSkills");
 

@@ -12,7 +12,7 @@ public class Project : Entity
     public string? FolderUrl { get; set; }
     public DateTime? CreateDate { get; set; }
 
-    public virtual ICollection<ProjectProgrammingLanguage> ProjectProgrammingLanguages { get; set; }
+    public virtual ICollection<ProjectProgrammingLanguageTechnology> ProjectProgrammingLanguageTechnologies { get; set; }
     public virtual ICollection<TecgnologyProject> TecgnologyProjects { get; set; }
     public virtual ICollection<ProjectSkill> ProjectSkills { get; set; }
 
