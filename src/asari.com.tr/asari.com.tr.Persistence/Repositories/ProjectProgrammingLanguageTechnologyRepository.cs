@@ -5,9 +5,9 @@ using Core.Persistence.Repositories;
 
 namespace asari.com.tr.Persistence.Repositories;
 
-public class ProjectProgrammingLanguageRepository : EfRepositoryBase<ProjectProgrammingLanguageTechnology, BaseDbContext>, IProjectProgrammingLanguageRepository
+public class ProjectProgrammingLanguageTechnologyRepository : EfRepositoryBase<ProjectProgrammingLanguageTechnology, BaseDbContext>, IProjectProgrammingLanguageTechnologyRepository
 {
-    public ProjectProgrammingLanguageRepository(BaseDbContext context) : base(context)
+    public ProjectProgrammingLanguageTechnologyRepository(BaseDbContext context) : base(context)
     {
         // BaseDbContext'i Ef içerisinde Base Context e yolladı
     }

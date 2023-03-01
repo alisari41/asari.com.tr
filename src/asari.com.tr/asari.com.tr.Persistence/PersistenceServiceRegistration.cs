@@ -17,7 +17,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>(); // Eğer Biri IProgrammingLanguageRepository isterse ona ProgrammingLanguageRepository ver 
         services.AddScoped<IProgrammingLanguageTechnologyRepository, ProgrammingLanguageTechnologyRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
-        services.AddScoped<IProjectProgrammingLanguageRepository, ProjectProgrammingLanguageRepository>();
+        services.AddScoped<IProjectProgrammingLanguageTechnologyRepository, ProjectProgrammingLanguageTechnologyRepository>();
         services.AddScoped<ITecgnologyProjectRepository, TecgnologyProjectRepository>();
         services.AddScoped<ITechnologyRepository, TechnologyRepository>();
         services.AddScoped<IProjectSkillRepository, ProjectSkillRepository>();
