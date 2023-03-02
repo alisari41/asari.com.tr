@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetListProjectProgrammingLanguageTechnology;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,13 @@ namespace asari.com.tr.WebAPI.Controllers
         public async Task<IActionResult> Add([FromBody] CreateProjectProgrammingLanguageTechnologyCommand createProjectProgrammingLanguageTechnologyCommand)
         {
             var result = await Mediator.Send(createProjectProgrammingLanguageTechnologyCommand);
+            return Created("", result);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] UpdateProjectProgrammingLanguageTechnologyCommand updateProjectProgrammingLanguageTechnologyCommand)
+        {
+            var result = await Mediator.Send(updateProjectProgrammingLanguageTechnologyCommand);
             return Created("", result);
         }
     }

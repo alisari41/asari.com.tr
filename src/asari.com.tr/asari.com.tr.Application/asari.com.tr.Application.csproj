@@ -10,7 +10,6 @@
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Constants\" />
-    <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Rules\" />
     <Folder Include="Features\Projects\Constants\" />
   </ItemGroup>
 

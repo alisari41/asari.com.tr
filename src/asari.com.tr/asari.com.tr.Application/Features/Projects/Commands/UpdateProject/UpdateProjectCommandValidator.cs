@@ -8,7 +8,6 @@ public class UpdateProjectCommandValidator : AbstractValidator<UpdateProjectComm
     {
         #region Zorunlu Alanlar
         RuleFor(x => x.Id).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
-        RuleFor(x => x.Id).NotNull().WithMessage("Proje Id'si boş bırakmayınız");
         RuleFor(x => x.Title).NotEmpty().WithMessage("Proje Adını boş bırakmayınız");
         RuleFor(x => x.Description).NotEmpty().WithMessage("Proje Açıklamasını boş bırakmayınız");
         RuleFor(x => x.Content).NotEmpty().WithMessage("Proje İçeriğini boş bırakmayınız");
