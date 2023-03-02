@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.DeleteProjectProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetListProjectProgrammingLanguageTechnology;
 using Core.Application.Requests;
@@ -33,6 +34,13 @@ namespace asari.com.tr.WebAPI.Controllers
         {
             var result = await Mediator.Send(updateProjectProgrammingLanguageTechnologyCommand);
             return Created("", result);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteProjectProgrammingLanguageTechnologyCommand deleteProjectProgrammingLanguageTechnologyCommand)
+        {
+            var result = await Mediator.Send(deleteProjectProgrammingLanguageTechnologyCommand);
+            return Ok(result);
         }
     }
 }

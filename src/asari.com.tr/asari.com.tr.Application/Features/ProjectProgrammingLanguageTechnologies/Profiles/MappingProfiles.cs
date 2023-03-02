@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.DeleteProjectProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Models;
@@ -46,6 +47,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<ProjectProgrammingLanguageTechnology, UpdatedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
         CreateMap<ProjectProgrammingLanguageTechnology, UpdateProjectProgrammingLanguageTechnologyCommand>().ReverseMap(); 
+        #endregion
+
+        #region Delete
+        CreateMap<ProjectProgrammingLanguageTechnology, DeletedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProjectProgrammingLanguageTechnology, DeleteProjectProgrammingLanguageTechnologyCommand>().ReverseMap(); 
         #endregion
     }
 }
