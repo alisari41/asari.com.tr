@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
+    <Folder Include="Features\ProgrammingLanguages\Dtos\" />
+    <Folder Include="Features\ProgrammingLanguages\Models\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Constants\" />
     <Folder Include="Features\Projects\Constants\" />

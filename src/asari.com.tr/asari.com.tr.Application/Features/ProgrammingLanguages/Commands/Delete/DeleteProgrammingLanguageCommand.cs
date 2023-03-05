@@ -1,16 +1,15 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
 
-namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Delete;
 
-public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
+public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageResponse>
 {
     public int Id { get; set; }
 
-    public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
+    public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageResponse>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
@@ -23,7 +22,7 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
             _programmingLanguageRules = programmingLanguageRules;
         }
 
-        public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
+        public async Task<DeletedProgrammingLanguageResponse> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
 
             var programmingLanguage = await _programmingLanguageRepository.GetAsync(x => x.Id == request.Id);
@@ -34,9 +33,9 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
 
             var deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 
-            var deleteProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
+            var deleteProgrammingLanguageResponse = _mapper.Map<DeletedProgrammingLanguageResponse>(deletedProgrammingLanguage);
 
-            return deleteProgrammingLanguageDto;
+            return deleteProgrammingLanguageResponse;
 
         }
     }

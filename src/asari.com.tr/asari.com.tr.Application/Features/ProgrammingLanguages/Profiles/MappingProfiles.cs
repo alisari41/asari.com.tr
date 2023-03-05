@@ -1,8 +1,8 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Create;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Delete;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Update;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetById;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -21,26 +21,26 @@ public class MappingProfiles : Profile
 
 
         #region Get List
-        CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap(); // ProgrammingLanguageListModel sınıfı IPaginate sınıfıyla Maplenir
-        CreateMap<ProgrammingLanguage, ProgrammingLanguageDto>().ReverseMap();
+        CreateMap<IPaginate<ProgrammingLanguage>, GetListResponse<GetListProgrammingLanguageListItemDto>>().ReverseMap(); // ProgrammingLanguageListModel sınıfı IPaginate sınıfıyla Maplenir
+        CreateMap<ProgrammingLanguage, GetListProgrammingLanguageListItemDto>().ReverseMap();
         #endregion
 
         #region Get By Id
-        CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, GetByIdProgrammingLanguageGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create
-        CreateMap<ProgrammingLanguage, CreatedProgrammingLanguageDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, CreatedProgrammingLanguageResponse>().ReverseMap();
         CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommand>().ReverseMap();
         #endregion
 
         #region Update
-        CreateMap<ProgrammingLanguage, UpdatedProgrammingLanguageDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, UpdatedProgrammingLanguageResponse>().ReverseMap();
         CreateMap<ProgrammingLanguage, UpdateProgrammingLanguageCommand>().ReverseMap();
         #endregion
 
         #region Delete
-        CreateMap<ProgrammingLanguage, DeletedProgrammingLanguageDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, DeletedProgrammingLanguageResponse>().ReverseMap();
         CreateMap<ProgrammingLanguage, DeleteProgrammingLanguageCommand>().ReverseMap();
         #endregion
     }

@@ -1,10 +1,11 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
+using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 
-public class ProgrammingLanguageRules
+public class ProgrammingLanguageRules : BaseBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
 

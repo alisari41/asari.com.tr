@@ -1,18 +1,17 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using MediatR;
 
-namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Create;
 
-public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
+public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageResponse>
 {
     public string Name { get; set; }
 
     // Bir tanede Handlerımız var yani böyle bir command sıraya koyulursa hangi Handler çalışacak onu IRequestHandler olduğunu belirtiyoruz. Hem çalışacağımız command'i hemde dönüş tipimizi belirtiyoruz.
-    public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
+    public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageResponse>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
@@ -25,16 +24,16 @@ public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLangu
             _programmingLanguageRules = programmingLanguageRules;
         }
 
-        public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedProgrammingLanguageResponse> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
             await _programmingLanguageRules.ProgrammingLanguageConNotBeDuplicatedWhenInserted(request.Name);
 
             ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request); // mapper kullanarak Parametre olarak gelen "request"'i ProgrammingLanguage nesnesine çevir. 
-            ProgrammingLanguage createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage); 
-            CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
+            ProgrammingLanguage createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
+            CreatedProgrammingLanguageResponse createdProgrammingLanguageResponse = _mapper.Map<CreatedProgrammingLanguageResponse>(createdProgrammingLanguage);
 
 
-            return createdProgrammingLanguageDto;
+            return createdProgrammingLanguageResponse;
         }
     }
 }

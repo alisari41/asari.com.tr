@@ -1,11 +1,10 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Models;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
-using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Create;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Delete;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Update;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetById;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetList;
 using Core.Application.Requests;
+using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asari.com.tr.WebAPI.Controllers;
@@ -19,7 +18,7 @@ public class PrgrammingLanguagesController : BaseController
     {
         GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
 
-        ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageQuery);
+        GetListResponse<GetListProgrammingLanguageListItemDto> result = await Mediator.Send(getListProgrammingLanguageQuery);
         return Ok(result);
     }
 
@@ -33,7 +32,7 @@ public class PrgrammingLanguagesController : BaseController
     [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
     {
-        CreatedProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        var result = await Mediator.Send(createProgrammingLanguageCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
         return Created("", result);
     }
 
