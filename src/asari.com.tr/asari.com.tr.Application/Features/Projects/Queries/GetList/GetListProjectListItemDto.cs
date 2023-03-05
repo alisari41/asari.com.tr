@@ -1,6 +1,8 @@
-﻿namespace asari.com.tr.Application.Features.Projects.Dtos;
+﻿using Core.Application.Dtos;
 
-public class UpdatedProjectDto
+namespace asari.com.tr.Application.Features.Projects.Queries.GetList;
+
+public class GetListProjectListItemDto : IDto
 {
     public int Id { get; set; }
     public string Title { get; set; }

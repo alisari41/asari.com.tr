@@ -1,6 +1,6 @@
-﻿namespace asari.com.tr.Application.Features.Projects.Dtos;
+﻿namespace asari.com.tr.Application.Features.Projects.Commands.Create;
 
-public class ProjectDto
+public class CreatedProjectResponse
 {
     public int Id { get; set; }
     public string Title { get; set; }

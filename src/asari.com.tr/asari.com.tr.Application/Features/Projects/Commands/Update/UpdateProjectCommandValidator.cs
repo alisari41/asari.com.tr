@@ -1,15 +1,13 @@
 ﻿using FluentValidation;
 
-namespace asari.com.tr.Application.Features.Projects.Commands.CreateProject;
+namespace asari.com.tr.Application.Features.Projects.Commands.Update;
 
-public class CreateProjectCommandValidator : AbstractValidator<CreateProjectCommand>
+public class UpdateProjectCommandValidator : AbstractValidator<UpdateProjectCommand>
 {
-    // FluentValidation ile Format Doğrulama işlemleri
-    // Ekeleme işlemleri için ayrı güncelleme işlemleri vs. ler için ayrı doğrulama işlemleri olabileceği için "CreateBrandCommand" ile ekleme işlemleri için yapıldı
-
-    public CreateProjectCommandValidator()
+    public UpdateProjectCommandValidator()
     {
         #region Zorunlu Alanlar
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
         RuleFor(x => x.Title).NotEmpty().WithMessage("Proje Adını boş bırakmayınız");
         RuleFor(x => x.Description).NotEmpty().WithMessage("Proje Açıklamasını boş bırakmayınız");
         RuleFor(x => x.Content).NotEmpty().WithMessage("Proje İçeriğini boş bırakmayınız");

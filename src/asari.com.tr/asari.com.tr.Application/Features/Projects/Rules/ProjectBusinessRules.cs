@@ -1,14 +1,15 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
+using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 
 namespace asari.com.tr.Application.Features.Projects.Rules;
 
-public class ProjectRules
+public class ProjectBusinessRules : BaseBusinessRules
 {
     private readonly IProjectRepository _projectRepository;
 
-    public ProjectRules(IProjectRepository projectRepository)
+    public ProjectBusinessRules(IProjectRepository projectRepository)
     {
         _projectRepository = projectRepository;
     }

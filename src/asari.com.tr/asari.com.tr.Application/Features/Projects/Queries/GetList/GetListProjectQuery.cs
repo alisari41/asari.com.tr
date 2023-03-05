@@ -1,19 +1,17 @@
-﻿using asari.com.tr.Application.Features.Projects.Dtos;
-using asari.com.tr.Application.Features.Projects.Models;
-using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
-namespace asari.com.tr.Application.Features.Projects.Queries.GetListProject;
+namespace asari.com.tr.Application.Features.Projects.Queries.GetList;
 
-public class GetListProjectQuery : IRequest<ProjectListModel>
+public class GetListProjectQuery : IRequest<GetListResponse<GetListProjectListItemDto>>
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
 
-    public class GetListProjectQueryHandler : IRequestHandler<GetListProjectQuery, ProjectListModel>
+    public class GetListProjectQueryHandler : IRequestHandler<GetListProjectQuery, GetListResponse<GetListProjectListItemDto>>
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
@@ -24,11 +22,11 @@ public class GetListProjectQuery : IRequest<ProjectListModel>
             _mapper = mapper;
         }
 
-        public async Task<ProjectListModel> Handle(GetListProjectQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetListProjectListItemDto>> Handle(GetListProjectQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Project> projects = await _projectRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
-            ProjectListModel mappedProjectListModel = _mapper.Map<ProjectListModel>(projects);
+            GetListResponse<GetListProjectListItemDto> mappedProjectListModel = _mapper.Map<GetListResponse<GetListProjectListItemDto>>(projects);
 
             return mappedProjectListModel;
         }

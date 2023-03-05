@@ -1,11 +1,12 @@
-﻿using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
-using asari.com.tr.Application.Features.Projects.Commands.DeleteProject;
-using asari.com.tr.Application.Features.Projects.Commands.UpdateProject;
-using asari.com.tr.Application.Features.Projects.Queries.GetByIdProject;
-using asari.com.tr.Application.Features.Projects.Queries.GetListProject;
-using asari.com.tr.Application.Features.Projects.Queries.GetListProjectByDynamic;
+﻿using asari.com.tr.Application.Features.Projects.Commands.Create;
+using asari.com.tr.Application.Features.Projects.Commands.Delete;
+using asari.com.tr.Application.Features.Projects.Commands.Update;
+using asari.com.tr.Application.Features.Projects.Queries.GetById;
+using asari.com.tr.Application.Features.Projects.Queries.GetList;
+using asari.com.tr.Application.Features.Projects.Queries.GetListByDynamic;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
+using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asari.com.tr.WebAPI.Controllers;
@@ -19,7 +20,7 @@ public class ProjectsController : BaseController
     {
         GetListProjectQuery getListProjectQuery = new() { PageRequest = pageRequest };
 
-        var result = await Mediator.Send(getListProjectQuery);
+        GetListResponse<GetListProjectListItemDto> result = await Mediator.Send(getListProjectQuery);
         return Ok(result);
     }
 
@@ -35,7 +36,7 @@ public class ProjectsController : BaseController
     {
         GetListProjectByDynamicQuery getListProjectByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
 
-        var result = await Mediator.Send(getListProjectByDynamicQuery);
+        GetListResponse<GetListProjectListItemDto> result = await Mediator.Send(getListProjectByDynamicQuery);
         return Ok(result);
     }
 

@@ -20,10 +20,10 @@ public class UpdateProjectProgrammingLanguageTechnologyCommand : IRequest<Update
         private readonly IProjectProgrammingLanguageTechnologyRepository _projectProgrammingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
         private readonly ProjectProgrammingLanguageTechnologyBusinessRules _projectProgrammingLanguageTechnologyRules;
-        private readonly ProjectRules _projectRules;
+        private readonly ProjectBusinessRules _projectRules;
         private readonly ProgrammingLanguageTechnologyBusinessRules _programmingLanguageTechnologyRules;
 
-        public UpdateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyBusinessRules projectProgrammingLanguageTechnologyRules, ProjectRules projectRules, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules)
+        public UpdateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyBusinessRules projectProgrammingLanguageTechnologyRules, ProjectBusinessRules projectRules, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules)
         {
             _projectProgrammingLanguageTechnologyRepository = projectProgrammingLanguageTechnologyRepository;
             _mapper = mapper;

@@ -1,8 +1,8 @@
-﻿using asari.com.tr.Application.Features.Projects.Commands.CreateProject;
-using asari.com.tr.Application.Features.Projects.Commands.DeleteProject;
-using asari.com.tr.Application.Features.Projects.Commands.UpdateProject;
-using asari.com.tr.Application.Features.Projects.Dtos;
-using asari.com.tr.Application.Features.Projects.Models;
+﻿using asari.com.tr.Application.Features.Projects.Commands.Create;
+using asari.com.tr.Application.Features.Projects.Commands.Delete;
+using asari.com.tr.Application.Features.Projects.Commands.Update;
+using asari.com.tr.Application.Features.Projects.Queries.GetById;
+using asari.com.tr.Application.Features.Projects.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -20,26 +20,26 @@ public class MappingProfiles : Profile
         // AutoMapper'in Profile Sınıfından gelir Amacı: Neyi Neye maplicez Source:kaynak Destination: Hedef
 
         #region Get List
-        CreateMap<IPaginate<Project>, ProjectListModel>().ReverseMap(); // ProjectListModel sınıfı IPaginate sınıfıyla Maplenir
-        CreateMap<Project, ProjectDto>().ReverseMap();
+        CreateMap<IPaginate<Project>, GetListResponse<GetListProjectListItemDto>>().ReverseMap(); // ProjectListModel sınıfı IPaginate sınıfıyla Maplenir
+        CreateMap<Project, GetListProjectListItemDto>().ReverseMap();
         #endregion
 
         #region Get By Id
-        CreateMap<Project, ProjectGetByIdDto>().ReverseMap();
+        CreateMap<Project, GetByIdProjectResponse>().ReverseMap();
         #endregion
 
         #region Create
-        CreateMap<Project, CreatedProjectDto>().ReverseMap();
+        CreateMap<Project, CreatedProjectResponse>().ReverseMap();
         CreateMap<Project, CreateProjectCommand>().ReverseMap();
         #endregion
 
         #region Update
-        CreateMap<Project, UpdatedProjectDto>().ReverseMap();
+        CreateMap<Project, UpdatedProjectReponse>().ReverseMap();
         CreateMap<Project, UpdateProjectCommand>().ReverseMap();
         #endregion
 
         #region Delete
-        CreateMap<Project, DeletedProjectDto>().ReverseMap();
+        CreateMap<Project, DeletedProjectResponse>().ReverseMap();
         CreateMap<Project, DeleteProjectCommand>().ReverseMap();
         #endregion
     }

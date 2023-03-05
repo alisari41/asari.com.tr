@@ -17,6 +17,8 @@
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Dtos\" />
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Models\" />
     <Folder Include="Features\Projects\Constants\" />
+    <Folder Include="Features\Projects\Dtos\" />
+    <Folder Include="Features\Projects\Models\" />
   </ItemGroup>
 
   <ItemGroup>
