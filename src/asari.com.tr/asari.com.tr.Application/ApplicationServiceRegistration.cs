@@ -32,7 +32,7 @@ public static class ApplicationServiceRegistration
 
         #region İş Kuralllarının Servislseri
         services.AddScoped<ProgrammingLanguageRules>(); // Business Kuralları bir kere bellekte durur.
-        services.AddScoped<ProgrammingLanguageTechnologyRules>(); // Business Kuralları bir kere bellekte durur.
+        services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<ProjectRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<ProjectProgrammingLanguageTechnologyRules>(); // Business Kuralları bir kere bellekte durur.
         #endregion

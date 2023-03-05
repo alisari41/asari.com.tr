@@ -1,28 +1,27 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using MediatR;
 
-namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.UpdateProgrammingLanguageTechnology;
+namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
 
-public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgrammingLanguageTechnologyDto>
+public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgrammingLanguageTechnologyResponse>
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public int Id { get; set; }
     public int ProgrammingLanguageId { get; set; }
     public string Name { get; set; }
 
-    public class UpdateProgrammingLanguageTechnologyCommandHandler : IRequestHandler<UpdateProgrammingLanguageTechnologyCommand, UpdatedProgrammingLanguageTechnologyDto>
+    public class UpdateProgrammingLanguageTechnologyCommandHandler : IRequestHandler<UpdateProgrammingLanguageTechnologyCommand, UpdatedProgrammingLanguageTechnologyResponse>
     {
         private readonly IProgrammingLanguageTechnologyRepository _programmingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
-        private readonly ProgrammingLanguageTechnologyRules _programmingLanguageTechnologyRules;
+        private readonly ProgrammingLanguageTechnologyBusinessRules _programmingLanguageTechnologyRules;
         private readonly ProgrammingLanguageRules _programmingLanguageRules;
 
-        public UpdateProgrammingLanguageTechnologyCommandHandler(IProgrammingLanguageTechnologyRepository programmingLanguageTechnologyRepository, IMapper mapper, ProgrammingLanguageTechnologyRules programmingLanguageTechnologyRules, ProgrammingLanguageRules programmingLanguageRules)
+        public UpdateProgrammingLanguageTechnologyCommandHandler(IProgrammingLanguageTechnologyRepository programmingLanguageTechnologyRepository, IMapper mapper, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules, ProgrammingLanguageRules programmingLanguageRules)
         {
             _programmingLanguageTechnologyRepository = programmingLanguageTechnologyRepository;
             _mapper = mapper;
@@ -30,7 +29,7 @@ public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgra
             _programmingLanguageRules = programmingLanguageRules;
         }
 
-        public async Task<UpdatedProgrammingLanguageTechnologyDto> Handle(UpdateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<UpdatedProgrammingLanguageTechnologyResponse> Handle(UpdateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
         {
             ProgrammingLanguageTechnology? programmingLanguageTechnology = await _programmingLanguageTechnologyRepository.GetAsync(x => x.Id == request.Id); // Buna ilerde ihtiyacımız olabilir. Çünkü ilerde belirli alanları alır diğer alanları almazsam buradan dönmesini sağlayabilirim.
 
@@ -41,7 +40,7 @@ public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgra
             await _programmingLanguageTechnologyRules.ProgrammingLanguageTechnologyNameConNotBeDuplicatedWhenUpdated(programmingLanguageTechnology); // Güncelleme işleminden önce mapleme yapılması gerekir.
 
             ProgrammingLanguageTechnology updatedProgrammingLanguageTechnology = await _programmingLanguageTechnologyRepository.UpdateAsync(programmingLanguageTechnology);
-            UpdatedProgrammingLanguageTechnologyDto mappedUpdatedProgrammingLanguageTechnologyDto = _mapper.Map<UpdatedProgrammingLanguageTechnologyDto>(updatedProgrammingLanguageTechnology);
+            UpdatedProgrammingLanguageTechnologyResponse mappedUpdatedProgrammingLanguageTechnologyDto = _mapper.Map<UpdatedProgrammingLanguageTechnologyResponse>(updatedProgrammingLanguageTechnology);
 
             return mappedUpdatedProgrammingLanguageTechnologyDto;
         }

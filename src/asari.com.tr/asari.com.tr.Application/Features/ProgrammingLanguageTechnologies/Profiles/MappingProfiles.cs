@@ -1,8 +1,7 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.DeleteProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.UpdateProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Dtos;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Models;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Delete;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -19,28 +18,28 @@ public class MappingProfiles : Profile
     {
         #region Get List / İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
         #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
-        CreateMap<ProgrammingLanguageTechnology, ProgrammingLanguageTechnologyDto>()
+        CreateMap<ProgrammingLanguageTechnology, GetListProgrammingLanguageTechnologyListItemDto>()
                                     .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguage.Name)) // ProgrammingLanguageName'i map işlemi yapamayacağı için biz verdik
-                                    // .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguage.Name))     Mesela Başka alanlarıda bu şekilde MAPleyebiliriz
+                                                                                                                                    // .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguage.Name))     Mesela Başka alanlarıda bu şekilde MAPleyebiliriz
                                     .ReverseMap();
         #endregion
 
-        CreateMap<IPaginate<ProgrammingLanguageTechnology>, ProgrammingLanguageTechnologyListModel>().ReverseMap();
+        CreateMap<IPaginate<ProgrammingLanguageTechnology>, GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>>().ReverseMap();
 
         #endregion
 
         #region Create
-        CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyReponse>().ReverseMap();
         CreateMap<ProgrammingLanguageTechnology, CreateProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
 
         #region Update
-        CreateMap<ProgrammingLanguageTechnology, UpdatedProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, UpdatedProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProgrammingLanguageTechnology, UpdateProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
 
         #region Delete
-        CreateMap<ProgrammingLanguageTechnology, DeletedProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, DeletedProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProgrammingLanguageTechnology, DeleteProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
     }

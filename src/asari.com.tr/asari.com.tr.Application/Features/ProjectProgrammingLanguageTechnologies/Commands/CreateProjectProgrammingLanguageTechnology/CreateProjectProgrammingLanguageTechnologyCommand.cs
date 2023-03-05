@@ -21,9 +21,9 @@ public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<Create
         private readonly IMapper _mapper;
         private readonly ProjectProgrammingLanguageTechnologyRules _projectProgrammingLanguageTechnologyRules;
         private readonly ProjectRules _projectRules;
-        private readonly ProgrammingLanguageTechnologyRules _programmingLanguageTechnologyRules;
+        private readonly ProgrammingLanguageTechnologyBusinessRules _programmingLanguageTechnologyRules;
 
-        public CreateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyRules projectProgrammingLanguageTechnologyRules, ProjectRules projectRules, ProgrammingLanguageTechnologyRules programmingLanguageTechnologyRules)
+        public CreateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyRules projectProgrammingLanguageTechnologyRules, ProjectRules projectRules, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules)
         {
             _projectProgrammingLanguageTechnologyRepository = projectProgrammingLanguageTechnologyRepository;
             _mapper = mapper;

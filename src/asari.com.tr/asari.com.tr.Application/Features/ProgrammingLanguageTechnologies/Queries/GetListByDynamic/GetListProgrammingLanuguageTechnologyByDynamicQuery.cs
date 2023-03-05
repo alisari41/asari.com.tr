@@ -1,4 +1,4 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Models;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -8,14 +8,14 @@ using Core.Persistence.Paging;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanuguageTechnologyByDynamic;
+namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListByDynamic;
 
-public class GetListProgrammingLanuguageTechnologyByDynamicQuery : IRequest<ProgrammingLanguageTechnologyListModel>
+public class GetListProgrammingLanuguageTechnologyByDynamicQuery : IRequest<GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>>
 {
     public Dynamic Dynamic { get; set; } // Dinamik sorgu yazmak için kullanacağız
     public PageRequest PageRequest { get; set; }
 
-    public class GetListProgrammingLanuguageTechnologyByDynamicQueryJandler : IRequestHandler<GetListProgrammingLanuguageTechnologyByDynamicQuery, ProgrammingLanguageTechnologyListModel>
+    public class GetListProgrammingLanuguageTechnologyByDynamicQueryJandler : IRequestHandler<GetListProgrammingLanuguageTechnologyByDynamicQuery, GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>>
     {
         private readonly IProgrammingLanguageTechnologyRepository _programmingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ public class GetListProgrammingLanuguageTechnologyByDynamicQuery : IRequest<Prog
             _mapper = mapper;
         }
 
-        public async Task<ProgrammingLanguageTechnologyListModel> Handle(GetListProgrammingLanuguageTechnologyByDynamicQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>> Handle(GetListProgrammingLanuguageTechnologyByDynamicQuery request, CancellationToken cancellationToken)
         {
             IPaginate<ProgrammingLanguageTechnology> programmingLanguageTechnologies = await _programmingLanguageTechnologyRepository.GetListByDynamicAsync( // Dinamik Sorgu
                                                                                                     request.Dynamic,
@@ -34,7 +34,7 @@ public class GetListProgrammingLanuguageTechnologyByDynamicQuery : IRequest<Prog
                                                                                                     index: request.PageRequest.Page,
                                                                                                     size: request.PageRequest.PageSize);
 
-            ProgrammingLanguageTechnologyListModel mappedProgrammingLanguageTechnologyListModel = _mapper.Map<ProgrammingLanguageTechnologyListModel>(programmingLanguageTechnologies);
+            GetListResponse<GetListProgrammingLanguageTechnologyListItemDto> mappedProgrammingLanguageTechnologyListModel = _mapper.Map<GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>>(programmingLanguageTechnologies);
 
             return mappedProgrammingLanguageTechnologyListModel;
         }

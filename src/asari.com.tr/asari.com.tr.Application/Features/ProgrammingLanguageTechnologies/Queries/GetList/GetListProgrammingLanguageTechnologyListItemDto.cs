@@ -1,6 +1,8 @@
-﻿namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Dtos;
+﻿using Core.Application.Dtos;
 
-public class ProgrammingLanguageTechnologyDto
+namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
+
+public class GetListProgrammingLanguageTechnologyListItemDto : IDto
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
     public int Id { get; set; }

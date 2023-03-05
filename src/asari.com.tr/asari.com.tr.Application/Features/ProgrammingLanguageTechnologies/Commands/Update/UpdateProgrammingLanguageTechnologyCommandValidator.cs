@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.UpdateProgrammingLanguageTechnology;
+namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
 
 public class UpdateProgrammingLanguageTechnologyCommandValidator : AbstractValidator<UpdateProgrammingLanguageTechnologyCommand>
 {

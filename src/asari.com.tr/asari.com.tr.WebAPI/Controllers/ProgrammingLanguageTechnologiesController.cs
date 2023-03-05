@@ -1,10 +1,11 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.DeleteProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.UpdateProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListProgrammingLanuguageTechnologyByDynamic;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Delete;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetListByDynamic;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
+using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asari.com.tr.WebAPI.Controllers;
@@ -17,10 +18,10 @@ public class ProgrammingLanguageTechnologiesController : BaseController
     public async Task<ActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListProgrammingLanguageTechnologyQuery getListPrgrammingLanguageTecnologyQuery = new() { PageRequest = pageRequest }; // Bu yeni kullanımdır eski hali aşağıdaki gibidir.
-                                                                                            // GetListBrandQuery getListBrandQuery = new GetListBrandQuery();
-                                                                                            // getListBrandQuery.PageRequest = pageRequest;
+                                                                                                                                 // GetListBrandQuery getListBrandQuery = new GetListBrandQuery();
+                                                                                                                                 // getListBrandQuery.PageRequest = pageRequest;
 
-        var result = await Mediator.Send(getListPrgrammingLanguageTecnologyQuery);
+        GetListResponse<GetListProgrammingLanguageTechnologyListItemDto> result = await Mediator.Send(getListPrgrammingLanguageTecnologyQuery);
         return Ok(result);
     }
 
@@ -29,7 +30,7 @@ public class ProgrammingLanguageTechnologiesController : BaseController
     {
         GetListProgrammingLanuguageTechnologyByDynamicQuery getListProgrammingLanuguageTechnologyByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
 
-        var result = await Mediator.Send(getListProgrammingLanuguageTechnologyByDynamicQuery);
+        GetListResponse<GetListProgrammingLanguageTechnologyListItemDto> result = await Mediator.Send(getListProgrammingLanuguageTechnologyByDynamicQuery);
         return Ok(result);
     }
 
