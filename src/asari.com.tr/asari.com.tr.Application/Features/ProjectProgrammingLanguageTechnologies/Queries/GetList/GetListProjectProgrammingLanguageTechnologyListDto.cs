@@ -1,6 +1,8 @@
-﻿namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
+﻿using Core.Application.Dtos;
 
-public class ProjectProgrammingLanguageTechnologyListDto
+namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
+
+public class GetListProjectProgrammingLanguageTechnologyListDto : IDto
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
     #region Tablo Id

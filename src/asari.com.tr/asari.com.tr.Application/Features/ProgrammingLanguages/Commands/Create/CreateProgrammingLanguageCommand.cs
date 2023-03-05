@@ -15,9 +15,9 @@ public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLangu
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
-        private readonly ProgrammingLanguageRules _programmingLanguageRules;
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
+        public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
             _mapper = mapper;

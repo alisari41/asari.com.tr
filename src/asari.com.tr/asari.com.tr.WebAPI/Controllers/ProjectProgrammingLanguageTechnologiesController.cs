@@ -1,8 +1,9 @@
-﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.DeleteProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetListProjectProgrammingLanguageTechnology;
+﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Delete;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
 using Core.Application.Requests;
+using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asari.com.tr.WebAPI.Controllers
@@ -15,10 +16,10 @@ namespace asari.com.tr.WebAPI.Controllers
         public async Task<ActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListProjectProgrammingLanguageTechnologyQuery getListProjectProgrammingLanguageTechnologyQuery = new() { PageRequest = pageRequest }; // Bu yeni kullanımdır eski hali aşağıdaki gibidir.
-                                                                                                // GetListBrandQuery getListBrandQuery = new GetListBrandQuery();
-                                                                                                // getListBrandQuery.PageRequest = pageRequest;
+                                                                                                                                                     // GetListBrandQuery getListBrandQuery = new GetListBrandQuery();
+                                                                                                                                                     // getListBrandQuery.PageRequest = pageRequest;
 
-            var result = await Mediator.Send(getListProjectProgrammingLanguageTechnologyQuery);
+            GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto> result = await Mediator.Send(getListProjectProgrammingLanguageTechnologyQuery);
             return Ok(result);
         }
 

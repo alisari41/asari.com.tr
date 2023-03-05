@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
 
-namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
+namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
 
-public class UpdateProjectProgrammingLanguageTechnologyCommandValidator : AbstractValidator<UpdateProjectProgrammingLanguageTechnologyCommand>
+public class CreateProjectProgrammingLanguageTechnologyCommandValidator : AbstractValidator<CreateProjectProgrammingLanguageTechnologyCommand>
 {
     // FluentValidation ile Format Doğrulama işlemleri
     // Ekeleme işlemleri için ayrı güncelleme işlemleri vs. ler için ayrı doğrulama işlemleri olabileceği için "CreateBrandCommand" ile ekleme işlemleri için yapıldı
 
-    public UpdateProjectProgrammingLanguageTechnologyCommandValidator()
+    public CreateProjectProgrammingLanguageTechnologyCommandValidator()
     {
         #region Zorunlu Alanlar
         RuleFor(x => x.ProgrammingLanguageTechnologyId).NotEmpty().WithMessage("Programlama Dili Id'si Boş olamaz");

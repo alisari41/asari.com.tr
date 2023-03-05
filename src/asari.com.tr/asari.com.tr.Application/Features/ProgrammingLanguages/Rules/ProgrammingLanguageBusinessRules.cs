@@ -5,11 +5,11 @@ using Core.CrossCuttingConcerns.Exceptions;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 
-public class ProgrammingLanguageRules : BaseBusinessRules
+public class ProgrammingLanguageBusinessRules : BaseBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
 
-    public ProgrammingLanguageRules(IProgrammingLanguageRepository programmingLanguageRepository)
+    public ProgrammingLanguageBusinessRules(IProgrammingLanguageRepository programmingLanguageRepository)
     {
         _programmingLanguageRepository = programmingLanguageRepository;
     }

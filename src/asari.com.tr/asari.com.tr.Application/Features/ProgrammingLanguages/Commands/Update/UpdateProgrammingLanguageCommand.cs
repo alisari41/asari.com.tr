@@ -16,9 +16,9 @@ public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLangu
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
-        private readonly ProgrammingLanguageRules _programmingLanguageRules;
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
+        public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
             _mapper = mapper;

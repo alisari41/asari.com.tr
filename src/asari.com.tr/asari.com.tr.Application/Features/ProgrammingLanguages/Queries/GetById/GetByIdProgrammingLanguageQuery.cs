@@ -14,9 +14,9 @@ public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLangua
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
-        private readonly ProgrammingLanguageRules _programmingLanguageRules;
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
+        public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
             _mapper = mapper;

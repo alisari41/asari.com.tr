@@ -1,5 +1,4 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.Projects.Rules;
 using asari.com.tr.Application.Services.Repositories;
@@ -7,23 +6,23 @@ using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using MediatR;
 
-namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
+namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
 
-public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<CreatedProjectProgrammingLanguageTechnologyDto>
+public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<CreatedProjectProgrammingLanguageTechnologyResponse>
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public int ProjectId { get; set; }
     public int ProgrammingLanguageTechnologyId { get; set; }
 
-    public class CreateProjectProgrammingLanguageTechnologyCommandHandler : IRequestHandler<CreateProjectProgrammingLanguageTechnologyCommand, CreatedProjectProgrammingLanguageTechnologyDto>
+    public class CreateProjectProgrammingLanguageTechnologyCommandHandler : IRequestHandler<CreateProjectProgrammingLanguageTechnologyCommand, CreatedProjectProgrammingLanguageTechnologyResponse>
     {
         private readonly IProjectProgrammingLanguageTechnologyRepository _projectProgrammingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
-        private readonly ProjectProgrammingLanguageTechnologyRules _projectProgrammingLanguageTechnologyRules;
+        private readonly ProjectProgrammingLanguageTechnologyBusinessRules _projectProgrammingLanguageTechnologyRules;
         private readonly ProjectRules _projectRules;
         private readonly ProgrammingLanguageTechnologyBusinessRules _programmingLanguageTechnologyRules;
 
-        public CreateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyRules projectProgrammingLanguageTechnologyRules, ProjectRules projectRules, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules)
+        public CreateProjectProgrammingLanguageTechnologyCommandHandler(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository, IMapper mapper, ProjectProgrammingLanguageTechnologyBusinessRules projectProgrammingLanguageTechnologyRules, ProjectRules projectRules, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules)
         {
             _projectProgrammingLanguageTechnologyRepository = projectProgrammingLanguageTechnologyRepository;
             _mapper = mapper;
@@ -32,7 +31,7 @@ public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<Create
             _programmingLanguageTechnologyRules = programmingLanguageTechnologyRules;
         }
 
-        public async Task<CreatedProjectProgrammingLanguageTechnologyDto> Handle(CreateProjectProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedProjectProgrammingLanguageTechnologyResponse> Handle(CreateProjectProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
         {
             await _projectProgrammingLanguageTechnologyRules.ProjectProgrammingLanguageTechnologySConNotBeDuplicatedWhenInserted(request.ProgrammingLanguageTechnologyId, request.ProjectId);
             await _projectRules.ProjectShouldExistWhenRequested(request.ProjectId);
@@ -40,9 +39,9 @@ public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<Create
 
             ProjectProgrammingLanguageTechnology mappedProjectProgrammingLanguageTechnology = _mapper.Map<ProjectProgrammingLanguageTechnology>(request);
             ProjectProgrammingLanguageTechnology createdProjectProgrammingLanguageTechnology = await _projectProgrammingLanguageTechnologyRepository.AddAsync(mappedProjectProgrammingLanguageTechnology);
-            CreatedProjectProgrammingLanguageTechnologyDto mappedCreatedProjectProgrammingLanguageTechnologyDto = _mapper.Map<CreatedProjectProgrammingLanguageTechnologyDto>(createdProjectProgrammingLanguageTechnology);
+            CreatedProjectProgrammingLanguageTechnologyResponse mappedCreatedProjectProgrammingLanguageTechnologyResponse = _mapper.Map<CreatedProjectProgrammingLanguageTechnologyResponse>(createdProjectProgrammingLanguageTechnology);
 
-            return mappedCreatedProjectProgrammingLanguageTechnologyDto;
+            return mappedCreatedProjectProgrammingLanguageTechnologyResponse;
         }
     }
 }

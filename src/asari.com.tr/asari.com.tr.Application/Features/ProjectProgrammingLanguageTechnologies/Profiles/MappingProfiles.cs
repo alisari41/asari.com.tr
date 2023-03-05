@@ -1,8 +1,7 @@
-﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.CreateProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.DeleteProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.UpdateProjectProgrammingLanguageTechnology;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Dtos;
-using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Models;
+﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Delete;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -20,7 +19,7 @@ public class MappingProfiles : Profile
         #region  Get List / İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
             #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
                 #region Project
-                CreateMap<ProjectProgrammingLanguageTechnology, ProjectProgrammingLanguageTechnologyListDto>()
+                CreateMap<ProjectProgrammingLanguageTechnology, GetListProjectProgrammingLanguageTechnologyListDto>()
                                 .ForMember(x => x.Title, opt => opt.MapFrom(x => x.Project.Title))
                                 .ForMember(x => x.Description, opt => opt.MapFrom(x => x.Project.Description))
                                 .ForMember(x => x.ImageUrl, opt => opt.MapFrom(x => x.Project.ImageUrl))
@@ -34,23 +33,23 @@ public class MappingProfiles : Profile
                 #endregion
                 #region Programlama Dili Teknolojileri
                                 .ForMember(x => x.ProgrammingLanguageTechnologyName, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.Name)).ReverseMap();
-                #endregion
-            #endregion
-        CreateMap<IPaginate<ProjectProgrammingLanguageTechnology>, ProjectProgrammingLanguageTechnologyListModel>().ReverseMap();
+        #endregion
+        #endregion
+        CreateMap<IPaginate<ProjectProgrammingLanguageTechnology>, GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>().ReverseMap();
         #endregion
 
         #region Create
-        CreateMap<ProjectProgrammingLanguageTechnology, CreatedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProjectProgrammingLanguageTechnology, CreatedProjectProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProjectProgrammingLanguageTechnology, CreateProjectProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
 
         #region Update
-        CreateMap<ProjectProgrammingLanguageTechnology, UpdatedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProjectProgrammingLanguageTechnology, UpdatedProjectProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProjectProgrammingLanguageTechnology, UpdateProjectProgrammingLanguageTechnologyCommand>().ReverseMap(); 
         #endregion
 
         #region Delete
-        CreateMap<ProjectProgrammingLanguageTechnology, DeletedProjectProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProjectProgrammingLanguageTechnology, DeletedProjectProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProjectProgrammingLanguageTechnology, DeleteProjectProgrammingLanguageTechnologyCommand>().ReverseMap(); 
         #endregion
     }

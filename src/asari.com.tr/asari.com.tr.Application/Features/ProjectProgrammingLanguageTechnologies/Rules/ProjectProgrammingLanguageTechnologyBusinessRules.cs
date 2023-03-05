@@ -1,14 +1,15 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
+using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Rules;
 
-public class ProjectProgrammingLanguageTechnologyRules
+public class ProjectProgrammingLanguageTechnologyBusinessRules : BaseBusinessRules
 {
     private readonly IProjectProgrammingLanguageTechnologyRepository _projectProgrammingLanguageTechnologyRepository;
 
-    public ProjectProgrammingLanguageTechnologyRules(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository)
+    public ProjectProgrammingLanguageTechnologyBusinessRules(IProjectProgrammingLanguageTechnologyRepository projectProgrammingLanguageTechnologyRepository)
     {
         _projectProgrammingLanguageTechnologyRepository = projectProgrammingLanguageTechnologyRepository;
     }

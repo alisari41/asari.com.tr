@@ -18,9 +18,9 @@ public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgra
         private readonly IProgrammingLanguageTechnologyRepository _programmingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
         private readonly ProgrammingLanguageTechnologyBusinessRules _programmingLanguageTechnologyRules;
-        private readonly ProgrammingLanguageRules _programmingLanguageRules;
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public CreateProgrammingLanguageTechnologyCommandHandler(IProgrammingLanguageTechnologyRepository programmingLanguageTechnologyRepository, IMapper mapper, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules, ProgrammingLanguageRules programmingLanguageRules)
+        public CreateProgrammingLanguageTechnologyCommandHandler(IProgrammingLanguageTechnologyRepository programmingLanguageTechnologyRepository, IMapper mapper, ProgrammingLanguageTechnologyBusinessRules programmingLanguageTechnologyRules, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
             _programmingLanguageTechnologyRepository = programmingLanguageTechnologyRepository;
             _mapper = mapper;
