@@ -1,7 +1,6 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.CrossCuttingConcerns.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.Projects.Rules;
 
@@ -14,23 +13,26 @@ public class ProjectRules
         _projectRepository = projectRepository;
     }
 
+    public void ProgrammingLanguageShouldExistWhenRequested(Project? project)
+    {
+        if (project == null) throw new BusinessException("Proje mevcut değildir.");
+    }
+
     public async Task ProjectShouldExistWhenRequested(int id)
     {
-        // Eğer biz aradığımız Id ile tüm listenin verilerini istemiyorsa sadece kontrol sağlamak için bu metot kullanılır. Yok biz id vererek GetById (id numarasını vererek tüm listeyi almak gibi) gibi aramalar yapmak isteyip birde sorgulama yapmak istersek yukardaki metot kullanılır
-        var result = await _projectRepository.Query().Where(x => x.Id == id).AnyAsync();
-        if (!result) throw new BusinessException("Proje mevcut değildir.");
+        Project? result = await _projectRepository.GetAsync(x => x.Id == id, enableTracking: false);
+        ProgrammingLanguageShouldExistWhenRequested(result);
     }
 
     public async Task ProjectTitleConNotBeDuplicatedWhenInserted(string title)
     {
-        var result = await _projectRepository.Query().Where(x => x.Title.ToLower() == title.ToLower()).AnyAsync(); // Aynı isimde veri var mı
-        if (result) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
+        Project? result = await _projectRepository.GetAsync(x => string.Equals(x.Title.ToLower(), title.ToLower())); // Aynı isimde veri var mı
+        if (result != null) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
     }
 
-    public async Task ProjectTitleConNotBeDuplicatedWhenUpdated(Project? project)
+    public async Task ProjectTitleConNotBeDuplicatedWhenUpdated(Project project)
     {
-        var result = await _projectRepository.Query().Where(x => (x.Id != project.Id) && (x.Title.ToLower() == project.Title.ToLower())).AnyAsync();
-
-        if (result) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
+        Project? result = await _projectRepository.GetAsync(x => (x.Id != project.Id) && string.Equals(x.Title.ToLower(), project.Title.ToLower()));
+        if (result != null) throw new BusinessException("Proje Başlığı kullanılmaktadır!");
     }
 }

@@ -1,7 +1,6 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.CrossCuttingConcerns.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 
@@ -14,22 +13,29 @@ public class ProgrammingLanguageTechnologyRules
         _programmingLanguageTechnologyRepository = programmingLanguageTechnologyRepository;
     }
 
+    public void ProgrammingLanguageTechnologyShouldExistWhenRequested(ProgrammingLanguageTechnology? programmingLanguageTechnology)
+    {
+        if (programmingLanguageTechnology == null) throw new BusinessException("Programlama dili Teknolojisi mevcut değildir.");
+    }
+
     public async Task ProgrammingLanguageTechnologyShouldExistWhenRequested(int id)
     {
-        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => x.Id == id).AnyAsync();
-        if (!result) throw new BusinessException("Programlama dili Teknolojisi mevcut değildir.");
+        ProgrammingLanguageTechnology? result = await _programmingLanguageTechnologyRepository.GetAsync(x => x.Id == id, enableTracking: false);
+        ProgrammingLanguageTechnologyShouldExistWhenRequested(result);
     }
 
     public async Task ProgrammingLanguageTechnologyNameCanNotBeDuplicatedWhenIserted(string name)
     {
-        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => x.Name.ToLower() == name.ToLower()).AnyAsync(); // Aynı isimde veri var mı
-        if (result) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
+        ProgrammingLanguageTechnology? result = await _programmingLanguageTechnologyRepository.GetAsync(x => string.Equals(x.Name.ToLower(),
+                                                                                                                                name.ToLower())); // Aynı isimde veri var mı
+        if (result != null) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
     }
 
-    public async Task ProgrammingLanguageTechnologyNameConNotBeDuplicatedWhenUpdated(ProgrammingLanguageTechnology? programmingLanguageTechnology)
+    public async Task ProgrammingLanguageTechnologyNameConNotBeDuplicatedWhenUpdated(ProgrammingLanguageTechnology programmingLanguageTechnology)
     {
-        var result = await _programmingLanguageTechnologyRepository.Query().Where(x => (x.Id != programmingLanguageTechnology.Id) && (x.Name.ToLower() == programmingLanguageTechnology.Name.ToLower())).AnyAsync();
+        ProgrammingLanguageTechnology? result = await _programmingLanguageTechnologyRepository.GetAsync(x => (x.Id != programmingLanguageTechnology.Id) && (string.Equals(x.Name.ToLower(),
+                                                                                                                                                                               programmingLanguageTechnology.Name.ToLower())));
 
-        if (result) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
+        if (result != null) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
     }
 }

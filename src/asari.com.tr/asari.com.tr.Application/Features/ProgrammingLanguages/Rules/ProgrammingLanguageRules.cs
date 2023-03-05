@@ -1,7 +1,6 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.CrossCuttingConcerns.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 
@@ -16,27 +15,27 @@ public class ProgrammingLanguageRules
 
     public void ProgrammingLanguageShouldExistWhenRequested(ProgrammingLanguage? programmingLanguage)
     {
-        // Eğer bir Programlama Dili  talep ediliyorsa o dilin olması gerekir.
-
         if (programmingLanguage == null) throw new BusinessException("Programlama dili mevcut değildir.");
     }
 
     public async Task ProgrammingLanguageShouldExistWhenRequested(int id)
     {
-        var result = await _programmingLanguageRepository.Query().Where(x => x.Id == id).AnyAsync();
-        if (!result) throw new BusinessException("Programlama dili mevcut değildir.");
+        ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(x => x.Id == id, enableTracking: false);
+        ProgrammingLanguageShouldExistWhenRequested(result);
     }
 
     public async Task ProgrammingLanguageConNotBeDuplicatedWhenInserted(string name)
     {
-        var result = await _programmingLanguageRepository.Query().Where(x => x.Name.ToLower() == name.ToLower()).AnyAsync(); // Aynı isimde veri var mı
-        if (result) throw new BusinessException("Progralama Dili kullanılmaktadır!"); // BusinessException için "Core.CrossCuttingConcerns" dan Referans almak gerekir
+        ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(x => string.Equals(x.Name.ToLower(),
+                                                                                                            name.ToLower()));
+        if (result != null) throw new BusinessException("Progralama Dili kullanılmaktadır!");
     }
 
-    public async Task ProgrammingLanguageConNotBeDuplicatedWhenUpdated(ProgrammingLanguage? programmingLanguage)
+    public async Task ProgrammingLanguageConNotBeDuplicatedWhenUpdated(ProgrammingLanguage programmingLanguage)
     {
-        var result = await _programmingLanguageRepository.Query().Where(x => (x.Id != programmingLanguage.Id) && (x.Name.ToLower() == programmingLanguage.Name.ToLower())).AnyAsync();
+        ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(x => (x.Id != programmingLanguage.Id) && string.Equals(x.Name.ToLower(),
+                                                                                                                                                programmingLanguage.Name.ToLower()));
 
-        if (result) throw new BusinessException("Progralama Dili kullanılmaktadır!");
+        if (result != null) throw new BusinessException("Progralama Dili kullanılmaktadır!");
     }
 }
