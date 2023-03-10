@@ -1,7 +1,8 @@
-﻿using asari.com.tr.Application.Features.Projects.Queries.GetById;
-using asari.com.tr.Application.Features.Technologies.Queries.GetById;
+﻿using asari.com.tr.Application.Features.Technologies.Queries.GetById;
 using asari.com.tr.Application.Features.Technologies.Queries.GetList;
+using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
 using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,15 @@ public class TechnologiesController : BaseController
     public async Task<IActionResult> GetById([FromRoute] GetByIdTechnologyQuery getByIdTechnologyQuery) // route'daki Id ile GetByIdTechnologyQuery Id işlemini mapleme yapacak. Id yazılımları aynı olmak zorunda 
     {
         var result = await Mediator.Send(getByIdTechnologyQuery);
+        return Ok(result);
+    }
+
+    [HttpPost("GetList/ByDynamic")]
+    public async Task<ActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic) // Dynamic olduğu için HttpPost kullanıldı
+    {
+        GetListByDynamicTechnologyQuery getListByDynamicTechnologyQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+
+        GetListResponse<GetListByDynamicTechnologyListItemDto> result = await Mediator.Send(getListByDynamicTechnologyQuery);
         return Ok(result);
     }
 }
