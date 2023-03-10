@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.Technologies.Commands.Create;
+using asari.com.tr.Application.Features.Technologies.Commands.Delete;
 using asari.com.tr.Application.Features.Technologies.Commands.Update;
 using asari.com.tr.Application.Features.Technologies.Queries.GetById;
 using asari.com.tr.Application.Features.Technologies.Queries.GetList;
@@ -41,6 +42,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<Technology, UpdatedTechnologyResponse>().ReverseMap();
         CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
+        #endregion
+
+        #region Update
+        CreateMap<Technology, DeletedTechnologyResponse>().ReverseMap();
+        CreateMap<Technology, DeleteTechnologyCommand>().ReverseMap();
         #endregion
     }
 }
