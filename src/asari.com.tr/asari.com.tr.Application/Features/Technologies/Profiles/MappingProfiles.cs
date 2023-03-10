@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetById;
+﻿using asari.com.tr.Application.Features.Technologies.Commands.Create;
+using asari.com.tr.Application.Features.Technologies.Queries.GetById;
 using asari.com.tr.Application.Features.Technologies.Queries.GetList;
 using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
 using asari.com.tr.Domain.Entities;
@@ -29,6 +30,11 @@ public class MappingProfiles : Profile
         #region Get List By Dynamic
         CreateMap<IPaginate<Technology>, GetListResponse<GetListByDynamicTechnologyListItemDto>>().ReverseMap();
         CreateMap<Technology, GetListByDynamicTechnologyListItemDto>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<Technology, CreatedTechnologyResponse>().ReverseMap();
+        CreateMap<Technology, CreateTechnologyCommand>().ReverseMap();
         #endregion
     }
 }

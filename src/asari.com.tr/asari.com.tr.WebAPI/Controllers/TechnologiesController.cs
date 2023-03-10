@@ -1,4 +1,6 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetById;
+﻿using asari.com.tr.Application.Features.Projects.Commands.Create;
+using asari.com.tr.Application.Features.Technologies.Commands.Create;
+using asari.com.tr.Application.Features.Technologies.Queries.GetById;
 using asari.com.tr.Application.Features.Technologies.Queries.GetList;
 using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
 using Core.Application.Requests;
@@ -36,5 +38,12 @@ public class TechnologiesController : BaseController
 
         GetListResponse<GetListByDynamicTechnologyListItemDto> result = await Mediator.Send(getListByDynamicTechnologyQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand createTechnologyCommand)
+    {
+        var result = await Mediator.Send(createTechnologyCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }

@@ -25,4 +25,10 @@ public class TechnologyBusinessRules : BaseBusinessRules
         Technology? result = await _technologyRepository.GetAsync(x => x.Id == id, enableTracking: false);
         TechnologyShouldExistWhenRequested(result);
     }
+
+    public async Task TechnologyTitleConNotBeDuplicatedWhenInserted(string title)
+    {
+        Technology? result = await _technologyRepository.GetAsync(x => string.Equals(x.Title.ToLower(), title.ToLower())); // Aynı isimde veri var mı
+        if (result != null) throw new BusinessException("Teknoloji Başlığı kullanılmaktadır!");
+    }
 }
