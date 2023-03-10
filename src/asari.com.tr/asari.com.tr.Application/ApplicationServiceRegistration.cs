@@ -2,6 +2,7 @@
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.Projects.Rules;
+using asari.com.tr.Application.Features.Technologies.Rules;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
@@ -35,6 +36,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<ProjectBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<ProjectProgrammingLanguageTechnologyBusinessRules>(); // Business Kuralları bir kere bellekte durur.
+        services.AddScoped<TechnologyBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         #endregion
 
 

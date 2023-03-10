@@ -1,4 +1,6 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetList;
+﻿using asari.com.tr.Application.Features.Projects.Queries.GetById;
+using asari.com.tr.Application.Features.Technologies.Queries.GetById;
+using asari.com.tr.Application.Features.Technologies.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +18,13 @@ public class TechnologiesController : BaseController
         GetListTechnologyQuery getListTechnologyQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListTechnologyListItemDto> result = await Mediator.Send(getListTechnologyQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdTechnologyQuery getByIdTechnologyQuery) // route'daki Id ile GetByIdTechnologyQuery Id işlemini mapleme yapacak. Id yazılımları aynı olmak zorunda 
+    {
+        var result = await Mediator.Send(getByIdTechnologyQuery);
         return Ok(result);
     }
 }

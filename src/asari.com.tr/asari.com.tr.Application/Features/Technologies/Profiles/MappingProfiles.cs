@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetList;
+﻿using asari.com.tr.Application.Features.Technologies.Queries.GetById;
+using asari.com.tr.Application.Features.Technologies.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -18,6 +19,10 @@ public class MappingProfiles : Profile
         #region Get List
         CreateMap<IPaginate<Technology>, GetListResponse<GetListTechnologyListItemDto>>().ReverseMap();
         CreateMap<Technology, GetListTechnologyListItemDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<Technology, GetByIdTechnologyResponse>().ReverseMap();
         #endregion
     }
 }
