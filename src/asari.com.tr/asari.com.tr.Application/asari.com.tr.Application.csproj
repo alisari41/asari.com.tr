@@ -19,6 +19,13 @@
     <Folder Include="Features\Projects\Constants\" />
     <Folder Include="Features\Projects\Dtos\" />
     <Folder Include="Features\Projects\Models\" />
+    <Folder Include="Features\Technologies\Commands\Create\" />
+    <Folder Include="Features\Technologies\Commands\Delete\" />
+    <Folder Include="Features\Technologies\Commands\Update\" />
+    <Folder Include="Features\Technologies\Constants\" />
+    <Folder Include="Features\Technologies\Dtos\" />
+    <Folder Include="Features\Technologies\Models\" />
+    <Folder Include="Features\Technologies\Rules\" />
   </ItemGroup>
 
   <ItemGroup>
