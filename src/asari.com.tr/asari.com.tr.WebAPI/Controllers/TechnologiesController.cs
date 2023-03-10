@@ -1,5 +1,5 @@
-﻿using asari.com.tr.Application.Features.Projects.Commands.Create;
-using asari.com.tr.Application.Features.Technologies.Commands.Create;
+﻿using asari.com.tr.Application.Features.Technologies.Commands.Create;
+using asari.com.tr.Application.Features.Technologies.Commands.Update;
 using asari.com.tr.Application.Features.Technologies.Queries.GetById;
 using asari.com.tr.Application.Features.Technologies.Queries.GetList;
 using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
@@ -44,6 +44,13 @@ public class TechnologiesController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand createTechnologyCommand)
     {
         var result = await Mediator.Send(createTechnologyCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateTechnologyCommand updateTechnologyCommand)
+    {
+        var result = await Mediator.Send(updateTechnologyCommand);
         return Created("", result);
     }
 }

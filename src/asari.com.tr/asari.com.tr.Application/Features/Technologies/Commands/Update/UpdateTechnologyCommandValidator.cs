@@ -1,15 +1,13 @@
 ﻿using FluentValidation;
 
-namespace asari.com.tr.Application.Features.Technologies.Commands.Create;
+namespace asari.com.tr.Application.Features.Technologies.Commands.Update;
 
-public class CreateTechnologyCommandValidator : AbstractValidator<CreateTechnologyCommand>
+public class UpdateTechnologyCommandValidator : AbstractValidator<UpdateTechnologyCommand>
 {
-    // FluentValidation ile Format Doğrulama işlemleri
-    // Ekeleme işlemleri için ayrı güncelleme işlemleri vs. ler için ayrı doğrulama işlemleri olabileceği için "CreateBrandCommand" ile ekleme işlemleri için yapıldı
-
-    public CreateTechnologyCommandValidator()
+    public UpdateTechnologyCommandValidator()
     {
         #region Zorunlu Alanlar
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Teknoloji Id'si boş bırakmayınız");
         RuleFor(x => x.Title).NotEmpty().WithMessage("Teknoloji Adını boş bırakmayınız");
         RuleFor(x => x.Description).NotEmpty().WithMessage("Teknoloji Açıklamasını boş bırakmayınız");
         RuleFor(x => x.Content).NotEmpty().WithMessage("Teknoloji İçeriğini boş bırakmayınız");
