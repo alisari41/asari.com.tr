@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace asari.com.tr.Persistence.EntityConfigurations;
 
-public class TecgnologyProjectConfiguration : IEntityTypeConfiguration<TecgnologyProject>
+public class TecgnologyProjectConfiguration : IEntityTypeConfiguration<TechnologyProject>
 {
-    public void Configure(EntityTypeBuilder<TecgnologyProject> builder)
+    public void Configure(EntityTypeBuilder<TechnologyProject> builder)
     {
-        builder.ToTable("TecgnologyProjects").HasKey(k => k.Id);
+        builder.ToTable("TechnologyProjects").HasKey(k => k.Id);
         builder.Property(p => p.Id).HasColumnName("Id");
         builder.Property(p => p.TechnologyId).HasColumnName("TechnologyId");
         builder.Property(p => p.ProjectId).HasColumnName("ProjectId");

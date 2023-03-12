@@ -13,7 +13,7 @@ public class Project : Entity
     public DateTime? CreateDate { get; set; }
 
     public virtual ICollection<ProjectProgrammingLanguageTechnology> ProjectProgrammingLanguageTechnologies { get; set; }
-    public virtual ICollection<TecgnologyProject> TecgnologyProjects { get; set; }
+    public virtual ICollection<TechnologyProject> TecgnologyProjects { get; set; }
     public virtual ICollection<ProjectSkill> ProjectSkills { get; set; }
 
     public Project()

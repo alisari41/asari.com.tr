@@ -15,7 +15,7 @@ public class BaseDbContext : DbContext
     public DbSet<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectProgrammingLanguageTechnology> ProjectProgrammingLanguageTechnologies { get; set; } //
-    public DbSet<TecgnologyProject> TecgnologyProjects { get; set; } //
+    public DbSet<TechnologyProject> TechnologyProjects { get; set; } //
     public DbSet<Technology> Technologies { get; set; }
     public DbSet<ProjectSkill> ProjectSkills { get; set; } //
     public DbSet<Skill> Skills { get; set; }

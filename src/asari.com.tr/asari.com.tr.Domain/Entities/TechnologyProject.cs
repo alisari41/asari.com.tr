@@ -2,7 +2,7 @@
 
 namespace asari.com.tr.Domain.Entities;
 
-public class TecgnologyProject : Entity
+public class TechnologyProject : Entity
 {
     public int TechnologyId { get; set; }
     public int ProjectId { get; set; }
@@ -10,12 +10,12 @@ public class TecgnologyProject : Entity
     public virtual Technology? Technology { get; set; }
     public virtual Project? Project { get; set; }
 
-    public TecgnologyProject()
+    public TechnologyProject()
     {
 
     }
 
-    public TecgnologyProject(int id, int technologyId, int projectId) : this()
+    public TechnologyProject(int id, int technologyId, int projectId) : this()
     {
         Id = id;
         TechnologyId = technologyId;
