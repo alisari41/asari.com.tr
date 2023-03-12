@@ -1,6 +1,9 @@
-﻿using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetById;
+﻿using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
+using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetById;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetList;
+using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetListByDynamic;
 using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +27,15 @@ public class TechnologyProjectsController : BaseController
     public async Task<IActionResult> GetById([FromRoute] GetByIdTechnologyProjectQuery getByIdTechnologyProjectQuery)
     {
         var result = await Mediator.Send(getByIdTechnologyProjectQuery);
+        return Ok(result);
+    }
+
+    [HttpPost("GetList/ByDynamic")]
+    public async Task<ActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic) // Dynamic olduğu için HttpPost kullanıldı
+    {
+        GetListByDynamicTechnologyProjectQuery getListByDynamicTechnologyProjectQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+
+        GetListResponse<GetListByDynamicTechnologyProjectListItemDto> result = await Mediator.Send(getListByDynamicTechnologyProjectQuery);
         return Ok(result);
     }
 }

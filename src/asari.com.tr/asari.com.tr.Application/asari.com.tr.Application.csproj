@@ -28,7 +28,6 @@
     <Folder Include="Features\TechnologyProjects\Constants\" />
     <Folder Include="Features\TechnologyProjects\Dtos\" />
     <Folder Include="Features\TechnologyProjects\Models\" />
-    <Folder Include="Features\TechnologyProjects\Queries\GetListByDynamic\" />
   </ItemGroup>
 
   <ItemGroup>
