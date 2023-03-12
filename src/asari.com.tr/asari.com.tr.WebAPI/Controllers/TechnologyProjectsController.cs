@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.TechnologyProjects.Commands.Create;
+using asari.com.tr.Application.Features.TechnologyProjects.Commands.Delete;
 using asari.com.tr.Application.Features.TechnologyProjects.Commands.Update;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetById;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetList;
@@ -52,5 +53,12 @@ public class TechnologyProjectsController : BaseController
     {
         UpdatedTechnologyProjectResponse result = await Mediator.Send(updateTechnologyProjectCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteTechnologyProjectCommand deleteTechnologyProjectCommand)
+    {
+        DeletedTechnologyProjectResponse result = await Mediator.Send(deleteTechnologyProjectCommand);
+        return Ok(result);
     }
 }
