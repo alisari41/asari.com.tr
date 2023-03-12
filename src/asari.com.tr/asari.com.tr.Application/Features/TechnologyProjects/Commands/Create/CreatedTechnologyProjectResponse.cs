@@ -3,6 +3,6 @@
 public class CreatedTechnologyProjectResponse
 {
     public int Id { get; set; }
-    public string TechnologyId { get; set; }
-    public string ProjectId { get; set; }
+    public int TechnologyId { get; set; }
+    public int ProjectId { get; set; }
 }

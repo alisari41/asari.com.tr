@@ -31,4 +31,10 @@ public class TechnologyProjectBusinessRules : BaseBusinessRules
         TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => (x.TechnologyId == technologyId) && (x.ProjectId == projectId));
         if (result != null) throw new BusinessException("Teknoloji Proje kullanılmaktadır!");
     }
+
+    public async Task TechnologyProjectSConNotBeDuplicatedWhenUpdated(TechnologyProject technologyProject)
+    {
+        TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => (x.Id != technologyProject.Id) && (x.TechnologyId == technologyProject.TechnologyId) && (x.ProjectId == technologyProject.ProjectId));
+        if (result != null) throw new BusinessException("Teknoloji Proje kullanılmaktadır!");
+    }
 }

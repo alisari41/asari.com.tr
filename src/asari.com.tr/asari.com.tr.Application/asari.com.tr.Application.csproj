@@ -23,7 +23,6 @@
     <Folder Include="Features\Technologies\Dtos\" />
     <Folder Include="Features\Technologies\Models\" />
     <Folder Include="Features\TechnologyProjects\Commands\Delete\" />
-    <Folder Include="Features\TechnologyProjects\Commands\Update\" />
     <Folder Include="Features\TechnologyProjects\Constants\" />
     <Folder Include="Features\TechnologyProjects\Dtos\" />
     <Folder Include="Features\TechnologyProjects\Models\" />
