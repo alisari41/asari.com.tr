@@ -1,4 +1,4 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetList;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetById;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -17,6 +17,13 @@ public class TechnologyProjectsController : BaseController
         GetListTechnologyProjectQuery getListTechnologyProjectQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListTechnologyProjectListItemDto> result = await Mediator.Send(getListTechnologyProjectQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdTechnologyProjectQuery getByIdTechnologyProjectQuery)
+    {
+        var result = await Mediator.Send(getByIdTechnologyProjectQuery);
         return Ok(result);
     }
 }
