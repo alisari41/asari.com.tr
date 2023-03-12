@@ -22,7 +22,6 @@
     <Folder Include="Features\Technologies\Constants\" />
     <Folder Include="Features\Technologies\Dtos\" />
     <Folder Include="Features\Technologies\Models\" />
-    <Folder Include="Features\TechnologyProjects\Commands\Create\" />
     <Folder Include="Features\TechnologyProjects\Commands\Delete\" />
     <Folder Include="Features\TechnologyProjects\Commands\Update\" />
     <Folder Include="Features\TechnologyProjects\Constants\" />

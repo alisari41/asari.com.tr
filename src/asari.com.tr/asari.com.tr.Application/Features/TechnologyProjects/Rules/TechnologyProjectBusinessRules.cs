@@ -25,4 +25,10 @@ public class TechnologyProjectBusinessRules : BaseBusinessRules
         TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => x.Id == id, enableTracking: false);
         TechnologyProjectShouldExistWhenRequested(result);
     }
+
+    public async Task TechnologyProjectSConNotBeDuplicatedWhenInserted(int technologyId, int projectId)
+    {
+        TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => (x.TechnologyId == technologyId) && (x.ProjectId == projectId));
+        if (result != null) throw new BusinessException("Teknoloji Proje kullanılmaktadır!");
+    }
 }

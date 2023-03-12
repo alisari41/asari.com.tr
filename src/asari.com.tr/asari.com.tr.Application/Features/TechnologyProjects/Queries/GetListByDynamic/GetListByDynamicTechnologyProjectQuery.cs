@@ -28,7 +28,7 @@ public class GetListByDynamicTechnologyProjectQuery : IRequest<GetListResponse<G
         public async Task<GetListResponse<GetListByDynamicTechnologyProjectListItemDto>> Handle(GetListByDynamicTechnologyProjectQuery request, CancellationToken cancellationToken)
         {
             IPaginate<TechnologyProject> technologyProject = await _technologyProjectRepository.GetListByDynamicAsync( // Dinamik Sorgu
-                                                                    request.Dynamic,
+                                                                dynamic: request.Dynamic,
                                                                     include: x =>
                                                                     x.Include(c => c.Technology)
                                                                      .Include(c => c.Project)

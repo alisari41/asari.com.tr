@@ -1,4 +1,4 @@
-﻿using asari.com.tr.Application.Features.Technologies.Queries.GetListByDynamic;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Commands.Create;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetById;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetList;
 using asari.com.tr.Application.Features.TechnologyProjects.Queries.GetListByDynamic;
@@ -37,5 +37,12 @@ public class TechnologyProjectsController : BaseController
 
         GetListResponse<GetListByDynamicTechnologyProjectListItemDto> result = await Mediator.Send(getListByDynamicTechnologyProjectQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateTechnologyProjectCommand createTechnologyProjectCommand)
+    {
+        CreatedTechnologyProjectResponse result = await Mediator.Send(createTechnologyProjectCommand);
+        return Created("", result);
     }
 }
