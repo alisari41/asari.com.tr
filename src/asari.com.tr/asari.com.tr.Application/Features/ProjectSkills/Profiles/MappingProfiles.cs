@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
+using asari.com.tr.Application.Features.ProjectSkills.Commands.Update;
 using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -28,6 +29,11 @@ public class MappingProfiles : Profile
         #region Create
         CreateMap<ProjectSkill, CreatedProjectSkillResponse>().ReverseMap();
         CreateMap<ProjectSkill, CreateProjectSkillCommand>().ReverseMap();
+        #endregion
+
+        #region Update
+        CreateMap<ProjectSkill, UpdatedProjectSkillResponse>().ReverseMap();
+        CreateMap<ProjectSkill, UpdateProjectSkillCommand>().ReverseMap();
         #endregion
     }
 }

@@ -1,5 +1,7 @@
 ﻿using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
+using asari.com.tr.Application.Features.ProjectSkills.Commands.Update;
 using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
+using asari.com.tr.Application.Features.Skills.Commands.Update;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +26,13 @@ public class ProjectSkillsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateProjectSkillCommand createProjectSkillCommand)
     {
         CreatedProjectSkillResponse result = await Mediator.Send(createProjectSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateProjectSkillCommand updateProjectSkillCommand)
+    {
+        UpdatedProjectSkillResponse result = await Mediator.Send(updateProjectSkillCommand);
         return Created("", result);
     }
 }

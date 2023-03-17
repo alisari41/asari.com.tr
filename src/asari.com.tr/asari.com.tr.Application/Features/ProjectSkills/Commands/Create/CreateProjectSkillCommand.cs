@@ -18,7 +18,7 @@ public class CreateProjectSkillCommand : IRequest<CreatedProjectSkillResponse>
         private readonly IProjectSkillRepository _projectSkillRepository;
         private readonly IMapper _mapper;
         private readonly ProjectSkillBusinessRules _projectSkillBusinessRules;
-        private readonly ProjectBusinessRules _projectRules;
+        private readonly ProjectBusinessRules _projectBusinessRules;
         private readonly SkillBusinessRules _skillBusinessRules;
 
         public CreateProjectSkillCommandHandler(IProjectSkillRepository projectSkillRepository, IMapper mapper, ProjectSkillBusinessRules projectSkillBusinessRules, ProjectBusinessRules projectRules, SkillBusinessRules skillBusinessRules)
@@ -26,14 +26,14 @@ public class CreateProjectSkillCommand : IRequest<CreatedProjectSkillResponse>
             _projectSkillRepository = projectSkillRepository;
             _mapper = mapper;
             _projectSkillBusinessRules = projectSkillBusinessRules;
-            _projectRules = projectRules;
+            _projectBusinessRules = projectRules;
             _skillBusinessRules = skillBusinessRules;
         }
 
         public async Task<CreatedProjectSkillResponse> Handle(CreateProjectSkillCommand request, CancellationToken cancellationToken)
         {
             await _projectSkillBusinessRules.ProjectSkillSConNotBeDuplicatedWhenInserted(request.ProjectId, request.SkillId);
-            await _projectRules.ProjectShouldExistWhenRequested(request.ProjectId);
+            await _projectBusinessRules.ProjectShouldExistWhenRequested(request.ProjectId);
             await _skillBusinessRules.SkillShouldExistWhenRequested(request.SkillId);
 
             ProjectSkill mappedProjectSkill = _mapper.Map<ProjectSkill>(request);
