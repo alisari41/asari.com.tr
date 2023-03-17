@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Experiences\Commands\Create\" />
     <Folder Include="Features\Experiences\Commands\Delete\" />
     <Folder Include="Features\Experiences\Commands\Update\" />
     <Folder Include="Features\Experiences\Constants\" />
     <Folder Include="Features\Experiences\Dtos\" />
     <Folder Include="Features\Experiences\Models\" />
-    <Folder Include="Features\Experiences\Rules\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguages\Dtos\" />
     <Folder Include="Features\ProgrammingLanguages\Models\" />

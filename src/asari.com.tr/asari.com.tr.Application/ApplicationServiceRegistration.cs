@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
+﻿using asari.com.tr.Application.Features.Experiences.Rules;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.Projects.Rules;
@@ -43,6 +44,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<TechnologyProjectBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<SkillBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<ProjectSkillBusinessRules>(); // Business Kuralları bir kere bellekte durur.
+        services.AddScoped<ExperienceBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         #endregion
 
 
