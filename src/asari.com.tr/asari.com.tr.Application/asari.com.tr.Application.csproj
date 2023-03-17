@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Experiences\Commands\Delete\" />
     <Folder Include="Features\Experiences\Constants\" />
     <Folder Include="Features\Experiences\Dtos\" />
     <Folder Include="Features\Experiences\Models\" />
