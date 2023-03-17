@@ -16,7 +16,6 @@
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Constants\" />
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Dtos\" />
     <Folder Include="Features\ProjectProgrammingLanguageTechnologies\Models\" />
-    <Folder Include="Features\ProjectSkills\Commands\Delete\" />
     <Folder Include="Features\ProjectSkills\Constants\" />
     <Folder Include="Features\ProjectSkills\Dtos\" />
     <Folder Include="Features\ProjectSkills\Models\" />
