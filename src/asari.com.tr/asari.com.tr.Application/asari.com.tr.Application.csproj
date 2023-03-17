@@ -19,7 +19,6 @@
     <Folder Include="Features\Projects\Constants\" />
     <Folder Include="Features\Projects\Dtos\" />
     <Folder Include="Features\Projects\Models\" />
-    <Folder Include="Features\Skills\Commands\Delete\" />
     <Folder Include="Features\Skills\Constants\" />
     <Folder Include="Features\Skills\Dtos\" />
     <Folder Include="Features\Skills\Models\" />

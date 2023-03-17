@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.Skills.Commands.Create;
+using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using asari.com.tr.Application.Features.Skills.Commands.Update;
 using asari.com.tr.Application.Features.Skills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
@@ -30,6 +31,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<Skill, UpdatedSkillResponse>().ReverseMap();
         CreateMap<Skill, UpdateSkillCommand>().ReverseMap();
+        #endregion
+
+        #region Delete
+        CreateMap<Skill, DeletedSkillResponse>().ReverseMap();
+        CreateMap<Skill, DeleteSkillCommand>().ReverseMap();
         #endregion
     }
 }

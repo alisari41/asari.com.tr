@@ -1,6 +1,8 @@
 ﻿using asari.com.tr.Application.Features.Skills.Commands.Create;
+using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using asari.com.tr.Application.Features.Skills.Commands.Update;
 using asari.com.tr.Application.Features.Skills.Queries.GetList;
+using asari.com.tr.Application.Features.Technologies.Commands.Delete;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -33,5 +35,12 @@ public class SkillsController : BaseController
     {
         UpdatedSkillResponse result = await Mediator.Send(updateSkillCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteSkillCommand deleteSkillCommand)
+    {
+        DeletedSkillResponse result = await Mediator.Send(deleteSkillCommand);
+        return Ok(result);
     }
 }
