@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Skills.Queries.GetList;
+﻿using asari.com.tr.Application.Features.Skills.Commands.Create;
+using asari.com.tr.Application.Features.Skills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -19,6 +20,10 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Skill>, GetListResponse<GetListSkillListItemDto>>().ReverseMap();
         CreateMap<Skill, GetListSkillListItemDto>().ReverseMap();
         #endregion
-    }
 
+        #region Create
+        CreateMap<Skill, CreatedSkillResponse>().ReverseMap();
+        CreateMap<Skill, CreateSkillCommand>().ReverseMap();
+        #endregion
+    }
 }
