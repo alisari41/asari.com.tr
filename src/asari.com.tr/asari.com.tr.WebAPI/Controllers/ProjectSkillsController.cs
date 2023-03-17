@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
+using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -17,5 +18,12 @@ public class ProjectSkillsController : BaseController
 
         GetListResponse<GetListProjectSkillListItemDto> result = await Mediator.Send(getListProjectSkillQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateProjectSkillCommand createProjectSkillCommand)
+    {
+        CreatedProjectSkillResponse result = await Mediator.Send(createProjectSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }
