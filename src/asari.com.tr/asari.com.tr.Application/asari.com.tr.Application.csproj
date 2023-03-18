@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Educations\Commands\Delete\" />
     <Folder Include="Features\Educations\Constants\" />
     <Folder Include="Features\Educations\Dtos\" />
     <Folder Include="Features\Educations\Models\" />

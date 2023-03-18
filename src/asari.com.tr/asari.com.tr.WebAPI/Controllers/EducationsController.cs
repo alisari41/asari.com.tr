@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.Educations.Commands.Create;
+using asari.com.tr.Application.Features.Educations.Commands.Delete;
 using asari.com.tr.Application.Features.Educations.Commands.Update;
 using asari.com.tr.Application.Features.Educations.Queries.GetList;
 using Core.Application.Requests;
@@ -32,5 +33,12 @@ public class EducationsController : BaseController
     {
         UpdatedEducationResponse result = await Mediator.Send(updateEducationCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteEducationCommand deleteEducationCommand)
+    {
+        DeletedEducationResponse result = await Mediator.Send(deleteEducationCommand);
+        return Ok(result);
     }
 }
