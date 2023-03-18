@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.Educations.Commands.Create;
+using asari.com.tr.Application.Features.Educations.Commands.Update;
 using asari.com.tr.Application.Features.Educations.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -23,6 +24,13 @@ public class EducationsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateEducationCommand createEducationCommand)
     {
         CreatedEducationResponse result = await Mediator.Send(createEducationCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateEducationCommand updateEducationCommand)
+    {
+        UpdatedEducationResponse result = await Mediator.Send(updateEducationCommand);
         return Created("", result);
     }
 }
