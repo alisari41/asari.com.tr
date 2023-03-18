@@ -9,27 +9,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "corePackages", "corePackage
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "asari.com.tr", "asari.com.tr", "{07B7E2C1-E279-4227-9D9A-1ADCE77370BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "src\corePackages\Core.Application\Core.Application.csproj", "{DF6B2894-7B31-4E71-9DC0-1C39E0F20390}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\corePackages\Core.Application\Core.Application.csproj", "{DF6B2894-7B31-4E71-9DC0-1C39E0F20390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.CrossCuttingConcerns", "src\corePackages\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj", "{9791DBD5-AD95-453C-937B-876A60F33664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.CrossCuttingConcerns", "src\corePackages\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj", "{9791DBD5-AD95-453C-937B-876A60F33664}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.ElasticSearch", "src\corePackages\Core.ElasticSearch\Core.ElasticSearch.csproj", "{DB8EAF31-F4E0-45CF-AB1A-D68E67E4E4A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ElasticSearch", "src\corePackages\Core.ElasticSearch\Core.ElasticSearch.csproj", "{DB8EAF31-F4E0-45CF-AB1A-D68E67E4E4A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Mailing", "src\corePackages\Core.Mailing\Core.Mailing.csproj", "{62D9A244-6BEF-4657-89E8-5E56A5699BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Mailing", "src\corePackages\Core.Mailing\Core.Mailing.csproj", "{62D9A244-6BEF-4657-89E8-5E56A5699BA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence", "src\corePackages\Core.Persistence\Core.Persistence.csproj", "{EA139353-AA93-4099-BEAE-6B2975A03DA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "src\corePackages\Core.Persistence\Core.Persistence.csproj", "{EA139353-AA93-4099-BEAE-6B2975A03DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Security", "src\corePackages\Core.Security\Core.Security.csproj", "{3DCEA317-8C79-4AD3-BD9F-47DE27775A30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Security", "src\corePackages\Core.Security\Core.Security.csproj", "{3DCEA317-8C79-4AD3-BD9F-47DE27775A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asari.com.tr.Application", "src\asari.com.tr\asari.com.tr.Application\asari.com.tr.Application.csproj", "{DE6D85D4-72AC-4847-819F-F0D57B28252A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asari.com.tr.Application", "src\asari.com.tr\asari.com.tr.Application\asari.com.tr.Application.csproj", "{DE6D85D4-72AC-4847-819F-F0D57B28252A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asari.com.tr.Domain", "src\asari.com.tr\asari.com.tr.Domain\asari.com.tr.Domain.csproj", "{91D0FE90-1C02-4DD5-968C-23E37ACFA360}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asari.com.tr.Domain", "src\asari.com.tr\asari.com.tr.Domain\asari.com.tr.Domain.csproj", "{91D0FE90-1C02-4DD5-968C-23E37ACFA360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asari.com.tr.Infrastructure", "src\asari.com.tr\asari.com.tr.Infrastructure\asari.com.tr.Infrastructure.csproj", "{BCD39322-2FE2-445F-859E-8128B23377F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asari.com.tr.Infrastructure", "src\asari.com.tr\asari.com.tr.Infrastructure\asari.com.tr.Infrastructure.csproj", "{BCD39322-2FE2-445F-859E-8128B23377F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asari.com.tr.Persistence", "src\asari.com.tr\asari.com.tr.Persistence\asari.com.tr.Persistence.csproj", "{3DACE906-3A8D-4E27-AF62-3F073A157FCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asari.com.tr.Persistence", "src\asari.com.tr\asari.com.tr.Persistence\asari.com.tr.Persistence.csproj", "{3DACE906-3A8D-4E27-AF62-3F073A157FCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asari.com.tr.WebAPI", "src\asari.com.tr\asari.com.tr.WebAPI\asari.com.tr.WebAPI.csproj", "{F229B599-BB8D-408A-906D-8F3C9944A10B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asari.com.tr.WebAPI", "src\asari.com.tr\asari.com.tr.WebAPI\asari.com.tr.WebAPI.csproj", "{F229B599-BB8D-408A-906D-8F3C9944A10B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD29FCF5-57DD-4C8D-B601-0F1578452E63}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
