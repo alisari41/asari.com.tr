@@ -1,5 +1,5 @@
-﻿using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
-using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
+﻿using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
+using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -17,5 +17,12 @@ public class ExperienceSkillsController : BaseController
 
         GetListResponse<GetListExperienceSkillListItemDto> result = await Mediator.Send(getListExperienceSkillQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateExperienceSkillCommand createExperienceSkillCommand)
+    {
+        CreatedExperienceSkillResponse result = await Mediator.Send(createExperienceSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }

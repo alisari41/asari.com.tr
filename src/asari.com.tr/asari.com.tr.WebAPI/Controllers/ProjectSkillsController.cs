@@ -2,7 +2,6 @@
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Update;
 using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
-using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;

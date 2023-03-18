@@ -13,9 +13,6 @@ public class ProjectSkillBusinessRules : BaseBusinessRules
     {
         _projectSkillRepository = projectSkillRepository;
     }
-
-
-
     public void ProjectSkillShouldExistWhenRequested(ProjectSkill? projectSkill)
     {
         if (projectSkill == null) throw new BusinessException("Proje Yeteneği mevcut değildir.");
