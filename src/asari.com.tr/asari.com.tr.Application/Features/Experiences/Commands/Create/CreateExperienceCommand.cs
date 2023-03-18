@@ -34,8 +34,6 @@ public class CreateExperienceCommand : IRequest<CreatedExperienceResponse>
 
         public async Task<CreatedExperienceResponse> Handle(CreateExperienceCommand request, CancellationToken cancellationToken)
         {
-            await _experienceBusinessRules.ExperienceTitleConNotBeDuplicatedWhenInserted(request.Title);
-
             Experience? mappedExperience = _mapper.Map<Experience>(request);
             Experience? createdExperience = await _experienceRepository.AddAsync(mappedExperience);
             CreatedExperienceResponse mappedCreatedExperienceResponse = _mapper.Map<CreatedExperienceResponse>(createdExperience);

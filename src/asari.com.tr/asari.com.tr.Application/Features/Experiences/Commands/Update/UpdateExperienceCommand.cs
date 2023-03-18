@@ -40,7 +40,6 @@ public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>
             _experienceBusinessRules.ExperienceShouldExistWhenRequested(experience);
 
             _mapper.Map(request, experience);
-            await _experienceBusinessRules.ExperienceTitleConNotBeDuplicatedWhenUpdated(experience);
 
             Experience updatedExperience = await _experienceRepository.UpdateAsync(experience);
             UpdatedExperienceResponse mappedUpdatedExperienceResponse = _mapper.Map<UpdatedExperienceResponse>(updatedExperience);

@@ -24,16 +24,4 @@ public class ExperienceBusinessRules : BaseBusinessRules
         Experience? result = await _experienceRepository.GetAsync(x => x.Id == id, enableTracking: false);
         ExperienceShouldExistWhenRequested(result);
     }
-
-    public async Task ExperienceTitleConNotBeDuplicatedWhenInserted(string title)
-    {
-        Experience? result = await _experienceRepository.GetAsync(x => string.Equals(x.Title.ToLower(), title.ToLower())); // Aynı isimde veri var mı
-        if (result != null) throw new BusinessException("Deneyim Başlığı kullanılmaktadır!");
-    }
-
-    public async Task ExperienceTitleConNotBeDuplicatedWhenUpdated(Experience experience)
-    {
-        Experience? result = await _experienceRepository.GetAsync(x => (x.Id != experience.Id) && (string.Equals(x.Title.ToLower(), experience.Title.ToLower()))); // Aynı isimde veri var mı
-        if (result != null) throw new BusinessException("Deneyim Başlığı kullanılmaktadır!");
-    }
 }

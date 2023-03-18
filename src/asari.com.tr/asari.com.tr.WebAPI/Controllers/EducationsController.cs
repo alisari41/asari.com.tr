@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Educations.Queries.GetList;
+﻿using asari.com.tr.Application.Features.Educations.Commands.Create;
+using asari.com.tr.Application.Features.Educations.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -16,5 +17,12 @@ public class EducationsController : BaseController
 
         GetListResponse<GetListEducationListItemDto> result = await Mediator.Send(getListEducationQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateEducationCommand createEducationCommand)
+    {
+        CreatedEducationResponse result = await Mediator.Send(createEducationCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }
