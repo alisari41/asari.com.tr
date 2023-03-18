@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
+using asari.com.tr.Application.Features.ExperienceSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ExperienceSkills.Commands.Update;
 using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
 using Core.Application.Requests;
@@ -32,5 +33,12 @@ public class ExperienceSkillsController : BaseController
     {
         UpdatedExperienceSkillResponse result = await Mediator.Send(updateExperienceSkillCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteExperienceSkillCommand deleteProjectSkillCommand)
+    {
+        DeletedExperienceSkillResponse result = await Mediator.Send(deleteProjectSkillCommand);
+        return Ok(result);
     }
 }

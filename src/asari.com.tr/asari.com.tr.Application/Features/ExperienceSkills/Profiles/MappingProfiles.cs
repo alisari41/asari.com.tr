@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
+using asari.com.tr.Application.Features.ExperienceSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ExperienceSkills.Commands.Update;
 using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
@@ -34,6 +35,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<ExperienceSkill, UpdatedExperienceSkillResponse>().ReverseMap();
         CreateMap<ExperienceSkill, UpdateExperienceSkillCommand>().ReverseMap();
+        #endregion
+
+        #region Delete
+        CreateMap<ExperienceSkill, DeletedExperienceSkillResponse>().ReverseMap();
+        CreateMap<ExperienceSkill, DeleteExperienceSkillCommand>().ReverseMap();
         #endregion
     }
 }
