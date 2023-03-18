@@ -29,4 +29,12 @@ public class ExperienceSkillBusinessRules : BaseBusinessRules
         ExperienceSkill? result = await _experienceSkillRepository.GetAsync(x => (x.ExperienceId == experienceId) && (x.SkillId == skillId));
         if (result != null) throw new BusinessException("Deneyim Yeteneği kullanılmaktadır!");
     }
+
+    public async Task ExperienceSkillConNotBeDuplicatedWhenUpdated(ExperienceSkill experienceSkill)
+    {
+        ExperienceSkill? result = await _experienceSkillRepository.GetAsync(x => (x.Id != experienceSkill.Id)
+                                                                        && (x.ExperienceId == experienceSkill.ExperienceId)
+                                                                        && (x.SkillId == experienceSkill.SkillId));
+        if (result != null) throw new BusinessException("Deneyim Yeteneği kullanılmaktadır!");
+    }
 }

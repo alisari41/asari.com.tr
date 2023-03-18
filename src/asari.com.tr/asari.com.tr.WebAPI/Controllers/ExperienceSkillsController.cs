@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
+using asari.com.tr.Application.Features.ExperienceSkills.Commands.Update;
 using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -23,6 +24,13 @@ public class ExperienceSkillsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateExperienceSkillCommand createExperienceSkillCommand)
     {
         CreatedExperienceSkillResponse result = await Mediator.Send(createExperienceSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateExperienceSkillCommand updateExperienceSkillCommand)
+    {
+        UpdatedExperienceSkillResponse result = await Mediator.Send(updateExperienceSkillCommand);
         return Created("", result);
     }
 }
