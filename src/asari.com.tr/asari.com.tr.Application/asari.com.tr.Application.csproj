@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ExperienceSkills\Commands\Create\" />
+    <Folder Include="Features\ExperienceSkills\Commands\Delete\" />
+    <Folder Include="Features\ExperienceSkills\Commands\Update\" />
+    <Folder Include="Features\ExperienceSkills\Constants\" />
+    <Folder Include="Features\ExperienceSkills\Dtos\" />
+    <Folder Include="Features\ExperienceSkills\Models\" />
+    <Folder Include="Features\ExperienceSkills\Rules\" />
     <Folder Include="Features\Experiences\Constants\" />
     <Folder Include="Features\Experiences\Dtos\" />
     <Folder Include="Features\Experiences\Models\" />
