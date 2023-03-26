@@ -1,5 +1,5 @@
 ﻿using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
-using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
+using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -23,6 +23,11 @@ public class MappingProfiles : Profile
         #endregion
         #endregion
         CreateMap<IPaginate<EducationSkill>, GetListResponse<GetListEducationSkillListItemDto>>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<EducationSkill, CreatedEducationSkillResponse>().ReverseMap();
+        CreateMap<EducationSkill, CreateEducationSkillCommand>().ReverseMap();
         #endregion
     }
 }

@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\EducationSkills\Commands\Create\" />
     <Folder Include="Features\EducationSkills\Commands\Delete\" />
     <Folder Include="Features\EducationSkills\Commands\Update\" />
     <Folder Include="Features\EducationSkills\Constants\" />
     <Folder Include="Features\EducationSkills\Dtos\" />
     <Folder Include="Features\EducationSkills\Models\" />
-    <Folder Include="Features\EducationSkills\Rules\" />
     <Folder Include="Features\Educations\Constants\" />
     <Folder Include="Features\Educations\Dtos\" />
     <Folder Include="Features\Educations\Models\" />
