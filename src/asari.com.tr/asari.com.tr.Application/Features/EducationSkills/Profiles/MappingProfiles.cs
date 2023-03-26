@@ -1,9 +1,10 @@
 ﻿using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
+using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
+using asari.com.tr.Application.Features.EducationSkills.Commands.Delete;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
-using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Profiles;
 
@@ -34,6 +35,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<EducationSkill, UpdatedEducationSkillResponse>().ReverseMap();
         CreateMap<EducationSkill, UpdateEducationSkillCommand>().ReverseMap();
+        #endregion
+
+        #region Delete
+        CreateMap<EducationSkill, DeletedEducationSkillResponse>().ReverseMap();
+        CreateMap<EducationSkill, DeleteEducationSkillCommand>().ReverseMap();
         #endregion
     }
 }
