@@ -30,4 +30,12 @@ public class EducationSkillBusinessRules : BaseBusinessRules
         EducationSkill? result = await _educationSkillRepository.GetAsync(x => (x.EducationId == educationId) && (x.SkillId == skillId));
         if (result != null) throw new BusinessException("Eğitim Yeteneği kullanılmaktadır!");
     }
+
+    public async Task EducationSkillConNotBeDuplicatedWhenUpdated(EducationSkill educationSkill)
+    {
+        EducationSkill? result = await _educationSkillRepository.GetAsync(x => (x.Id != educationSkill.Id)
+                                                                        && (x.EducationId == educationSkill.EducationId)
+                                                                        && (x.SkillId == educationSkill.SkillId));
+        if (result != null) throw new BusinessException("Eğitim Yeteneği kullanılmaktadır!");
+    }
 }

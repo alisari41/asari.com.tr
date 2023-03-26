@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\EducationSkills\Commands\Delete\" />
-    <Folder Include="Features\EducationSkills\Commands\Update\" />
     <Folder Include="Features\EducationSkills\Constants\" />
     <Folder Include="Features\EducationSkills\Dtos\" />
     <Folder Include="Features\EducationSkills\Models\" />

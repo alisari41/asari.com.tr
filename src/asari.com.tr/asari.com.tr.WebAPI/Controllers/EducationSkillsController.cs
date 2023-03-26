@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
+using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
 using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -23,6 +24,13 @@ public class EducationSkillsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateEducationSkillCommand createEducationSkillCommand)
     {
         CreatedEducationSkillResponse result = await Mediator.Send(createEducationSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateEducationSkillCommand updateEducationSkillCommand)
+    {
+        UpdatedEducationSkillResponse result = await Mediator.Send(updateEducationSkillCommand);
         return Created("", result);
     }
 }

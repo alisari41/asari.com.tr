@@ -3,6 +3,7 @@ using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Persistence.Paging;
+using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Profiles;
 
@@ -28,6 +29,11 @@ public class MappingProfiles : Profile
         #region Create
         CreateMap<EducationSkill, CreatedEducationSkillResponse>().ReverseMap();
         CreateMap<EducationSkill, CreateEducationSkillCommand>().ReverseMap();
+        #endregion
+
+        #region Update
+        CreateMap<EducationSkill, UpdatedEducationSkillResponse>().ReverseMap();
+        CreateMap<EducationSkill, UpdateEducationSkillCommand>().ReverseMap();
         #endregion
     }
 }
