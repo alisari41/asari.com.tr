@@ -19,6 +19,13 @@
     <Folder Include="Features\Experiences\Constants\" />
     <Folder Include="Features\Experiences\Dtos\" />
     <Folder Include="Features\Experiences\Models\" />
+    <Folder Include="Features\LicensesAndCertifications\Commands\Create\" />
+    <Folder Include="Features\LicensesAndCertifications\Commands\Delete\" />
+    <Folder Include="Features\LicensesAndCertifications\Commands\Update\" />
+    <Folder Include="Features\LicensesAndCertifications\Constants\" />
+    <Folder Include="Features\LicensesAndCertifications\Dtos\" />
+    <Folder Include="Features\LicensesAndCertifications\Models\" />
+    <Folder Include="Features\LicensesAndCertifications\Rules\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguages\Dtos\" />
     <Folder Include="Features\ProgrammingLanguages\Models\" />
