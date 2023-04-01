@@ -20,7 +20,6 @@
     <Folder Include="Features\Experiences\Dtos\" />
     <Folder Include="Features\Experiences\Models\" />
     <Folder Include="Features\LicenseAndCertificationSkills\Command\Delete\" />
-    <Folder Include="Features\LicenseAndCertificationSkills\Command\Update\" />
     <Folder Include="Features\LicenseAndCertificationSkills\Constants\" />
     <Folder Include="Features\LicenseAndCertificationSkills\Dtos\" />
     <Folder Include="Features\LicenseAndCertificationSkills\Models\" />

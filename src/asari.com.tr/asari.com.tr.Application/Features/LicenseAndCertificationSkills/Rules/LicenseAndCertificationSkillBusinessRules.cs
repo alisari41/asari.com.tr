@@ -30,4 +30,12 @@ public class LicenseAndCertificationSkillBusinessRules : BaseBusinessRules
         LicenseAndCertificationSkill? result = await _licenseAndCertificationSkillRepository.GetAsync(x => (x.LicenseAndCertificationId == licenseAndCertificationId) && (x.SkillId == skillId));
         if (result != null) throw new BusinessException("Lisans ve Sertifika Yeteneği kullanılmaktadır!");
     }
+
+    public async Task LicenseAndCertificationSkillConNotBeDuplicatedWhenUpdated(LicenseAndCertificationSkill licenseAndCertificationSkill)
+    {
+        LicenseAndCertificationSkill? result = await _licenseAndCertificationSkillRepository.GetAsync(x => (x.Id != licenseAndCertificationSkill.Id)
+                                                                        && (x.LicenseAndCertificationId == licenseAndCertificationSkill.LicenseAndCertificationId)
+                                                                        && (x.SkillId == licenseAndCertificationSkill.SkillId));
+        if (result != null) throw new BusinessException("Lisans ve Sertifika Yeteneği kullanılmaktadır!");
+    }
 }
