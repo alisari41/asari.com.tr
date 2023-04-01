@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetList;
+﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Create;
+using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -16,5 +17,12 @@ public class LicenseAndCertificationSkillsController : BaseController
 
         GetListResponse<GetListLicenseAndCertificationSkillListItemDto> result = await Mediator.Send(getListLicenseAndCertificationSkillQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateLicenseAndCertificationSkillCommand createLicenseAndCertificationSkillCommand)
+    {
+        CreatedLicenseAndCertificationSkillResponse result = await Mediator.Send(createLicenseAndCertificationSkillCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }
