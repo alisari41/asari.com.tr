@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 using asari.com.tr.Domain.Entities;
@@ -24,6 +25,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<LicenseAndCertification, UpdatedLicenseAndCertificationResponse>().ReverseMap();
         CreateMap<LicenseAndCertification, UpdateLicenseAndCertificationCommand>().ReverseMap();
+        #endregion
+
+        #region Delete
+        CreateMap<LicenseAndCertification, DeletedLicenseAndCertificationResponse>().ReverseMap();
+        CreateMap<LicenseAndCertification, DeleteLicenseAndCertificationCommand>().ReverseMap();
         #endregion
     }
 }
