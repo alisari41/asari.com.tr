@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Create;
+using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Delete;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Update;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetList;
 using Core.Application.Requests;
@@ -32,5 +33,12 @@ public class LicenseAndCertificationSkillsController : BaseController
     {
         UpdatedLicenseAndCertificationSkillResponse result = await Mediator.Send(updateLicenseAndCertificationSkillCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteLicenseAndCertificationSkillCommand deleteLicenseAndCertificationSkillCommand)
+    {
+        DeletedLicenseAndCertificationSkillResponse result = await Mediator.Send(deleteLicenseAndCertificationSkillCommand);
+        return Ok(result);
     }
 }
