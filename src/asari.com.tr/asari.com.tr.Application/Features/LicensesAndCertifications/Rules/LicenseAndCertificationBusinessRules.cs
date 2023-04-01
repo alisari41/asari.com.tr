@@ -30,4 +30,10 @@ public class LicenseAndCertificationBusinessRules : BaseBusinessRules
         LicenseAndCertification? result = await _licenseAndCertificationRepository.GetAsync(x => string.Equals(x.Name.ToLower(), name.ToLower())); // Aynı isimde veri var mı
         if (result != null) throw new BusinessException("Lisanslar ve Sertifikalar Başlığı kullanılmaktadır!");
     }
+
+    public async Task LicenseAndCertificationTitleConNotBeDuplicatedWhenUpdated(LicenseAndCertification licenseAndCertification)
+    {
+        LicenseAndCertification? result = await _licenseAndCertificationRepository.GetAsync(x => (x.Id != licenseAndCertification.Id) && string.Equals(x.Name.ToLower(), licenseAndCertification.Name.ToLower())); // Aynı isimde veri var mı
+        if (result != null) throw new BusinessException("Lisanslar ve Sertifikalar Başlığı kullanılmaktadır!");
+    }
 }

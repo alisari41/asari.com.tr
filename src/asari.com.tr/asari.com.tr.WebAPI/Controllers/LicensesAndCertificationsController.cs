@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -23,6 +24,13 @@ public class LicensesAndCertificationsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateLicenseAndCertificationCommand createLicenseAndCertificationCommand)
     {
         CreatedLicenseAndCertificationResponse result = await Mediator.Send(createLicenseAndCertificationCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateLicenseAndCertificationCommand updateLicenseAndCertificationCommand)
+    {
+        UpdatedLicenseAndCertificationResponse result = await Mediator.Send(updateLicenseAndCertificationCommand);
         return Created("", result);
     }
 }
