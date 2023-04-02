@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Educations.Rules;
+﻿using asari.com.tr.Application.Features.Auths.Rules;
+using asari.com.tr.Application.Features.Educations.Rules;
 using asari.com.tr.Application.Features.EducationSkills.Rules;
 using asari.com.tr.Application.Features.Experiences.Rules;
 using asari.com.tr.Application.Features.ExperienceSkills.Rules;
@@ -12,6 +13,7 @@ using asari.com.tr.Application.Features.ProjectSkills.Rules;
 using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Features.Technologies.Rules;
 using asari.com.tr.Application.Features.TechnologyProjects.Rules;
+using asari.com.tr.Application.Services.AuthService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
@@ -55,8 +57,12 @@ public static class ApplicationServiceRegistration
         services.AddScoped<EducationSkillBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<LicenseAndCertificationBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<LicenseAndCertificationSkillBusinessRules>(); // Business Kuralları bir kere bellekte durur.
+        services.AddScoped<AuthBusinessRules>();
         #endregion
 
+        #region Service - Çoğu yerde kullanılacak metotları yazdığımız sınıfları Bağlıyoruz
+        services.AddScoped<IAuthService, AuthManager>(); // register
+        #endregion
 
         return services;
     }

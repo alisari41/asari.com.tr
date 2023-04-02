@@ -28,6 +28,14 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IEducationRepository, EducationRepository>();
         services.AddScoped<IExperienceSkillRepository, ExperienceSkillRepository>();
         services.AddScoped<IExperienceRepository, ExperienceRepository>();
+
+
+        #region JWT ( Json Web Token ) ve UseAuthentication ların Bağlanması 
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+        services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+        #endregion
         #endregion
 
 
