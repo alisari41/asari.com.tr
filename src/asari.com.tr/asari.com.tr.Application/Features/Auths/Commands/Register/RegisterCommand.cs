@@ -41,7 +41,7 @@ public class RegisterCommand : IRequest<RegisteredResponse>
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 FirstName = request.UserForRegisterDto.FirstName,
-                LastName = request.UserForRegisterDto.LastName,
+                LastName = request.UserForRegisterDto.LastName.ToUpper(),
                 Status = true
             };
             #endregion

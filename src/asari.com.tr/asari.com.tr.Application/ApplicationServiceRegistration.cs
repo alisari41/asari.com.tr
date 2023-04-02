@@ -14,6 +14,7 @@ using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Features.Technologies.Rules;
 using asari.com.tr.Application.Features.TechnologyProjects.Rules;
 using asari.com.tr.Application.Services.AuthService;
+using asari.com.tr.Application.Services.UserServices;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
@@ -62,6 +63,7 @@ public static class ApplicationServiceRegistration
 
         #region Service - Çoğu yerde kullanılacak metotları yazdığımız sınıfları Bağlıyoruz
         services.AddScoped<IAuthService, AuthManager>(); // register
+        services.AddScoped<IUserServices, UserManager>(); // Login
         #endregion
 
         return services;

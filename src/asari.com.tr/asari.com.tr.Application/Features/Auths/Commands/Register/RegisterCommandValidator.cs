@@ -24,14 +24,12 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .EmailAddress().WithMessage("Geçerli bir e-posta değeri giriniz!");
 
         RuleFor(c => c.UserForRegisterDto.Password)
-            .NotEmpty().WithMessage("'Parola' alanı boş geçilemez!")
-            .Must(IsPasswordValid).WithMessage("Parolanız en az 8 karakter, en az bir harf ve bir sayı içermelidir!");
-    }
-
-    private bool IsPasswordValid(string arg)
-    {
-        // Parola kontrolü - Parolanız en az 8 karakter, en az bir harf ve bir sayı içermelidir!
-        Regex regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
-        return regex.IsMatch(arg);
+            .NotEmpty()
+            .MinimumLength(8).WithMessage("'Şifre' en az 8 karakter olmalıdır.")
+            .Matches("[A-Z]").WithMessage("'Şifre' bir veya daha fazla büyük harf içermelidir.")
+            .Matches("[a-z]").WithMessage("'Şifre' bir veya daha fazla küçük harf içermelidir.")
+            .Matches(@"\d").WithMessage("'Şifre' bir veya daha fazla rakam içermelidir.")
+            .Matches(@"[][""!@$%^&*(){}:;<>,.?/+_=|'~\\-]").WithMessage("'Şifre' bir veya daha fazla özel karakter içermelidir.")
+            .Matches("^[^£# “”]*$").WithMessage("'Şifre' £ # “” karakterleri veya boşluk içermemelidir.");
     }
 }
