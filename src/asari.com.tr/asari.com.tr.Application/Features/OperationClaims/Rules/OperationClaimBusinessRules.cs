@@ -30,4 +30,10 @@ public class OperationClaimBusinessRules : BaseBusinessRules
         OperationClaim? result = await _operationClaimRepository.GetAsync(x => string.Equals(x.Name.ToLower(), name.ToLower()));
         if (result != null) throw new BusinessException("Bu Rol Mevcuttur.");
     }
+
+    public async Task OperationClaimNameCanNotBeDuplacatedWhenUpdated(OperationClaim operationClaim)
+    {
+        OperationClaim? result = await _operationClaimRepository.GetAsync(x => (x.Id != operationClaim.Id) && string.Equals(x.Name.ToLower(), operationClaim.Name.ToLower()));
+        if (result != null) throw new BusinessException("Bu Rol Mevcuttur.");
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.OperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -18,6 +19,11 @@ public class MappingProfiles : Profile
         #region Create
         CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
         CreateMap<OperationClaim, CreateOperationClaimCommand>().ReverseMap();
+        #endregion
+
+        #region Update
+        CreateMap<OperationClaim, UpdatedOperationClaimResponse>().ReverseMap();
+        CreateMap<OperationClaim, UpdateOperationClaimCommand>().ReverseMap();
         #endregion
     }
 }
