@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
+using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
@@ -15,6 +16,16 @@ public class AuthBusinessRules : BaseBusinessRules
     public AuthBusinessRules(IUserRepository userRepository)
     {
         _userRepository = userRepository;
+    }
+    public void UserShouldExistWhenRequested(User? User)
+    {
+        if (User == null) throw new BusinessException("Kullanıcı mevcut değildir.");
+    }
+
+    public async Task UserShouldExistWhenRequested(int id)
+    {
+        User? result = await _userRepository.GetAsync(x => x.Id == id, enableTracking: false);
+        UserShouldExistWhenRequested(result);
     }
 
     public async Task EmailCanNotBeDuplicatedWheRegistered(string email)

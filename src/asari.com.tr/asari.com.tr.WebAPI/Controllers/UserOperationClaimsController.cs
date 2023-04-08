@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -16,5 +17,12 @@ public class UserOperationClaimsController : BaseController
 
         GetListResponse<GetListUserOperationClaimListItemDto> result = await Mediator.Send(getListUserOperationClaimQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateUserOperationClaimCommand createUserOperationClaimCommand)
+    {
+        CreatedUserOperationClaimResponse result = await Mediator.Send(createUserOperationClaimCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
     }
 }
