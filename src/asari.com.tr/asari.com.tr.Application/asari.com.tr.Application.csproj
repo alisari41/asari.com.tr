@@ -27,7 +27,6 @@
     <Folder Include="Features\LicensesAndCertifications\Constants\" />
     <Folder Include="Features\LicensesAndCertifications\Dtos\" />
     <Folder Include="Features\LicensesAndCertifications\Models\" />
-    <Folder Include="Features\OperationClaims\Commands\Delete\" />
     <Folder Include="Features\OperationClaims\Contants\" />
     <Folder Include="Features\OperationClaims\Dtos\" />
     <Folder Include="Features\OperationClaims\Models\" />

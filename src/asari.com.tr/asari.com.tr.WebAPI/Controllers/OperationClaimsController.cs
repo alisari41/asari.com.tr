@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 using asari.com.tr.Application.Features.OperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 using Core.Application.Requests;
@@ -33,5 +34,12 @@ public class OperationClaimsController : BaseController
     {
         var result = await Mediator.Send(updateOperationClaimCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteOperationClaimCommand deleteOperationClaimCommand)
+    {
+        var result = await Mediator.Send(deleteOperationClaimCommand);
+        return Ok(result);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 using asari.com.tr.Application.Features.OperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 using AutoMapper;
@@ -24,6 +25,11 @@ public class MappingProfiles : Profile
         #region Update
         CreateMap<OperationClaim, UpdatedOperationClaimResponse>().ReverseMap();
         CreateMap<OperationClaim, UpdateOperationClaimCommand>().ReverseMap();
+        #endregion
+
+        #region Delete
+        CreateMap<OperationClaim, DeletedOperationClaimResponse>().ReverseMap();
+        CreateMap<OperationClaim, DeleteOperationClaimCommand>().ReverseMap();
         #endregion
     }
 }
