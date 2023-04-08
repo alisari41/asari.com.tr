@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
+using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
 using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -23,6 +24,13 @@ public class UserOperationClaimsController : BaseController
     public async Task<IActionResult> Add([FromBody] CreateUserOperationClaimCommand createUserOperationClaimCommand)
     {
         CreatedUserOperationClaimResponse result = await Mediator.Send(createUserOperationClaimCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+        return Created("", result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateUserOperationClaimCommand updateUserOperationClaimCommand)
+    {
+        UpdatedUserOperationClaimResponse result = await Mediator.Send(updateUserOperationClaimCommand);
         return Created("", result);
     }
 }
