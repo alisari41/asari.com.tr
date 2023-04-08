@@ -10,6 +10,7 @@ public class UpdateSkillCommand : IRequest<UpdatedSkillResponse>
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public double? Degree { get; set; }
 
     public class UpdateSkillCommandHandler : IRequestHandler<UpdateSkillCommand, UpdatedSkillResponse>
     {

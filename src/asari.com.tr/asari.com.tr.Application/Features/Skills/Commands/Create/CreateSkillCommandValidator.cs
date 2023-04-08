@@ -8,6 +8,7 @@ public class CreateSkillCommandValidator : AbstractValidator<CreateSkillCommand>
     {
         #region Zorunlu Alanlar
         RuleFor(x => x.Name).NotEmpty().WithMessage("Yetenek Adını boş bırakmayınız");
+        RuleFor(x => x.Degree).NotEmpty().WithMessage("Yetenek Derecesi boş bırakmayınız");
         #endregion
 
         #region Maximum Karakter Uzunluğu

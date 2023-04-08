@@ -10,7 +10,8 @@ public class SkillConfiguration : IEntityTypeConfiguration<Skill>
     {
         builder.ToTable("Skills").HasKey(k => k.Id);
         builder.Property(p => p.Id).HasColumnName("Id");
-        builder.Property(p => p.Name).HasColumnName("Name").IsRequired();
+        builder.Property(p => p.Name).HasColumnName("Name").IsRequired(false);
+        builder.Property(p => p.Degree).HasColumnName("Degree").IsRequired(false);
 
         //a.HasAlternateKey(p => p.Name); // Benzersiz alan
 

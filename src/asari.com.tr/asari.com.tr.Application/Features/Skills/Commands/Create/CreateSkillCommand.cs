@@ -9,6 +9,7 @@ namespace asari.com.tr.Application.Features.Skills.Commands.Create;
 public class CreateSkillCommand : IRequest<CreatedSkillResponse>
 {
     public string Name { get; set; }
+    public double? Degree { get; set; }
 
     public class CreateSkillCommandHandler : IRequestHandler<CreateSkillCommand, CreatedSkillResponse>
     {
