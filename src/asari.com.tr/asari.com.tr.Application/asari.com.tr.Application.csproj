@@ -54,6 +54,13 @@
     <Folder Include="Features\TechnologyProjects\Constants\" />
     <Folder Include="Features\TechnologyProjects\Dtos\" />
     <Folder Include="Features\TechnologyProjects\Models\" />
+    <Folder Include="Features\UserOperationClaims\Commands\Create\" />
+    <Folder Include="Features\UserOperationClaims\Commands\Delete\" />
+    <Folder Include="Features\UserOperationClaims\Commands\Update\" />
+    <Folder Include="Features\UserOperationClaims\Constants\" />
+    <Folder Include="Features\UserOperationClaims\Dtos\" />
+    <Folder Include="Features\UserOperationClaims\Models\" />
+    <Folder Include="Features\UserOperationClaims\Rules\" />
   </ItemGroup>
 
   <ItemGroup>
