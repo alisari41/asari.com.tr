@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
+﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -12,6 +13,11 @@ public class MappingProfiles : Profile
         #region Get List
         CreateMap<IPaginate<OperationClaim>, GetListResponse<OperationClaimListItemDto>>().ReverseMap(); // OperationClaimListModel sınıfı IPaginate sınıfıyla Maplenir
         CreateMap<OperationClaim, OperationClaimListItemDto>().ReverseMap();
+        #endregion
+
+        #region Create
+        CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
+        CreateMap<OperationClaim, CreateOperationClaimCommand>().ReverseMap();
         #endregion
     }
 }

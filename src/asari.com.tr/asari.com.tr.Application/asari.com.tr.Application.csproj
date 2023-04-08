@@ -27,13 +27,11 @@
     <Folder Include="Features\LicensesAndCertifications\Constants\" />
     <Folder Include="Features\LicensesAndCertifications\Dtos\" />
     <Folder Include="Features\LicensesAndCertifications\Models\" />
-    <Folder Include="Features\OperationClaims\Commands\Create\" />
     <Folder Include="Features\OperationClaims\Commands\Delete\" />
     <Folder Include="Features\OperationClaims\Commands\Update\" />
     <Folder Include="Features\OperationClaims\Contants\" />
     <Folder Include="Features\OperationClaims\Dtos\" />
     <Folder Include="Features\OperationClaims\Models\" />
-    <Folder Include="Features\OperationClaims\Rules\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguages\Dtos\" />
     <Folder Include="Features\ProgrammingLanguages\Models\" />

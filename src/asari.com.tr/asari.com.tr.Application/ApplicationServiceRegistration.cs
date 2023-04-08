@@ -5,6 +5,7 @@ using asari.com.tr.Application.Features.Experiences.Rules;
 using asari.com.tr.Application.Features.ExperienceSkills.Rules;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Rules;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Rules;
+using asari.com.tr.Application.Features.OperationClaims.Rules;
 using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Rules;
@@ -59,6 +60,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<LicenseAndCertificationBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<LicenseAndCertificationSkillBusinessRules>(); // Business Kuralları bir kere bellekte durur.
         services.AddScoped<AuthBusinessRules>();
+        services.AddScoped<OperationClaimBusinessRules>();
         #endregion
 
         #region Service - Çoğu yerde kullanılacak metotları yazdığımız sınıfları Bağlıyoruz

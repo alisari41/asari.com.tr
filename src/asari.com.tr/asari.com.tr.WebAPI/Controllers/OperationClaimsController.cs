@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
+﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,5 +18,12 @@ public class OperationClaimsController : BaseController
 
         var result = await Mediator.Send(getListOperationClaimQuery);
         return Ok(result);
+    }
+
+    [HttpPost("add")]
+    public async Task<IActionResult> Add([FromBody] CreateOperationClaimCommand createOperationClaimCommand)
+    {
+        var result = await Mediator.Send(createOperationClaimCommand);
+        return Created("", result);
     }
 }
