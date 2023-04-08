@@ -1,5 +1,6 @@
-﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
-using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
+using asari.com.tr.Application.Features.UserOperationClaims.Commands.Delete;
+using asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -32,5 +33,12 @@ public class UserOperationClaimsController : BaseController
     {
         UpdatedUserOperationClaimResponse result = await Mediator.Send(updateUserOperationClaimCommand);
         return Created("", result);
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteUserOperationClaimCommand deleteProjectSkillCommand)
+    {
+        DeletedUserOperationClaimResponse result = await Mediator.Send(deleteProjectSkillCommand);
+        return Ok(result);
     }
 }
