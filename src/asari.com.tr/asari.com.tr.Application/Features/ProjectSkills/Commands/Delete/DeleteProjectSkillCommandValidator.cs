@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Commands.Delete;
 
@@ -7,7 +8,7 @@ public class DeleteProjectSkillCommandValidator : AbstractValidator<DeleteProjec
     public DeleteProjectSkillCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Proje Yetenek Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(ProjectSkillMessages.IdBosOlmamali);
         #endregion
     }
 }

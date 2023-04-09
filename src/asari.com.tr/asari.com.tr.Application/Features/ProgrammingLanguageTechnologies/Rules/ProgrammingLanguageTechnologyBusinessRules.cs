@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class ProgrammingLanguageTechnologyBusinessRules : BaseBusinessRules
 
     public void ProgrammingLanguageTechnologyShouldExistWhenRequested(ProgrammingLanguageTechnology? programmingLanguageTechnology)
     {
-        if (programmingLanguageTechnology == null) throw new BusinessException("Programlama dili Teknolojisi mevcut değildir.");
+        if (programmingLanguageTechnology == null) throw new BusinessException(ProgrammingLanguageTechnologyMessages.ProgramlamaDiliTeknolojisiMevcutDegil);
     }
 
     public async Task ProgrammingLanguageTechnologyShouldExistWhenRequested(int id)
@@ -29,7 +30,7 @@ public class ProgrammingLanguageTechnologyBusinessRules : BaseBusinessRules
     {
         ProgrammingLanguageTechnology? result = await _programmingLanguageTechnologyRepository.GetAsync(x => string.Equals(x.Name.ToLower(),
                                                                                                                                 name.ToLower())); // Aynı isimde veri var mı
-        if (result != null) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
+        if (result != null) throw new BusinessException(ProgrammingLanguageTechnologyMessages.ProgramlamaDiliTeknolojisiMevcut);
     }
 
     public async Task ProgrammingLanguageTechnologyNameConNotBeDuplicatedWhenUpdated(ProgrammingLanguageTechnology programmingLanguageTechnology)
@@ -37,6 +38,6 @@ public class ProgrammingLanguageTechnologyBusinessRules : BaseBusinessRules
         ProgrammingLanguageTechnology? result = await _programmingLanguageTechnologyRepository.GetAsync(x => (x.Id != programmingLanguageTechnology.Id) && (string.Equals(x.Name.ToLower(),
                                                                                                                                                                                programmingLanguageTechnology.Name.ToLower())));
 
-        if (result != null) throw new BusinessException("Programlama Dili Teknolojisi kullanılmaktadır.");
+        if (result != null) throw new BusinessException(ProgrammingLanguageTechnologyMessages.ProgramlamaDiliTeknolojisiMevcut);
     }
 }

@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class ProgrammingLanguageBusinessRules : BaseBusinessRules
 
     public void ProgrammingLanguageShouldExistWhenRequested(ProgrammingLanguage? programmingLanguage)
     {
-        if (programmingLanguage == null) throw new BusinessException("Programlama dili mevcut değildir.");
+        if (programmingLanguage == null) throw new BusinessException(ProgrammingLanguageMessages.ProgramlamaDiliMevcutDegil);
     }
 
     public async Task ProgrammingLanguageShouldExistWhenRequested(int id)
@@ -29,7 +30,7 @@ public class ProgrammingLanguageBusinessRules : BaseBusinessRules
     {
         ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(x => string.Equals(x.Name.ToLower(),
                                                                                                             name.ToLower()));
-        if (result != null) throw new BusinessException("Progralama Dili kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProgrammingLanguageMessages.ProgramlamaDiliMevcut);
     }
 
     public async Task ProgrammingLanguageConNotBeDuplicatedWhenUpdated(ProgrammingLanguage programmingLanguage)
@@ -37,6 +38,6 @@ public class ProgrammingLanguageBusinessRules : BaseBusinessRules
         ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(x => (x.Id != programmingLanguage.Id) && string.Equals(x.Name.ToLower(),
                                                                                                                                                 programmingLanguage.Name.ToLower()));
 
-        if (result != null) throw new BusinessException("Progralama Dili kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProgrammingLanguageMessages.ProgramlamaDiliMevcut);
     }
 }

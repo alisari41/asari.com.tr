@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -15,7 +16,7 @@ public class ProjectSkillBusinessRules : BaseBusinessRules
     }
     public void ProjectSkillShouldExistWhenRequested(ProjectSkill? projectSkill)
     {
-        if (projectSkill == null) throw new BusinessException("Proje Yeteneği mevcut değildir.");
+        if (projectSkill == null) throw new BusinessException(ProjectSkillMessages.ProjeYetenegiMevcutDegil);
     }
 
     public async Task ProjectSkillShouldExistWhenRequested(int id)
@@ -27,7 +28,7 @@ public class ProjectSkillBusinessRules : BaseBusinessRules
     public async Task ProjectSkillSConNotBeDuplicatedWhenInserted(int projectId, int skillId)
     {
         ProjectSkill? result = await _projectSkillRepository.GetAsync(x => (x.ProjectId == projectId) && (x.SkillId == skillId));
-        if (result != null) throw new BusinessException("Proje Yeteneği kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProjectSkillMessages.ProjeYetenegiMevcut);
     }
 
     public async Task ProjectSkillTechnologySConNotBeDuplicatedWhenUpdated(ProjectSkill projectSkill)
@@ -35,6 +36,6 @@ public class ProjectSkillBusinessRules : BaseBusinessRules
         ProjectSkill? result = await _projectSkillRepository.GetAsync(x => (x.Id != projectSkill.Id)
                                                                         && (x.ProjectId == projectSkill.ProjectId)
                                                                         && (x.SkillId == projectSkill.SkillId));
-        if (result != null) throw new BusinessException("Proje Yeteneği kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProjectSkillMessages.ProjeYetenegiMevcut);
     }
 }

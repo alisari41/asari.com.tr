@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.TechnologyProjects.Commands.Create;
 
@@ -9,8 +10,8 @@ public class CreateTechnologyProjectCommandValidator : AbstractValidator<CreateT
     public CreateTechnologyProjectCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.TechnologyId).NotEmpty().WithMessage("Teknoloji Id'si Boş olamaz");
-        RuleFor(x => x.ProjectId).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
+        RuleFor(x => x.TechnologyId).NotEmpty().WithMessage(TechnologyProjectMessages.TechnologyIdBosOlmamali);
+        RuleFor(x => x.ProjectId).NotEmpty().WithMessage(TechnologyProjectMessages.ProjectIdBosOlmamali);
         #endregion
     }
 }

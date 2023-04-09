@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.TechnologyProjects.Commands.Update;
 
@@ -7,9 +8,9 @@ public class UpdateTechnologyProjectCommandValidator : AbstractValidator<UpdateT
     public UpdateTechnologyProjectCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Teknoloji Proje Id'si Boş olamaz");
-        RuleFor(x => x.TechnologyId).NotEmpty().WithMessage("Teknoloji Id'si Boş olamaz");
-        RuleFor(x => x.ProjectId).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(TechnologyProjectMessages.IdBosOlmamali);
+        RuleFor(x => x.TechnologyId).NotEmpty().WithMessage(TechnologyProjectMessages.TechnologyIdBosOlmamali);
+        RuleFor(x => x.ProjectId).NotEmpty().WithMessage(TechnologyProjectMessages.ProjectIdBosOlmamali);
         #endregion
     }
 }

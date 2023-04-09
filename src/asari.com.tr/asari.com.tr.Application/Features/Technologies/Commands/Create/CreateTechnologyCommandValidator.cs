@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.Technologies.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.Technologies.Commands.Create;
 
@@ -10,13 +11,13 @@ public class CreateTechnologyCommandValidator : AbstractValidator<CreateTechnolo
     public CreateTechnologyCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Title).NotEmpty().WithMessage("Teknoloji Adını boş bırakmayınız");
-        RuleFor(x => x.Description).NotEmpty().WithMessage("Teknoloji Açıklamasını boş bırakmayınız");
-        RuleFor(x => x.Content).NotEmpty().WithMessage("Teknoloji İçeriğini boş bırakmayınız");
+        RuleFor(x => x.Title).NotEmpty().WithMessage(TechnologyMessages.TitleBosOlmamali);
+        RuleFor(x => x.Description).NotEmpty().WithMessage(TechnologyMessages.DescriptionBosOlmamali);
+        RuleFor(x => x.Content).NotEmpty().WithMessage(TechnologyMessages.ContentBosOlmamali);
         #endregion
 
         #region Maximum Karakter Uzunluğu
-        RuleFor(x => x.Title).MaximumLength(250).WithMessage("Teknoloji Adı 250 karakterden uzun olamaz.");
+        RuleFor(x => x.Title).MaximumLength(250).WithMessage(TechnologyMessages.TitleMaxKarakter);
         #endregion
     }
 }

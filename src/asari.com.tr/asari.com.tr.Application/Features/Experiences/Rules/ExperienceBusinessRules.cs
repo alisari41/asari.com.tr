@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.Experiences.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class ExperienceBusinessRules : BaseBusinessRules
 
     public void ExperienceShouldExistWhenRequested(Experience? experience)
     {
-        if (experience == null) throw new BusinessException("Deneyim mevcut değildir.");
+        if (experience == null) throw new BusinessException(ExperienceMessages.DeneyimMevcutDegil);
     }
 
     public async Task ExperienceShouldExistWhenRequested(int id)

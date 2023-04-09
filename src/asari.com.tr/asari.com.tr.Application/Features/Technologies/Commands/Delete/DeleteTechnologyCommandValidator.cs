@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.Technologies.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.Technologies.Commands.Delete;
 
@@ -6,6 +7,6 @@ public class DeleteTechnologyCommandValidator : AbstractValidator<DeleteTechnolo
 {
     public DeleteTechnologyCommandValidator()
     {
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(TechnologyMessages.IdBosOlmamali);
     }
 }

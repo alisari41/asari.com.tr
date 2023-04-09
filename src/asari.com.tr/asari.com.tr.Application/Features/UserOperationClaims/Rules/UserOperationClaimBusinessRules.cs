@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class UserOperationClaimBusinessRules : BaseBusinessRules
     }
     public void UserOperationClaimShouldExistWhenRequested(UserOperationClaim? UserOperationClaim)
     {
-        if (UserOperationClaim == null) throw new BusinessException("Kullanıcı Rolü mevcut değildir.");
+        if (UserOperationClaim == null) throw new BusinessException(UserOperationClaimMessages.KullaniciRoluMevcutDegil);
     }
 
     public async Task UserOperationClaimShouldExistWhenRequested(int id)
@@ -28,7 +29,7 @@ public class UserOperationClaimBusinessRules : BaseBusinessRules
     public async Task UserOperationClaimConNotBeDuplicatedWhenInserted(int userId, int operationClaimId)
     {
         UserOperationClaim? result = await _userOperationClaimRepository.GetAsync(x => (x.UserId == userId) && (x.OperationClaimId == operationClaimId));
-        if (result != null) throw new BusinessException("Kullanıcı Rolü kullanılmaktadır!");
+        if (result != null) throw new BusinessException(UserOperationClaimMessages.KullaniciRoluMevcut);
     }
 
     public async Task UserOperationClaimConNotBeDuplicatedWhenUpdated(UserOperationClaim userOperationClaim)
@@ -36,6 +37,6 @@ public class UserOperationClaimBusinessRules : BaseBusinessRules
         UserOperationClaim? result = await _userOperationClaimRepository.GetAsync(x => (x.Id != userOperationClaim.Id) 
                                                                             && (x.UserId == userOperationClaim.UserId) 
                                                                             && (x.OperationClaimId == userOperationClaim.OperationClaimId));
-        if (result != null) throw new BusinessException("Kullanıcı Rolü kullanılmaktadır!");
+        if (result != null) throw new BusinessException(UserOperationClaimMessages.KullaniciRoluMevcut);
     }
 }

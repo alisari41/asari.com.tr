@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
 
@@ -7,8 +8,8 @@ public class CreateUserOperationClaimCommandValidator : AbstractValidator<Create
     public CreateUserOperationClaimCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.UserId).NotEmpty().WithMessage("Kullanıcı Id'si boş bırakmayınız");
-        RuleFor(x => x.OperationClaimId).NotEmpty().WithMessage("Rol Id'si boş bırakmayınız");
+        RuleFor(x => x.UserId).NotEmpty().WithMessage(UserOperationClaimMessages.UserIdBosOlmamali);
+        RuleFor(x => x.OperationClaimId).NotEmpty().WithMessage(UserOperationClaimMessages.OperationClaimIdBosOlmamali);
         #endregion
     }
 }

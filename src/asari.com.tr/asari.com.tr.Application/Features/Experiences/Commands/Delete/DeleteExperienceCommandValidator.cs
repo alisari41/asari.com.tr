@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.Experiences.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.Experiences.Commands.Delete;
 
@@ -6,6 +7,6 @@ public class DeleteExperienceCommandValidator : AbstractValidator<DeleteExperien
 {
     public DeleteExperienceCommandValidator()
     {
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Deneyim Id'sini boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(ExperienceMessages.IdBosOlmamali);
     }
 }

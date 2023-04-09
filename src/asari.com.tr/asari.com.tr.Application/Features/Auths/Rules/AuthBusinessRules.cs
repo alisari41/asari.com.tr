@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.Auths.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -19,7 +20,7 @@ public class AuthBusinessRules : BaseBusinessRules
     }
     public void UserShouldExistWhenRequested(User? User)
     {
-        if (User == null) throw new BusinessException("Kullanıcı mevcut değildir.");
+        if (User == null) throw new BusinessException(AuthMessages.KullaniciMevcutDegil);
     }
 
     public async Task UserShouldExistWhenRequested(int id)
@@ -31,12 +32,12 @@ public class AuthBusinessRules : BaseBusinessRules
     public async Task EmailCanNotBeDuplicatedWheRegistered(string email)
     {
         var result = await _userRepository.Query().Where(x => x.Email == email).AnyAsync();
-        if (result) throw new BusinessException("Mail already Exists");
+        if (result) throw new BusinessException(AuthMessages.MailMevcut);
     }
 
     public Task UserShouldBeExists(User? user)
     {
-        if (user == null) throw new BusinessException("Kullanıcı mevcut değil.");
+        if (user == null) throw new BusinessException(AuthMessages.KullaniciMevcutDegil);
         return Task.CompletedTask;
     }
 
@@ -44,6 +45,6 @@ public class AuthBusinessRules : BaseBusinessRules
     {
         var user = await _userRepository.GetAsync(x => x.Id == id);
         if (!HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-            throw new BusinessException("Hatalı şifre");
+            throw new BusinessException(AuthMessages.PasswordError);
     }
 }

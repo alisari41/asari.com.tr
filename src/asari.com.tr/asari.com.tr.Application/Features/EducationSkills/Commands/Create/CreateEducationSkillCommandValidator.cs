@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.EducationSkills.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 
@@ -7,8 +8,8 @@ public class CreateEducationSkillCommandValidator : AbstractValidator<CreateEduc
     public CreateEducationSkillCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.EducationId).NotEmpty().WithMessage("Eğitim Id'si boş bırakmayınız");
-        RuleFor(x => x.SkillId).NotEmpty().WithMessage("Yetenek Id'si boş bırakmayınız");
+        RuleFor(x => x.EducationId).NotEmpty().WithMessage(EducationSkillMessages.EducationIdBosOlmamali);
+        RuleFor(x => x.SkillId).NotEmpty().WithMessage(EducationSkillMessages.SkillIdBosOlmamali);
         #endregion
     }
 }

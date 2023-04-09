@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class ProjectProgrammingLanguageTechnologyBusinessRules : BaseBusinessRul
 
     public void ProjectProgrammingLanguageTechnologyShouldExistWhenRequested(ProjectProgrammingLanguageTechnology? projectProgrammingLanguageTechnology)
     {
-        if (projectProgrammingLanguageTechnology == null) throw new BusinessException("Proje Programlama dili mevcut değildir.");
+        if (projectProgrammingLanguageTechnology == null) throw new BusinessException(ProjectProgrammingLanguageTechnologyMessages.ProjeProgramlamaDiliTeknolojisiMevcutDegil);
     }
 
     public async Task ProjectProgrammingLanguageTechnologyShouldExistWhenRequested(int id)
@@ -29,7 +30,7 @@ public class ProjectProgrammingLanguageTechnologyBusinessRules : BaseBusinessRul
     {
         ProjectProgrammingLanguageTechnology? result = await _projectProgrammingLanguageTechnologyRepository.GetAsync(x => (x.ProgrammingLanguageTechnologyId == programmingLanguageTechnologyId)
                                                                                                                                                 && (x.ProjectId == projectId));
-        if (result != null) throw new BusinessException("Proje Programalama Dili kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProjectProgrammingLanguageTechnologyMessages.ProjeProgramlamaDiliTeknolojisiMevcut);
     }
 
     public async Task ProjectProgrammingLanguageTechnologySConNotBeDuplicatedWhenUpdated(ProjectProgrammingLanguageTechnology projectProgrammingLanguageTechnology)
@@ -37,6 +38,6 @@ public class ProjectProgrammingLanguageTechnologyBusinessRules : BaseBusinessRul
         ProjectProgrammingLanguageTechnology? result = await _projectProgrammingLanguageTechnologyRepository.GetAsync(x => (x.Id != projectProgrammingLanguageTechnology.Id)
                                                                                                             && (x.ProgrammingLanguageTechnologyId == projectProgrammingLanguageTechnology.ProgrammingLanguageTechnologyId)
                                                                                                             && (x.ProjectId == projectProgrammingLanguageTechnology.ProjectId));
-        if (result != null) throw new BusinessException("Proje Programalama Dili kullanılmaktadır!");
+        if (result != null) throw new BusinessException(ProjectProgrammingLanguageTechnologyMessages.ProjeProgramlamaDiliTeknolojisiMevcut);
     }
 }

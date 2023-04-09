@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.OperationClaims.Contants;
+using asari.com.tr.Application.Services.Repositories;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
@@ -16,7 +17,7 @@ public class OperationClaimBusinessRules : BaseBusinessRules
 
     public void OperationClaimShouldExistWhenRequested(OperationClaim? operationClaim)
     {
-        if (operationClaim == null) throw new BusinessException("Rol mevcut değildir.");
+        if (operationClaim == null) throw new BusinessException(OperationClaimMessages.RolMevcutDegil);
     }
 
     public async Task OperationClaimShouldExistWhenRequested(int id)
@@ -28,12 +29,12 @@ public class OperationClaimBusinessRules : BaseBusinessRules
     public async Task OperationClaimNameCanNotBeDuplacatedWhenInserted(string name)
     {
         OperationClaim? result = await _operationClaimRepository.GetAsync(x => string.Equals(x.Name.ToLower(), name.ToLower()));
-        if (result != null) throw new BusinessException("Bu Rol Mevcuttur.");
+        if (result != null) throw new BusinessException(OperationClaimMessages.RolMevcut);
     }
 
     public async Task OperationClaimNameCanNotBeDuplacatedWhenUpdated(OperationClaim operationClaim)
     {
         OperationClaim? result = await _operationClaimRepository.GetAsync(x => (x.Id != operationClaim.Id) && string.Equals(x.Name.ToLower(), operationClaim.Name.ToLower()));
-        if (result != null) throw new BusinessException("Bu Rol Mevcuttur.");
+        if (result != null) throw new BusinessException(OperationClaimMessages.RolMevcut);
     }
 }

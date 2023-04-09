@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.OperationClaims.Contants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 
@@ -6,6 +7,6 @@ public class DeleteOperationClaimCommandValidator : AbstractValidator<DeleteOper
 {
     public DeleteOperationClaimCommandValidator()
     {
-        RuleFor(x => x.Id).NotEmpty().WithMessage("'Rol Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(OperationClaimMessages.IdBosOlmamali);
     }
 }

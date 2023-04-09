@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
 
@@ -7,9 +8,9 @@ public class UpdateUserOperationClaimCommandValidator : AbstractValidator<Update
     public UpdateUserOperationClaimCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Kullanıcı Rol Id'si boş bırakmayınız");
-        RuleFor(x => x.UserId).NotEmpty().WithMessage("Kullanıcı Id'si boş bırakmayınız");
-        RuleFor(x => x.OperationClaimId).NotEmpty().WithMessage("Rol Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(UserOperationClaimMessages.IdBosOlmamali);
+        RuleFor(x => x.UserId).NotEmpty().WithMessage(UserOperationClaimMessages.UserIdBosOlmamali);
+        RuleFor(x => x.OperationClaimId).NotEmpty().WithMessage(UserOperationClaimMessages.OperationClaimIdBosOlmamali);
         #endregion
     }
 }

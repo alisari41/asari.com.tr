@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.Educations.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -16,7 +17,7 @@ public class EducationBusinessRules : BaseBusinessRules
 
     public void EducationShouldExistWhenRequested(Education? education)
     {
-        if (education == null) throw new BusinessException("Eğitim mevcut değildir.");
+        if (education == null) throw new BusinessException(EducationMessages.EgitimMevcutDegil);
     }
 
     public async Task EducationShouldExistWhenRequested(int id)

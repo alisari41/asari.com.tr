@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Delete;
 
@@ -7,7 +8,7 @@ public class DeleteLicenseAndCertificationSkillCommandValidator : AbstractValida
     public DeleteLicenseAndCertificationSkillCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Lisans ve Sertifika Yetenek Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(LicenseAndCertificationSkillMessages.IdBosOlmamali);
         #endregion
     }
 }

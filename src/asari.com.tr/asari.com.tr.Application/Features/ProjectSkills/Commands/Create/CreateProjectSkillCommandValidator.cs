@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
 
@@ -7,8 +8,8 @@ public class CreateProjectSkillCommandValidator : AbstractValidator<CreateProjec
     public CreateProjectSkillCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.ProjectId).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
-        RuleFor(x => x.SkillId).NotEmpty().WithMessage("Yetenek Id'si boş bırakmayınız");
+        RuleFor(x => x.ProjectId).NotEmpty().WithMessage(ProjectSkillMessages.ProjectIdBosOlmamali);
+        RuleFor(x => x.SkillId).NotEmpty().WithMessage(ProjectSkillMessages.SkillIdBosOlmamali);
         #endregion
     }
 }

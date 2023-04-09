@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Create;
 
@@ -7,8 +8,8 @@ public class CreateLicenseAndCertificationSkillCommandValidator : AbstractValida
     public CreateLicenseAndCertificationSkillCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.LicenseAndCertificationId).NotEmpty().WithMessage("Lisans ve Sertifika Id'si boş bırakmayınız");
-        RuleFor(x => x.SkillId).NotEmpty().WithMessage("Yetenek Id'si boş bırakmayınız");
+        RuleFor(x => x.LicenseAndCertificationId).NotEmpty().WithMessage(LicenseAndCertificationSkillMessages.LicenseAndCertificationIdBosOlmamali);
+        RuleFor(x => x.SkillId).NotEmpty().WithMessage(LicenseAndCertificationSkillMessages.SkillIdBosOlmamali);
         #endregion
     }
 }

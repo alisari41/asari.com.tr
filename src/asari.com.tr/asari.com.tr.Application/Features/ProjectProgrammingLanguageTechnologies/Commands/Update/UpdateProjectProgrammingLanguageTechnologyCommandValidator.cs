@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Constants;
+using FluentValidation;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Update;
 
@@ -10,8 +11,9 @@ public class UpdateProjectProgrammingLanguageTechnologyCommandValidator : Abstra
     public UpdateProjectProgrammingLanguageTechnologyCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.ProgrammingLanguageTechnologyId).NotEmpty().WithMessage("Programlama Dili Id'si Boş olamaz");
-        RuleFor(x => x.ProjectId).NotEmpty().WithMessage("Proje Id'si boş bırakmayınız");
+        RuleFor(x => x.Id).NotEmpty().WithMessage(ProjectProgrammingLanguageTechnologyMessages.IdBosOlmamali);
+        RuleFor(x => x.ProgrammingLanguageTechnologyId).NotEmpty().WithMessage(ProjectProgrammingLanguageTechnologyMessages.ProgrammingLanguageTechnologyIdBosOlmamali);
+        RuleFor(x => x.ProjectId).NotEmpty().WithMessage(ProjectProgrammingLanguageTechnologyMessages.ProjectIdBosOlmamali);
         #endregion
     }
 }

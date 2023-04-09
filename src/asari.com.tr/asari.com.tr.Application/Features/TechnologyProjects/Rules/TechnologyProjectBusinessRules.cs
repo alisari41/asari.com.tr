@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Services.Repositories;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Constants;
+using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
@@ -17,7 +18,7 @@ public class TechnologyProjectBusinessRules : BaseBusinessRules
 
     public void TechnologyProjectShouldExistWhenRequested(TechnologyProject? technologyProject)
     {
-        if (technologyProject == null) throw new BusinessException("Teknoloji Proje mevcut değildir.");
+        if (technologyProject == null) throw new BusinessException(TechnologyProjectMessages.TeknolojiProjeMevcutDegil);
     }
 
     public async Task TechnologyProjectShouldExistWhenRequested(int id)
@@ -29,12 +30,12 @@ public class TechnologyProjectBusinessRules : BaseBusinessRules
     public async Task TechnologyProjectSConNotBeDuplicatedWhenInserted(int technologyId, int projectId)
     {
         TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => (x.TechnologyId == technologyId) && (x.ProjectId == projectId));
-        if (result != null) throw new BusinessException("Teknoloji Proje kullanılmaktadır!");
+        if (result != null) throw new BusinessException(TechnologyProjectMessages.TeknolojiProjeMevcut);
     }
 
     public async Task TechnologyProjectSConNotBeDuplicatedWhenUpdated(TechnologyProject technologyProject)
     {
         TechnologyProject? result = await _technologyProjectRepository.GetAsync(x => (x.Id != technologyProject.Id) && (x.TechnologyId == technologyProject.TechnologyId) && (x.ProjectId == technologyProject.ProjectId));
-        if (result != null) throw new BusinessException("Teknoloji Proje kullanılmaktadır!");
+        if (result != null) throw new BusinessException(TechnologyProjectMessages.TeknolojiProjeMevcut);
     }
 }
