@@ -5,17 +5,22 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Constants.ProgrammingLanguageTechnologiesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
 
-public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgrammingLanguageTechnologyResponse>, ISecuredRequest
+public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgrammingLanguageTechnologyResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public int Id { get; set; }
     public int ProgrammingLanguageId { get; set; }
     public string Name { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageTechnologyCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, ProgrammingLanguageTechnologiesOperationClaims.Update };
 

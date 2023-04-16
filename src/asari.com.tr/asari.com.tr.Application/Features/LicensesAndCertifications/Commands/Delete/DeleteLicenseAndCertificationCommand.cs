@@ -4,14 +4,19 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.LicensesAndCertifications.Constants.LicensesAndCertificationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 
-public class DeleteLicenseAndCertificationCommand : IRequest<DeletedLicenseAndCertificationResponse>, ISecuredRequest
+public class DeleteLicenseAndCertificationCommand : IRequest<DeletedLicenseAndCertificationResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.LicensesAndCertificationCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, LicensesAndCertificationsOperationClaims.Delete };
 

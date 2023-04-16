@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
@@ -8,9 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
 
-public class GetListProjectSkillQuery : IRequest<GetListResponse<GetListProjectSkillListItemDto>>
+public class GetListProjectSkillQuery : IRequest<GetListResponse<GetListProjectSkillListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListProjectSkill({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.ProjectSkillCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListProjectSkillQueryHandler : IRequestHandler<GetListProjectSkillQuery, GetListResponse<GetListProjectSkillListItemDto>>
     {
@@ -31,8 +38,8 @@ public class GetListProjectSkillQuery : IRequest<GetListResponse<GetListProjectS
                                                                     index: request.PageRequest.Page,
                                                                     size: request.PageRequest.PageSize);
 
-            GetListResponse<GetListProjectSkillListItemDto> mappedGetListProjectSkillListItemDto=_mapper.Map<GetListResponse<GetListProjectSkillListItemDto>>(projectSkills);
-            
+            GetListResponse<GetListProjectSkillListItemDto> mappedGetListProjectSkillListItemDto = _mapper.Map<GetListResponse<GetListProjectSkillListItemDto>>(projectSkills);
+
             return mappedGetListProjectSkillListItemDto;
         }
     }

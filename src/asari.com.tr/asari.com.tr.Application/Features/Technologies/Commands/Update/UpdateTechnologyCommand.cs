@@ -4,18 +4,23 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Technologies.Constants.TechnologiesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Technologies.Commands.Update;
 
-public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyResponse>, ISecuredRequest
+public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string? ImageUrl { get; set; }
     public string Content { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.TechnologyCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, TechnologiesOperationClaims.Update };
 

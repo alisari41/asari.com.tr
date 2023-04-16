@@ -64,6 +64,11 @@ builder.Services.AddSwaggerGen(opt => // Swagger için otantikasyon ejensikyonu e
 });
 #endregion
 
+#region Cache
+builder.Services.AddDistributedMemoryCache(); // InMemory
+//builder.Services.AddStackExchangeRedisCache(opt => opt.Configuration = "localhost:6379");
+#endregion
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

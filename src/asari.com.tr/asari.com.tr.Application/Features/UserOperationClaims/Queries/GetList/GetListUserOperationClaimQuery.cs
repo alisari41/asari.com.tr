@@ -1,5 +1,6 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -8,9 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
 
-public class GetListUserOperationClaimQuery : IRequest<GetListResponse<GetListUserOperationClaimListItemDto>>
+public class GetListUserOperationClaimQuery : IRequest<GetListResponse<GetListUserOperationClaimListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListUserOperationClaim({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.UserOperationClaimCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListUserOperationClaimQueryHandler : IRequestHandler<GetListUserOperationClaimQuery, GetListResponse<GetListUserOperationClaimListItemDto>>
     {

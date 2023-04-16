@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
@@ -8,10 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
 
-public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>
+public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>, ICachableRequest
 {
     // Mediator da IRequest
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListProjectProgrammingLanguageTechnology({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.ProjectProgrammingLanguageTechnologyCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListProjectProgrammingLanguageTechnologyQueryHandler : IRequestHandler<GetListProjectProgrammingLanguageTechnologyQuery, GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>
     {

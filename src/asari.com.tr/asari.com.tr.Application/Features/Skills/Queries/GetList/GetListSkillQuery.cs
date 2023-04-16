@@ -1,15 +1,22 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
 namespace asari.com.tr.Application.Features.Skills.Queries.GetList;
 
-public class GetListSkillQuery : IRequest<GetListResponse<GetListSkillListItemDto>>
+public class GetListSkillQuery : IRequest<GetListResponse<GetListSkillListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListSkill({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.SkillCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListSkillQueryHandler : IRequestHandler<GetListSkillQuery, GetListResponse<GetListSkillListItemDto>>
     {

@@ -6,16 +6,21 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.LicenseAndCertificationSkills.Constants.LicenseAndCertificationSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Update;
 
-public class UpdateLicenseAndCertificationSkillCommand : IRequest<UpdatedLicenseAndCertificationSkillResponse>, ISecuredRequest
+public class UpdateLicenseAndCertificationSkillCommand : IRequest<UpdatedLicenseAndCertificationSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
     public int LicenseAndCertificationId { get; set; }
     public int SkillId { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.LicenseAndCertificationSkillCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, LicenseAndCertificationSkillsOperationClaims.Update };
 

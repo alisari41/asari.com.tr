@@ -4,14 +4,19 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.EducationSkills.Constants.EducationSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Delete;
 
-public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillResponse>, ISecuredRequest
+public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.EducationSkillCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, EducationSkillsOperationClaims.Delete };
 

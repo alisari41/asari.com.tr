@@ -4,12 +4,13 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Educations.Constants.EducationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Educations.Commands.Update;
 
-public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecuredRequest
+public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -21,6 +22,10 @@ public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecur
     public string? ActivityAndCommunity { get; set; }
     public string? Description { get; set; }
     public string? MediaUrl { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.EducationCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, EducationsOperationClaims.Update };
 

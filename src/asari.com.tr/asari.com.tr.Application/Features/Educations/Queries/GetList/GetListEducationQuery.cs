@@ -1,15 +1,22 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
 namespace asari.com.tr.Application.Features.Educations.Queries.GetList;
 
-public class GetListEducationQuery : IRequest<GetListResponse<GetListEducationListItemDto>>
+public class GetListEducationQuery : IRequest<GetListResponse<GetListEducationListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListEducation({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.EducationCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListEducationQueryHandler : IRequestHandler<GetListEducationQuery, GetListResponse<GetListEducationListItemDto>>
     {

@@ -2,15 +2,20 @@
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using Core.Security.Entities;
 using MediatR;
 using static asari.com.tr.Application.Features.OperationClaims.Contants.OperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Commands.Create;
 
-public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimResponse>, ISecuredRequest
+public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public string Name { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.OperationClaimCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 

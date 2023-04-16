@@ -5,16 +5,21 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.EducationSkills.Constants.EducationSkillsOperationClaims;
 
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 
-public class CreateEducationSkillCommand : IRequest<CreatedEducationSkillResponse>, ISecuredRequest
+public class CreateEducationSkillCommand : IRequest<CreatedEducationSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int EducationId { get; set; }
     public int SkillId { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.EducationSkillCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 

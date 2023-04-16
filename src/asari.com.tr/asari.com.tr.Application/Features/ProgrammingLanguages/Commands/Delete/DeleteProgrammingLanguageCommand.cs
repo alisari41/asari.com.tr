@@ -3,14 +3,19 @@ using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.ProgrammingLanguages.Constants.ProgrammingLanguagesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Delete;
 
-public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageResponse>, ISecuredRequest
+public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, ProgrammingLanguagesOperationClaims.Delete };
 

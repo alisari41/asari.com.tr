@@ -1,5 +1,6 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -7,9 +8,15 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Users.Queries.GetList;
 
-public class GetListUserQuery : IRequest<GetListResponse<GetListUserListItemDto>>
+public class GetListUserQuery : IRequest<GetListResponse<GetListUserListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListUser({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.UserCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, GetListResponse<GetListUserListItemDto>>
     {

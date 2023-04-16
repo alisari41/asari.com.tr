@@ -3,14 +3,19 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.ProgrammingLanguages.Constants.ProgrammingLanguagesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Create;
 
-public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageResponse>, ISecuredRequest
+public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public string Name { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 

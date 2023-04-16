@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.Auths.Rules;
 using asari.com.tr.Application.Services.AuthService;
 using asari.com.tr.Application.Services.Repositories;
+using Core.Application.Pipelines.Caching;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
@@ -9,10 +10,14 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Auths.Commands.Register;
 
-public class RegisterCommand : IRequest<RegisteredResponse>
+public class RegisterCommand : IRequest<RegisteredResponse>, ICacheRemoverRequest
 {
     public UserForRegisterDto UserForRegisterDto { get; set; } // Register olacak kişinin bilgileri - yani kullanıcı bilgileri
     public string IpAddress { get; set; } // RefreshToken da ip bazlı doğrulama süreçleri vardır.
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.UserCacheGroupKey;
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredResponse>
     {

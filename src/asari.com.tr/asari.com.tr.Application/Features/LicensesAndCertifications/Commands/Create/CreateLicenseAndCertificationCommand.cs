@@ -3,12 +3,13 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.LicensesAndCertifications.Constants.LicensesAndCertificationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
 
-public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCertificationResponse>, ISecuredRequest
+public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCertificationResponse>, ISecuredRequest,ICacheRemoverRequest
 {
     public string Name { get; set; }
     public string IssuingOrganization { get; set; }
@@ -17,6 +18,10 @@ public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCe
     public string? ImagegUrl { get; set; }
     public string? CredentialId { get; set; }
     public string? CredentialUrl { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.LicensesAndCertificationCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 

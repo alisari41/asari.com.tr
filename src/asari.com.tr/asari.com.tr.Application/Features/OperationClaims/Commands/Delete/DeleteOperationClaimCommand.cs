@@ -3,15 +3,20 @@ using asari.com.tr.Application.Features.OperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using Core.Security.Entities;
 using MediatR;
 using static asari.com.tr.Application.Features.OperationClaims.Contants.OperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 
-public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimResponse>, ISecuredRequest
+public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.OperationClaimCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, OperationClaimsOperationClaims.Delete };
 

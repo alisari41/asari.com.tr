@@ -4,15 +4,20 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Delete;
 
-public class DeleteProjectCommand : IRequest<DeletedProjectResponse>, ISecuredRequest
+public class DeleteProjectCommand : IRequest<DeletedProjectResponse>, ISecuredRequest,ICacheRemoverRequest
 {
     // Kullanıcının bize göndereceği son dataları içeren yapı 
     public int Id { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ProjectCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, ProjectsOperationClaims.Delete };
 

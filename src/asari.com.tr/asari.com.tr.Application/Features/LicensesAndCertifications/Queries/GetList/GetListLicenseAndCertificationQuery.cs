@@ -1,15 +1,22 @@
 ﻿using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 
-public class GetListLicenseAndCertificationQuery : IRequest<GetListResponse<GetListLicenseAndCertificationListItemDto>>
+public class GetListLicenseAndCertificationQuery : IRequest<GetListResponse<GetListLicenseAndCertificationListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListLicensesAndCertification({PageRequest.Page},{PageRequest.PageSize})";
+    public string? CacheGroupKey => CacheGroupKeyValue.LicensesAndCertificationCacheGroupKey;
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListLicenseAndCertificationQueryHandler : IRequestHandler<GetListLicenseAndCertificationQuery, GetListResponse<GetListLicenseAndCertificationListItemDto>>
     {

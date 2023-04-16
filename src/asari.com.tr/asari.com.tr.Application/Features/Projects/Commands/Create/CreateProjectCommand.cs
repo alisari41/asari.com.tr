@@ -3,12 +3,13 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Create;
 
-public class CreateProjectCommand : IRequest<CreatedProjectResponse>, ISecuredRequest
+public class CreateProjectCommand : IRequest<CreatedProjectResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public string Title { get; set; }
@@ -19,8 +20,11 @@ public class CreateProjectCommand : IRequest<CreatedProjectResponse>, ISecuredRe
     public string? FolderUrl { get; set; }
     public DateTime? CreateDate { get; set; }
 
-    public string[] Roles => new[] { Admin, Write, Add };
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ProjectCacheGroupKey;
 
+    public string[] Roles => new[] { Admin, Write, Add };
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, CreatedProjectResponse>
     {
         private readonly IProjectRepository _projectRepository;

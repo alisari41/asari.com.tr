@@ -3,15 +3,20 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Skills.Constants.SkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Skills.Commands.Create;
 
-public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredRequest
+public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public string Name { get; set; }
     public double? Degree { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.SkillCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 

@@ -4,12 +4,13 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 using static asari.com.tr.Application.Features.Experiences.Constants.ExperiencesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Experiences.Commands.Update;
 
-public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>, ISecuredRequest
+public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -22,6 +23,10 @@ public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>, ISec
     public string Industry { get; set; }
     public string Description { get; set; }
     public string? ProfileHeadline { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.ExperienceCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Update };
 

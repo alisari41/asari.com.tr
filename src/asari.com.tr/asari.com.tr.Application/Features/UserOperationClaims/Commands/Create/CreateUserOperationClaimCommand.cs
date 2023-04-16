@@ -4,16 +4,21 @@ using asari.com.tr.Application.Features.UserOperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using Core.Security.Entities;
 using MediatR;
 using static asari.com.tr.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
 
-public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimResponse>, ISecuredRequest
+public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string? CacheGroupKey => CacheGroupKeyValue.UserOperationClaimCacheGroupKey;
 
     public string[] Roles => new[] { Admin, Write, Add };
 
