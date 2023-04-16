@@ -1,18 +1,23 @@
-﻿using asari.com.tr.Application.Features.Technologies.Rules;
+﻿using asari.com.tr.Application.Features.Technologies.Constants;
+using asari.com.tr.Application.Features.Technologies.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Technologies.Constants.TechnologiesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Technologies.Commands.Update;
 
-public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyResponse>
+public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string? ImageUrl { get; set; }
     public string Content { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, TechnologiesOperationClaims.Update };
 
     public class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, UpdatedTechnologyResponse>
     {

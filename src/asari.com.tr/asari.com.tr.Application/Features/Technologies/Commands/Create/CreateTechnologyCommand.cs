@@ -2,16 +2,20 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Technologies.Constants.TechnologiesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Technologies.Commands.Create;
 
-public class CreateTechnologyCommand : IRequest<CreatedTechnologyResponse>
+public class CreateTechnologyCommand : IRequest<CreatedTechnologyResponse>, ISecuredRequest
 {
     public string Title { get; set; }
     public string Description { get; set; }
     public string? ImageUrl { get; set; }
     public string Content { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateTechnologyCommandHandler : IRequestHandler<CreateTechnologyCommand, CreatedTechnologyResponse>
     {

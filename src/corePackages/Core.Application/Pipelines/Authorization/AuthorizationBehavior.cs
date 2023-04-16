@@ -21,11 +21,11 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
     {
         List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
-        if (roleClaims == null) throw new AuthorizationException("Claims not found.");
+        if (roleClaims == null) throw new AuthorizationException("Hak talepleri bulunamadı.");
 
         bool isNotMatchedARoleClaimWithRequestRoles =
             roleClaims.FirstOrDefault(roleClaim => request.Roles.Any(role => role == roleClaim)).IsNullOrEmpty();
-        if (isNotMatchedARoleClaimWithRequestRoles) throw new AuthorizationException("You are not authorized.");
+        if (isNotMatchedARoleClaimWithRequestRoles) throw new AuthorizationException("Yetkiniz bulunamadı.");
 
         TResponse response = await next();
         return response;

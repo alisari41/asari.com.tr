@@ -1,12 +1,15 @@
-﻿using asari.com.tr.Application.Features.Educations.Rules;
+﻿using asari.com.tr.Application.Features.Educations.Constants;
+using asari.com.tr.Application.Features.Educations.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Educations.Constants.EducationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Educations.Commands.Update;
 
-public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>
+public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -18,6 +21,8 @@ public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>
     public string? ActivityAndCommunity { get; set; }
     public string? Description { get; set; }
     public string? MediaUrl { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, EducationsOperationClaims.Update };
 
     public class UpdateEducationCommandHandler : IRequestHandler<UpdateEducationCommand, UpdatedEducationResponse>
     {

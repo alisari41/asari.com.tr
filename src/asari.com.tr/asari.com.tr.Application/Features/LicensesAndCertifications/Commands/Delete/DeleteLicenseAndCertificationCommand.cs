@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Rules;
+﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Constants;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.LicensesAndCertifications.Constants.LicensesAndCertificationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 
-public class DeleteLicenseAndCertificationCommand : IRequest<DeletedLicenseAndCertificationResponse>
+public class DeleteLicenseAndCertificationCommand : IRequest<DeletedLicenseAndCertificationResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, LicensesAndCertificationsOperationClaims.Delete };
 
     public class DeleteLicenseAndCertificationCommandHandler : IRequestHandler<DeleteLicenseAndCertificationCommand, DeletedLicenseAndCertificationResponse>
     {

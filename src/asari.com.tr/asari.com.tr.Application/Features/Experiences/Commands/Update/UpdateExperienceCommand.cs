@@ -1,12 +1,15 @@
-﻿using asari.com.tr.Application.Features.Experiences.Rules;
+﻿using asari.com.tr.Application.Features.Experiences.Constants;
+using asari.com.tr.Application.Features.Experiences.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Experiences.Constants.ExperiencesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Experiences.Commands.Update;
 
-public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>
+public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -19,6 +22,8 @@ public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>
     public string Industry { get; set; }
     public string Description { get; set; }
     public string? ProfileHeadline { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Update };
 
     public class UpdateExperienceCommandHandler : IRequestHandler<UpdateExperienceCommand, UpdatedExperienceResponse>
     {

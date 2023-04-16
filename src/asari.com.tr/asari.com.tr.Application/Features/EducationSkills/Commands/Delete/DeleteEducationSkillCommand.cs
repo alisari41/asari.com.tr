@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.EducationSkills.Rules;
+﻿using asari.com.tr.Application.Features.EducationSkills.Constants;
+using asari.com.tr.Application.Features.EducationSkills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.EducationSkills.Constants.EducationSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Delete;
 
-public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillResponse>
+public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, EducationSkillsOperationClaims.Delete };
 
     public class DeleteEducationSkillCommandHandler : IRequestHandler<DeleteEducationSkillCommand, DeletedEducationSkillResponse>
     {
@@ -29,7 +34,7 @@ public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillRespons
 
             _educationSkillBusinessRules.EducationSkillShouldExistWhenRequested(educationSkill);
 
-            _mapper.Map(request,educationSkill);
+            _mapper.Map(request, educationSkill);
 
             EducationSkill deletedEducationSkill = await _educationSkillRepository.DeleteAsync(educationSkill);
             DeletedEducationSkillResponse mappedDeletedEducationSkillReponse = _mapper.Map<DeletedEducationSkillResponse>(deletedEducationSkill);

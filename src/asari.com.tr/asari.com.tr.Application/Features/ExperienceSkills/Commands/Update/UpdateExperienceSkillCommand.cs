@@ -1,18 +1,23 @@
-﻿using asari.com.tr.Application.Features.Experiences.Rules;
+﻿using asari.com.tr.Application.Features.Experiences.Constants;
+using asari.com.tr.Application.Features.Experiences.Rules;
 using asari.com.tr.Application.Features.ExperienceSkills.Rules;
 using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ExperienceSkills.Constants.ExperienceSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.ExperienceSkills.Commands.Update;
 
-public class UpdateExperienceSkillCommand : IRequest<UpdatedExperienceSkillResponse>
+public class UpdateExperienceSkillCommand : IRequest<UpdatedExperienceSkillResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public int ExperienceId { get; set; }
     public int SkillId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Update };
 
     public class UpdateExperienceSkillCommandHandler : IRequestHandler<UpdateExperienceSkillCommand, UpdatedExperienceSkillResponse>
     {

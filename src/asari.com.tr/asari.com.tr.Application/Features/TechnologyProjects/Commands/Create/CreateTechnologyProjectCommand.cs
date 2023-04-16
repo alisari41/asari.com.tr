@@ -4,14 +4,18 @@ using asari.com.tr.Application.Features.TechnologyProjects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.TechnologyProjects.Constants.TechnologyProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.TechnologyProjects.Commands.Create;
 
-public class CreateTechnologyProjectCommand : IRequest<CreatedTechnologyProjectResponse>
+public class CreateTechnologyProjectCommand : IRequest<CreatedTechnologyProjectResponse>, ISecuredRequest
 {
     public int TechnologyId { get; set; }
     public int ProjectId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateTechnologyProjectCommandHandler : IRequestHandler<CreateTechnologyProjectCommand, CreatedTechnologyProjectResponse>
     {
@@ -38,7 +42,7 @@ public class CreateTechnologyProjectCommand : IRequest<CreatedTechnologyProjectR
 
             TechnologyProject mappedTechnologyProject = _mapper.Map<TechnologyProject>(request);
             TechnologyProject createdTechnologyProject = await _technologyProjectRepository.AddAsync(mappedTechnologyProject);
-            CreatedTechnologyProjectResponse mappedCreatedTechnologyProjectResponse=_mapper.Map<CreatedTechnologyProjectResponse>(createdTechnologyProject);
+            CreatedTechnologyProjectResponse mappedCreatedTechnologyProjectResponse = _mapper.Map<CreatedTechnologyProjectResponse>(createdTechnologyProject);
 
             return mappedCreatedTechnologyProjectResponse;
         }

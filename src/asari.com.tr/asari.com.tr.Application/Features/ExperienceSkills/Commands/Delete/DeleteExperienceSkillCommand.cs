@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.ExperienceSkills.Rules;
+﻿using asari.com.tr.Application.Features.Experiences.Constants;
+using asari.com.tr.Application.Features.ExperienceSkills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ExperienceSkills.Constants.ExperienceSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.ExperienceSkills.Commands.Delete;
 
-public class DeleteExperienceSkillCommand : IRequest<DeletedExperienceSkillResponse>
+public class DeleteExperienceSkillCommand : IRequest<DeletedExperienceSkillResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Delete };
 
     public class DeleteExperienceSkillCommandHandler : IRequestHandler<DeleteExperienceSkillCommand, DeletedExperienceSkillResponse>
     {

@@ -2,11 +2,13 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.LicensesAndCertifications.Constants.LicensesAndCertificationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
 
-public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCertificationResponse>
+public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCertificationResponse>, ISecuredRequest
 {
     public string Name { get; set; }
     public string IssuingOrganization { get; set; }
@@ -15,6 +17,8 @@ public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCe
     public string? ImagegUrl { get; set; }
     public string? CredentialId { get; set; }
     public string? CredentialUrl { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateLicenseAndCertificationCommandHandler : IRequestHandler<CreateLicenseAndCertificationCommand, CreatedLicenseAndCertificationResponse>
     {
@@ -34,8 +38,8 @@ public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCe
             await _licenseAndCertificationBusinessRules.LicenseAndCertificationTitleConNotBeDuplicatedWhenInserted(request.Name);
 
             LicenseAndCertification licenseAndCertification = _mapper.Map<LicenseAndCertification>(request);
-            LicenseAndCertification createdLicenseAndCertification=await _licenseAndCertificationRepository.AddAsync(licenseAndCertification);
-            CreatedLicenseAndCertificationResponse mappedCreatedLicenseAndCertificationResponse=_mapper.Map<CreatedLicenseAndCertificationResponse>(createdLicenseAndCertification);
+            LicenseAndCertification createdLicenseAndCertification = await _licenseAndCertificationRepository.AddAsync(licenseAndCertification);
+            CreatedLicenseAndCertificationResponse mappedCreatedLicenseAndCertificationResponse = _mapper.Map<CreatedLicenseAndCertificationResponse>(createdLicenseAndCertification);
 
             return mappedCreatedLicenseAndCertificationResponse;
         }

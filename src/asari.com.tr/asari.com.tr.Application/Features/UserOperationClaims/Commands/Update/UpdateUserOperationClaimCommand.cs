@@ -1,18 +1,23 @@
 ﻿using asari.com.tr.Application.Features.Auths.Rules;
 using asari.com.tr.Application.Features.OperationClaims.Rules;
+using asari.com.tr.Application.Features.UserOperationClaims.Constants;
 using asari.com.tr.Application.Features.UserOperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
+using static asari.com.tr.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
 
-public class UpdateUserOperationClaimCommand : IRequest<UpdatedUserOperationClaimResponse>
+public class UpdateUserOperationClaimCommand : IRequest<UpdatedUserOperationClaimResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, UserOperationClaimsOperationClaims.Update };
 
     public class UpdateUserOperationClaimCommandHandler : IRequestHandler<UpdateUserOperationClaimCommand, UpdatedUserOperationClaimResponse>
     {

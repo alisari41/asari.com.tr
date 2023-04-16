@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.Educations.Rules;
+﻿using asari.com.tr.Application.Features.Educations.Constants;
+using asari.com.tr.Application.Features.Educations.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Educations.Constants.EducationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Educations.Commands.Delete;
 
-public class DeleteEducationCommand : IRequest<DeletedEducationResponse>
+public class DeleteEducationCommand : IRequest<DeletedEducationResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, EducationsOperationClaims.Delete };
 
     public class DeleteEducationCommandHandler : IRequestHandler<DeleteEducationCommand, DeletedEducationResponse>
     {

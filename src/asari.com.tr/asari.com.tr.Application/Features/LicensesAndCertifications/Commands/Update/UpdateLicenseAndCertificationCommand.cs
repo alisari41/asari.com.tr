@@ -1,12 +1,15 @@
-﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Rules;
+﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Constants;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.LicensesAndCertifications.Constants.LicensesAndCertificationsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
 
-public class UpdateLicenseAndCertificationCommand : IRequest<UpdatedLicenseAndCertificationResponse>
+public class UpdateLicenseAndCertificationCommand : IRequest<UpdatedLicenseAndCertificationResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -16,6 +19,8 @@ public class UpdateLicenseAndCertificationCommand : IRequest<UpdatedLicenseAndCe
     public string? ImagegUrl { get; set; }
     public string? CredentialId { get; set; }
     public string? CredentialUrl { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, LicensesAndCertificationsOperationClaims.Update };
 
     public class UpdateLicenseAndCertificationCommandHandler : IRequestHandler<UpdateLicenseAndCertificationCommand, UpdatedLicenseAndCertificationResponse>
     {

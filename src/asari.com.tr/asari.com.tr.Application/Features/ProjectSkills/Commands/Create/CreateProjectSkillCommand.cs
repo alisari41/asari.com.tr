@@ -4,14 +4,18 @@ using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ProjectSkills.Constants.ProjectSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
 
-public class CreateProjectSkillCommand : IRequest<CreatedProjectSkillResponse>
+public class CreateProjectSkillCommand : IRequest<CreatedProjectSkillResponse>, ISecuredRequest
 {
     public int ProjectId { get; set; }
     public int SkillId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateProjectSkillCommandHandler : IRequestHandler<CreateProjectSkillCommand, CreatedProjectSkillResponse>
     {

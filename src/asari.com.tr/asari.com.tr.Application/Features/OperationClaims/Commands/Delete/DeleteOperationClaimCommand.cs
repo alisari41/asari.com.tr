@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.OperationClaims.Rules;
+﻿using asari.com.tr.Application.Features.OperationClaims.Contants;
+using asari.com.tr.Application.Features.OperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
+using static asari.com.tr.Application.Features.OperationClaims.Contants.OperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 
-public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimResponse>
+public class DeleteOperationClaimCommand : IRequest<DeletedOperationClaimResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, OperationClaimsOperationClaims.Delete };
 
     public class DeleteOperationClaimCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedOperationClaimResponse>
     {

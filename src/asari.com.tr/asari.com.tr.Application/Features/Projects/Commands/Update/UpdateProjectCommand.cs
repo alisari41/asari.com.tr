@@ -1,12 +1,15 @@
-﻿using asari.com.tr.Application.Features.Projects.Rules;
+﻿using asari.com.tr.Application.Features.Projects.Constants;
+using asari.com.tr.Application.Features.Projects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Update;
 
-public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>
+public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -16,6 +19,8 @@ public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>
     public string? GithubLink { get; set; }
     public string? FolderUrl { get; set; }
     public DateTime? CreateDate { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ProjectsOperationClaims.Update };
 
     public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, UpdatedProjectReponse>
     {

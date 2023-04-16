@@ -2,14 +2,18 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Skills.Constants.SkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Skills.Commands.Create;
 
-public class CreateSkillCommand : IRequest<CreatedSkillResponse>
+public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredRequest
 {
     public string Name { get; set; }
     public double? Degree { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateSkillCommandHandler : IRequestHandler<CreateSkillCommand, CreatedSkillResponse>
     {

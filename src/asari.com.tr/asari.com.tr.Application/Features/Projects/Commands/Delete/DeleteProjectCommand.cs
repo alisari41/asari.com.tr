@@ -1,15 +1,20 @@
-﻿using asari.com.tr.Application.Features.Projects.Rules;
+﻿using asari.com.tr.Application.Features.Projects.Constants;
+using asari.com.tr.Application.Features.Projects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Delete;
 
-public class DeleteProjectCommand : IRequest<DeletedProjectResponse>
+public class DeleteProjectCommand : IRequest<DeletedProjectResponse>, ISecuredRequest
 {
     // Kullanıcının bize göndereceği son dataları içeren yapı 
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ProjectsOperationClaims.Delete };
 
     public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, DeletedProjectResponse>
     {

@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.ProjectSkills.Rules;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Constants;
+using asari.com.tr.Application.Features.ProjectSkills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ProjectSkills.Constants.ProjectSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Commands.Delete;
 
-public class DeleteProjectSkillCommand : IRequest<DeletedProjectSkillResponse>
+public class DeleteProjectSkillCommand : IRequest<DeletedProjectSkillResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ProjectSkillsOperationClaims.Delete };
 
     public class DeleteProjectSkillCommandHandler : IRequestHandler<DeleteProjectSkillCommand, DeletedProjectSkillResponse>
     {

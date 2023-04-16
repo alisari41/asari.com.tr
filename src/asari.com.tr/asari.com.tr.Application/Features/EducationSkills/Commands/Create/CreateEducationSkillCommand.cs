@@ -4,14 +4,19 @@ using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.EducationSkills.Constants.EducationSkillsOperationClaims;
+
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 
-public class CreateEducationSkillCommand : IRequest<CreatedEducationSkillResponse>
+public class CreateEducationSkillCommand : IRequest<CreatedEducationSkillResponse>, ISecuredRequest
 {
     public int EducationId { get; set; }
     public int SkillId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateEducationSkillCommandHandler : IRequestHandler<CreateEducationSkillCommand, CreatedEducationSkillResponse>
     {

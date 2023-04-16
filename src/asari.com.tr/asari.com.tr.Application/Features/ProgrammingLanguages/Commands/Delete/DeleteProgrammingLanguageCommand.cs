@@ -1,13 +1,18 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguages.Constants;
+using asari.com.tr.Application.Features.ProgrammingLanguages.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ProgrammingLanguages.Constants.ProgrammingLanguagesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Delete;
 
-public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageResponse>
+public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, ProgrammingLanguagesOperationClaims.Delete };
 
     public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageResponse>
     {

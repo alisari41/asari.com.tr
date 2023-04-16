@@ -2,13 +2,17 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ProgrammingLanguages.Constants.ProgrammingLanguagesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Commands.Create;
 
-public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageResponse>
+public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageResponse>, ISecuredRequest
 {
     public string Name { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     // Bir tanede Handlerımız var yani böyle bir command sıraya koyulursa hangi Handler çalışacak onu IRequestHandler olduğunu belirtiyoruz. Hem çalışacağımız command'i hemde dönüş tipimizi belirtiyoruz.
     public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageResponse>

@@ -1,14 +1,18 @@
 ﻿using asari.com.tr.Application.Features.OperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
+using static asari.com.tr.Application.Features.OperationClaims.Contants.OperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Commands.Create;
 
-public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimResponse>
+public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimResponse>, ISecuredRequest
 {
     public string Name { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateOperationClaimCommandHandler : IRequestHandler<CreateOperationClaimCommand, CreatedOperationClaimResponse>
     {

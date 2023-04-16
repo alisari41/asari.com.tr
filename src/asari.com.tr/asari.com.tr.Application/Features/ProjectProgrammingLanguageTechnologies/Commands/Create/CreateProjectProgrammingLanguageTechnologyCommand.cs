@@ -4,15 +4,19 @@ using asari.com.tr.Application.Features.Projects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Constants.ProjectProgrammingLanguageTechnologiesOperationClaims;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
 
-public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<CreatedProjectProgrammingLanguageTechnologyResponse>
+public class CreateProjectProgrammingLanguageTechnologyCommand : IRequest<CreatedProjectProgrammingLanguageTechnologyResponse>, ISecuredRequest
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public int ProjectId { get; set; }
     public int ProgrammingLanguageTechnologyId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateProjectProgrammingLanguageTechnologyCommandHandler : IRequestHandler<CreateProjectProgrammingLanguageTechnologyCommand, CreatedProjectProgrammingLanguageTechnologyResponse>
     {

@@ -2,11 +2,13 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Create;
 
-public class CreateProjectCommand : IRequest<CreatedProjectResponse>
+public class CreateProjectCommand : IRequest<CreatedProjectResponse>, ISecuredRequest
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public string Title { get; set; }
@@ -16,6 +18,8 @@ public class CreateProjectCommand : IRequest<CreatedProjectResponse>
     public string? GithubLink { get; set; }
     public string? FolderUrl { get; set; }
     public DateTime? CreateDate { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, CreatedProjectResponse>
     {

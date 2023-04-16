@@ -1,18 +1,23 @@
 ﻿using asari.com.tr.Application.Features.Projects.Rules;
 using asari.com.tr.Application.Features.Technologies.Rules;
+using asari.com.tr.Application.Features.TechnologyProjects.Constants;
 using asari.com.tr.Application.Features.TechnologyProjects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.TechnologyProjects.Constants.TechnologyProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.TechnologyProjects.Commands.Update;
 
-public class UpdateTechnologyProjectCommand : IRequest<UpdatedTechnologyProjectResponse>
+public class UpdateTechnologyProjectCommand : IRequest<UpdatedTechnologyProjectResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public int TechnologyId { get; set; }
     public int ProjectId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, TechnologyProjectsOperationClaims.Update };
 
     public class UpdateTechnologyProjectCommandHandler : IRequestHandler<UpdateTechnologyProjectCommand, UpdatedTechnologyProjectResponse>
     {

@@ -2,11 +2,13 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.Experiences.Constants.ExperiencesOperationClaims;
 
 namespace asari.com.tr.Application.Features.Experiences.Commands.Create;
 
-public class CreateExperienceCommand : IRequest<CreatedExperienceResponse>
+public class CreateExperienceCommand : IRequest<CreatedExperienceResponse>, ISecuredRequest
 {
     public string Title { get; set; }
     public string EmploymentType { get; set; }
@@ -18,6 +20,8 @@ public class CreateExperienceCommand : IRequest<CreatedExperienceResponse>
     public string Industry { get; set; }
     public string Description { get; set; }
     public string? ProfileHeadline { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateExperienceCommandHandler : IRequestHandler<CreateExperienceCommand, CreatedExperienceResponse>
     {

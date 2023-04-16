@@ -4,14 +4,18 @@ using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.LicenseAndCertificationSkills.Constants.LicenseAndCertificationSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Create;
 
-public class CreateLicenseAndCertificationSkillCommand : IRequest<CreatedLicenseAndCertificationSkillResponse>
+public class CreateLicenseAndCertificationSkillCommand : IRequest<CreatedLicenseAndCertificationSkillResponse>, ISecuredRequest
 {
     public int LicenseAndCertificationId { get; set; }
     public int SkillId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateLicenseAndCertificationSkillCommandHandler : IRequestHandler<CreateLicenseAndCertificationSkillCommand, CreatedLicenseAndCertificationSkillResponse>
     {

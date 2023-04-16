@@ -1,14 +1,19 @@
-﻿using asari.com.tr.Application.Features.TechnologyProjects.Rules;
+﻿using asari.com.tr.Application.Features.TechnologyProjects.Constants;
+using asari.com.tr.Application.Features.TechnologyProjects.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.TechnologyProjects.Constants.TechnologyProjectsOperationClaims;
 
 namespace asari.com.tr.Application.Features.TechnologyProjects.Commands.Delete;
 
-public class DeleteTechnologyProjectCommand : IRequest<DeletedTechnologyProjectResponse>
+public class DeleteTechnologyProjectCommand : IRequest<DeletedTechnologyProjectResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, TechnologyProjectsOperationClaims.Delete };
 
     public class DeleteTechnologyProjectCommandHandler : IRequestHandler<DeleteTechnologyProjectCommand, DeletedTechnologyProjectResponse>
     {

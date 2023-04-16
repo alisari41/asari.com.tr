@@ -3,15 +3,19 @@ using asari.com.tr.Application.Features.OperationClaims.Rules;
 using asari.com.tr.Application.Features.UserOperationClaims.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
+using static asari.com.tr.Application.Features.UserOperationClaims.Constants.UserOperationClaimsOperationClaims;
 
 namespace asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
 
-public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimResponse>
+public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimResponse>, ISecuredRequest
 {
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, Add };
 
     public class CreateUserOperationClaimCommandHandler : IRequestHandler<CreateUserOperationClaimCommand, CreatedUserOperationClaimResponse>
     {
@@ -37,8 +41,8 @@ public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClai
             await _operationClaimBusinessRules.OperationClaimShouldExistWhenRequested(request.OperationClaimId);
 
             UserOperationClaim mappedUserOperationClaim = _mapper.Map<UserOperationClaim>(request);
-            UserOperationClaim createdUserOperationClaim=await _userOperationClaimRepository.AddAsync(mappedUserOperationClaim);
-            CreatedUserOperationClaimResponse mappedCreatedUserOperationClaimResponse=_mapper.Map<CreatedUserOperationClaimResponse>(createdUserOperationClaim);
+            UserOperationClaim createdUserOperationClaim = await _userOperationClaimRepository.AddAsync(mappedUserOperationClaim);
+            CreatedUserOperationClaimResponse mappedCreatedUserOperationClaimResponse = _mapper.Map<CreatedUserOperationClaimResponse>(createdUserOperationClaim);
 
             return mappedCreatedUserOperationClaimResponse;
         }

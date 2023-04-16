@@ -1,18 +1,23 @@
 ﻿using asari.com.tr.Application.Features.Educations.Rules;
+using asari.com.tr.Application.Features.EducationSkills.Constants;
 using asari.com.tr.Application.Features.EducationSkills.Rules;
 using asari.com.tr.Application.Features.Skills.Rules;
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static asari.com.tr.Application.Features.EducationSkills.Constants.EducationSkillsOperationClaims;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Commands.Update;
 
-public class UpdateEducationSkillCommand : IRequest<UpdatedEducationSkillResponse>
+public class UpdateEducationSkillCommand : IRequest<UpdatedEducationSkillResponse>, ISecuredRequest
 {
     public int Id { get; set; }
     public int EducationId { get; set; }
     public int SkillId { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, EducationSkillsOperationClaims.Update };
 
     public class UpdateEducationSkillCommandHandler : IRequestHandler<UpdateEducationSkillCommand, UpdatedEducationSkillResponse>
     {
@@ -44,7 +49,7 @@ public class UpdateEducationSkillCommand : IRequest<UpdatedEducationSkillRespons
             await _skillBusinessRules.SkillShouldExistWhenRequested(request.SkillId);
 
             EducationSkill updatedEducationSkill = await _educationSkillRepository.UpdateAsync(educationSkill);
-            UpdatedEducationSkillResponse mappedUpdatedEducationSkillResponse=_mapper.Map<UpdatedEducationSkillResponse>(updatedEducationSkill);
+            UpdatedEducationSkillResponse mappedUpdatedEducationSkillResponse = _mapper.Map<UpdatedEducationSkillResponse>(updatedEducationSkill);
 
             return mappedUpdatedEducationSkillResponse;
         }
