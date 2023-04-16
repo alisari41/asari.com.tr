@@ -1,6 +1,8 @@
-﻿namespace asari.com.tr.Application.Features.Educations.Queries.GetList;
+﻿using Core.Application.Dtos;
 
-public class GetListEducationListItemDto
+namespace asari.com.tr.Application.Features.Educations.Queries.GetList;
+
+public class GetListEducationListItemDto : IDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
