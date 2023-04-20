@@ -1,7 +1,7 @@
 ﻿using asari.com.tr.Application.Features.OperationClaims.Contants;
 using asari.com.tr.Application.Services.Repositories;
 using Core.Application.Rules;
-using Core.CrossCuttingConcerns.Exceptions;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Security.Entities;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Rules;

@@ -1,10 +1,10 @@
 using Application;
 using asari.com.tr.Application;
 using asari.com.tr.Persistence;
-using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Encryption;
 using Core.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 

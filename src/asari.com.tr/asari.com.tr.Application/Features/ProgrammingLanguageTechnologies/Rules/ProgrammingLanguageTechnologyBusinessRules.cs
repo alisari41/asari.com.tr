@@ -2,7 +2,7 @@
 using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using Core.Application.Rules;
-using Core.CrossCuttingConcerns.Exceptions;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Rules;
 

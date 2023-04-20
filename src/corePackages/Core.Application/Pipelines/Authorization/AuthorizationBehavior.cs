@@ -1,4 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
+using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Security.Constants;
 using Core.Security.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,16 +18,20 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
-                                                            CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+        List<string>? userRoleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
-        if (roleClaims == null) throw new AuthorizationException("Hak talepleri bulunamadı.");
+        if (userRoleClaims == null)
+            throw new AuthorizationException("You are not authenticated.");
 
-        bool isNotMatchedARoleClaimWithRequestRoles =
-            roleClaims.FirstOrDefault(roleClaim => request.Roles.Any(role => role == roleClaim)).IsNullOrEmpty();
-        if (isNotMatchedARoleClaimWithRequestRoles) throw new AuthorizationException("Yetkiniz bulunamadı.");
+        bool isNotMatchedAUserRoleClaimWithRequestRoles = userRoleClaims
+            .FirstOrDefault(
+                userRoleClaim => userRoleClaim == GeneralOperationClaims.Admin || request.Roles.Any(role => role == userRoleClaim)
+            )
+            .IsNullOrEmpty();
+        if (isNotMatchedAUserRoleClaimWithRequestRoles)
+            throw new AuthorizationException("You are not authorized.");
 
         TResponse response = await next();
         return response;
