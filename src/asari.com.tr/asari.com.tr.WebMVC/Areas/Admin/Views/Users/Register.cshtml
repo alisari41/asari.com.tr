@@ -1,0 +1,164 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Core.Security.Dtos.UserForRegisterDto
+
+@{
+    ViewData["Title"] = "Kullanici Ekleme Paneli";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+
+        $(document).ready(function () {//Alert kapama süresi
+            // show the alert
+            setTimeout(function () {
+                $(".alert").alert('close');
+            }, 2000);
+        });
+
+    </script>
+</head>
+<body>
+
+    @{
+        if (ViewBag.AuthorizationErrorMessage != null || ViewBag.AuthorizationErrorStackTrace != null
+        || ViewBag.BusinessErrorMessage != null || ViewBag.BusinessErrorStackTrace != null
+        || ViewBag.NotFoundErrorMessage != null || ViewBag.NotFoundErrorStackTrace != null
+        || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null
+        || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null)
+        {  /*Kullanıcı Adı veya Yanlış şifre girişi*/
+            <div classs="container p-5">
+                <div class="alert alert-danger shadow" role="alert" style="border-left:#721C24 5px solid; border-radius: 0px">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="True" style="color:#721C24">&times;</span>
+                    </button>
+                    <div class="row">
+                        <p style="font-size:18px" class="mb-0 font-weight-light">
+                            <button type="button" class="btn btn-outline-danger mr-1" data-toggle="modal" data-target="#myModal">
+                                <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="m-1 bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                </svg>
+                                Hata Detayı
+                            </button>
+                            @ViewBag.AuthorizationErrorMessage
+                            @ViewBag.BusinessErrorMessage
+                            @ViewBag.NotFoundErrorMessage
+                            @ViewBag.ValidationErrorMessage
+                            @ViewBag.ExceptionErrorMessage
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>@ViewBag.AuthorizationErrorStackTrace</p> @*Burada Hata mesajı taşıyor...*@
+                    <p>@ViewBag.BusinessErrorStackTrace</p> @*Burada Hata mesajı taşıyor...*@
+                    <p>@ViewBag.NotFoundErrorStackTrace</p> @*Burada Hata mesajı taşıyor...*@
+                    <p>@ViewBag.ValidationErrorStackTrace</p> @*Burada Hata mesajı taşıyor...*@
+                    <p>@ViewBag.ExceptionErrorStackTrace</p> @*Burada Hata mesajı taşıyor...*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <form asp-action="Register" method="post" class="container-fluid px-3">
+        <div class="row min-vh-100">
+            <div class="col-md-5 col-lg-6 col-xl-4 px-lg-5 d-flex align-items-center">
+                <div class="w-100 py-5">
+                    <div class="text-center">
+                        <img src="~/dist/img/Bimser-Logo.png" alt="" style="max-width: 6rem;" class="img-fluid mb-4 rounded">
+                        <h1 class="display-4 mb-3">Yönetici Kayıt OL</h1>
+                    </div>
+                    <div class="form-horizontal">
+                        @* Bu satır "form-horizontal" olunca çalıştı yoksa çalışmıyor *@
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label> Ad</label>
+                            <input type="text" asp-for="FirstName" class="form-control text-info" id="txtAd" />
+                            <span asp-validation-for="FirstName" class="text-danger" id="txtKotrol"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Soyad</label>
+                            <input type="text" asp-for="LastName" class="form-control text-info" id="txtSoyad" />
+                            <span asp-validation-for="LastName" class="text-danger" id="txtKotrol"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="text" asp-for="Email" class="form-control text-info" placeholder="alisari41@outlook.com" id="txtEmail" />
+                            <span asp-validation-for="Email" class="text-danger" id="txtKotrol"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Şifre</label>
+                                </div>
+
+                            </div>
+
+                            <input type="password" asp-for="Password" class="form-control text-info" id="txtGirisPassword" />
+                            <span asp-validation-for="Password" class="text-danger" id="txtKotrol"></span>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-block btn-outline-success mb-3" style="border: 2px solid green;" id="btnSignUp">Kayıt OL</button>
+                        </div>
+
+                        @* <p class="text-center"><small class="text-muted text-center">Henüz bir hesabınız yok mu? <a href="kayitol.html">Kayıt ol</a>.</small></p>*@
+                        <p class="text-center">
+                            <small class="text-muted text-center">
+                                <a href="/Admin/AdminLogin" style="font-weight: bold; text-decoration: none" id="btnSingIn"> Zaten bir Yönetici hesabım var ve giriş yapmak istiyorum</a>.
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-7 col-lg-6 col-xl-8 d-none d-lg-block">
+                <div style="background-image: url(https://i.hizliresim.com/IFFxQK.jpg);" class="bg-cover h-100 mr-n3"></div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
