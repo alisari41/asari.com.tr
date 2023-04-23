@@ -14,7 +14,7 @@ public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecur
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public double Degree { get; set; }
+    public double? Degree { get; set; }
     public string FieldOfStudy { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDateOrExcepted { get; set; }

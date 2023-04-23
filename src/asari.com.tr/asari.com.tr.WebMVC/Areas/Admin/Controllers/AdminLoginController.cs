@@ -8,6 +8,7 @@ using asari.com.tr.Application.Features.Auths.Commands.Login;
 using MediatR;
 using Core.Security.Entities;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Microsoft.AspNetCore.Http;
 
 namespace asari.com.tr.WebMVC.Areas.Admin.Controllers;
 
@@ -32,7 +33,9 @@ public class AdminLoginController : BaseController
             if (result.RefreshToken is not null) SetRefreshTokenToCookie(result.RefreshToken);
 
 
-            return Ok(result.CreateResponseDto());
+            HttpContext.Session.SetString("Token", result.CreateResponseDto().AccessToken.Token);
+            return Redirect("/admin");//kendini admin sayfasına gönder
+            //return Ok(result.CreateResponseDto());
         }
         catch (AuthorizationException authorizationException)
         {

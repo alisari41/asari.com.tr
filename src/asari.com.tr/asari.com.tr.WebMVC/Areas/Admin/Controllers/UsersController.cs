@@ -33,6 +33,7 @@ public class UsersController : BaseController
             SetRefreshTokenToCookie(result.RefreshToken);
 
             Created("", result.AccessToken);
+            HttpContext.Session.SetString("Token", result.AccessToken.Token);
             return Redirect("/admin");//kendini admin sayfasına gönder
         }
         catch (AuthorizationException authorizationException)

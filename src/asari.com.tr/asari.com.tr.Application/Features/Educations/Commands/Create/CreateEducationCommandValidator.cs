@@ -10,7 +10,7 @@ public class CreateEducationCommandValidator : AbstractValidator<CreateEducation
     {
         #region Zorunlu Alanlar
         RuleFor(x => x.Name).NotEmpty().WithMessage(EducationMessages.NameBosOlmamali);
-        RuleFor(x => x.Degree).NotEmpty().WithMessage(EducationMessages.DegreeBosOlmamali);
+        RuleFor(x => x.Degree).NotNull().NotEmpty().WithMessage(EducationMessages.DegreeBosOlmamali);
         RuleFor(x => x.FieldOfStudy).NotEmpty().WithMessage(EducationMessages.FieldOfStudyBosOlmamali);
         RuleFor(x => x.StartDate).NotEmpty().WithMessage(EducationMessages.StartDateBosOlmamali);
         #endregion

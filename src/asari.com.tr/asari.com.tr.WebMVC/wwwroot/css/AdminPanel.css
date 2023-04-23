@@ -1,0 +1,32 @@
+﻿.guncellemebuton {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    color: #4db3ff;
+}
+
+.guncellemebuton:hover {
+    background-color: #4db3ff;
+    color: white;
+}
+
+.detaylamabuton {
+    -webkit-transition-duration: 0.4s;
+    color: #39ded8;
+    transition-duration: 0.4s;
+}
+
+.detaylamabuton:hover {
+    background-color: #1e4e4c;
+    color: white;
+}
+
+.silmebuton {
+    -webkit-transition-duration: 0.4s;
+    color: red;
+    transition-duration: 0.4s;
+}
+
+.silmebuton:hover {
+    background-color: red;
+    color: white;
+}
