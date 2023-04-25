@@ -1,21 +1,14 @@
-﻿using asari.com.tr.Application.Features.Auths.Commands.Register;
-using asari.com.tr.Application.Features.Educations.Commands.Create;
+﻿using asari.com.tr.Application.Features.Educations.Commands.Create;
 using asari.com.tr.Application.Features.Educations.Queries.GetList;
-using Azure;
 using Core.Application.Requests;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Persistence.Paging;
-using Core.Security.Dtos;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
-using System.Drawing.Printing;
-using X.PagedList;
 using asari.com.tr.Application.Features.Educations.Commands.Update;
 using asari.com.tr.Application.Features.Educations.Queries.GetById;
-using Azure.Core;
 using asari.com.tr.Application.Features.Educations.Commands.Delete;
 
 namespace asari.com.tr.WebMVC.Areas.Admin.Controllers;
@@ -142,7 +135,6 @@ public class EducationsController : BaseController
             ActivityAndCommunity = result.ActivityAndCommunity,
             Description = result.Description,
             MediaUrl = result.MediaUrl
-
         };
 
         return View(updateEducationCommand);
@@ -155,10 +147,14 @@ public class EducationsController : BaseController
         {
             // Form verilerini dinamik olarak al. Formu dinamik olarak alamamım sebebi cshtml den bana eğer sayı 0.4 olarak gelidiğinde updateEducationCommand bunu 4 müi gibi kabul ediyor ben 0,4 yapıp tekrar yollayınca sayı doğru oluyor.
             string myDoubleStr = Request.Form["Degree"];
-            double myDegree = Double.Parse(myDoubleStr.Replace('.', ','));
+            
+            if (!string.Equals(myDoubleStr, ""))
+            {
+                double myDegree = Double.Parse(myDoubleStr.Replace('.', ','));
 
-            // UpdateEducationCommand sınıfındaki myDegree özelliğini güncelle
-            updateEducationCommand.Degree = myDegree;
+                // UpdateEducationCommand sınıfındaki myDegree özelliğini güncelle
+                updateEducationCommand.Degree = myDegree;
+            }
 
 
             UpdatedEducationResponse result = await Mediator.Send(updateEducationCommand);
@@ -202,7 +198,7 @@ public class EducationsController : BaseController
     }
 
     [HttpPost("Delete")]
-    public async Task<IActionResult> Delete( DeleteEducationCommand deleteEducationCommand)
+    public async Task<IActionResult> Delete(DeleteEducationCommand deleteEducationCommand)
     {
         DeletedEducationResponse result = await Mediator.Send(deleteEducationCommand);
         return RedirectToAction("GetList");

@@ -57,7 +57,8 @@
     <div class="form-group">
         <label class="control-label col-md-3">Not Ortalaması</label>
         <div class="col-md-9">
-            <input type="text" name="Degree" asp-for="Degree" class="form-control text-info" oninput="this.value = this.value.replace(/[^0-9.,]/g, '').replace(/(,.*),/g, '$1').replace(/\.(?=.*\.)/g, '').replace(/^(\d{2,}\.)(.*)$/, '$1');" />@* DOUBLE kullanımı*@
+            @*<input type="text" name="Degree" asp-for="Degree" class="form-control text-info" oninput="this.value = this.value.replace(/[^0-9.,]/g, '').replace(/(,.*),/g, '$1').replace(/\.(?=.*\.)/g, '').replace(/^(\d{2,}\.)(.*)$/, '$1');" />@* DOUBLE kullanımı*@
+            <input type="number" step="any" value="@Model.Degree.ToString().Replace(',', '.')" name="Degree" class="form-control text-info" /> @* DOUBLE kullanımı girmek için type="number" step="any" kullanarak. veri Tabanındaki sayıyı almak için asp-for yerine value="@Model.Degree.ToString().Replace(',', '.')"*@
             <span asp-validation-for="Degree" class="text-danger" id="txtKotrol"></span>
         </div>
     </div>
