@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Delete;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
+using asari.com.tr.Application.Features.EducationSkills.Queries.GetById;
 using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -18,6 +19,13 @@ public class EducationSkillsController : BaseController
         GetListEducationSkillQuery getListEducationSkillQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListEducationSkillListItemDto> result = await Mediator.Send(getListEducationSkillQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdEducationSkillQuery getByIdEducationSkillQuery)
+    {
+        var result = await Mediator.Send(getByIdEducationSkillQuery);
         return Ok(result);
     }
 

@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Skills.Commands.Create;
+﻿using asari.com.tr.Application.Features.Skills.Queries.GetById;
+using asari.com.tr.Application.Features.Skills.Commands.Create;
 using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using asari.com.tr.Application.Features.Skills.Commands.Update;
 using asari.com.tr.Application.Features.Skills.Queries.GetList;
@@ -21,6 +22,10 @@ public class MappingProfiles : Profile
         #region Get List
         CreateMap<IPaginate<Skill>, GetListResponse<GetListSkillListItemDto>>().ReverseMap();
         CreateMap<Skill, GetListSkillListItemDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<Skill, GetByIdSkillGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create

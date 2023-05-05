@@ -1,0 +1,105 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Skills.Queries.GetList.GetListSkillListItemDto>
+
+@{
+    ViewData["Title"] = "Yetenekler";
+}
+
+<script>
+
+    function openPopup(url) {
+        var width = 800;
+        var height = 1000;
+        var left = (window.innerWidth - width) / 2;
+        var top = (window.innerHeight - height) / 2;
+        var options = "width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+        window.open(url, "", options);
+    }
+
+    function showConfirmationModal(id, name) {
+        var modal = $('#silmeIslemiOnayModal_' + id);
+        modal.modal('show');
+    }
+</script>
+
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+
+
+
+<!-- Ekleme Modal Penceresi -->
+<button type="button" class="btn btn-outline-danger mr-1" data-toggle="modal" data-target="#addModal">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+        <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+    </svg> Yetenek Ekle
+</button>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Ekleme Formu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Ekleme Formu -->
+                <form asp-action="Add" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label class="control-label ">Yetenek</label>
+                        <div class="">
+                            <input type="text" name="Name" placeholder="Örn: İstanbul Üniversitesi" class="form-control text-info" required />
+                            @*<span asp-validation-for="Name" class="text-danger" id="txtKotrol"></span>*@
+                            @*<span id="txtEror">@ViewBag.ExceptionErrorMessage</span>*@
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label ">Derece</label>
+                        <div class="">
+                            <input type="number" name="Degree" class="form-control text-info" required />
+                            @*<span asp-validation-for="Degree" class="text-danger" id="txtKotrol"></span>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-default guncellemebuton" style="margin-left: 5px; border: 2px solid #4db3ff;" id="btnAdd">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-plus-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z" />
+                                </svg>&nbsp; Kaydet
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Buraya kadar -->
+
+<p>
+    <a onclick="openPopup('/Admin/Skills/Add')" class="btn btn-outline-warning" id="btnAdd">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+            <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+        </svg> Yetenek Ekle
+    </a>
+</p>
+
+
+
+
+@* Tablodaki Verileri göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/Skills/_PartialViewSkillList.cshtml")
+
+
+
+
+@* SAYFALAMA İÇİN KULLANILMIŞTIR. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewSayfalama.cshtml")

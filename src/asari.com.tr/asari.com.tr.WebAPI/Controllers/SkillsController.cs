@@ -1,8 +1,8 @@
-﻿using asari.com.tr.Application.Features.Skills.Commands.Create;
+﻿using asari.com.tr.Application.Features.Skills.Queries.GetById;
+using asari.com.tr.Application.Features.Skills.Commands.Create;
 using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using asari.com.tr.Application.Features.Skills.Commands.Update;
 using asari.com.tr.Application.Features.Skills.Queries.GetList;
-using asari.com.tr.Application.Features.Technologies.Commands.Delete;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +20,13 @@ public class SkillsController : BaseController
         GetListSkillQuery getListSkillQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListSkillListItemDto> result = await Mediator.Send(getListSkillQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdSkillQuery getByIdSkillQuery)
+    {
+        var result = await Mediator.Send(getByIdSkillQuery);
         return Ok(result);
     }
 

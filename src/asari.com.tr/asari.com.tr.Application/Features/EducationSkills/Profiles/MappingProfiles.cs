@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
+﻿using asari.com.tr.Application.Features.EducationSkills.Queries.GetById;
+using asari.com.tr.Application.Features.EducationSkills.Queries.GetList;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Update;
 using asari.com.tr.Application.Features.EducationSkills.Commands.Delete;
@@ -25,6 +26,18 @@ public class MappingProfiles : Profile
         #endregion
         #endregion
         CreateMap<IPaginate<EducationSkill>, GetListResponse<GetListEducationSkillListItemDto>>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<EducationSkill, GetByIdEducationSkillGetByIdResponse>()
+        #region Project
+                        .ForMember(x => x.EducationId, opt => opt.MapFrom(x => x.Education.Id))
+                        .ForMember(x => x.EducationName, opt => opt.MapFrom(x => x.Education.Name))
+        #endregion
+        #region Yetenek
+                        .ForMember(x => x.SkillId, opt => opt.MapFrom(x => x.Skill.Id))
+                        .ForMember(x => x.SkillName, opt => opt.MapFrom(x => x.Skill.Name)).ReverseMap();
+        #endregion
         #endregion
 
         #region Create
