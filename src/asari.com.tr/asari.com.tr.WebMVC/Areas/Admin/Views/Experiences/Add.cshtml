@@ -1,0 +1,142 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.Experiences.Commands.Create.CreateExperienceCommand;
+
+
+@{
+    ViewData["Title"] = "Deneyim Ekle";
+}
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+
+<br />
+<h2>Deneyim Ekle</h2>
+<hr />
+
+<form asp-action="Add" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3">Başlık</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="Title" placeholder="Örn: Perakende Satış Müdürü" class="form-control text-info" />
+            <span asp-validation-for="Title" class="text-danger" id="txtKotrol"></span>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">İstihdam türü</label>
+        <div class="col-md-9">
+            <select name="EmploymentType" asp-for="EmploymentType" class="form-control">
+                <option value="">Lütfen Seçin</option>
+                <option value="Tam zamanlı">Tam zamanlı</option>
+                <option value="Yarı zamanlı">Yarı zamanlı</option>
+                <option value="Kendi işim">Kendi işim</option>
+                <option value="Serbest çalışan">Serbest çalışan</option>
+                <option value="Sözleşmeli">Sözleşmeli</option>
+                <option value="Stajyer">Stajyer</option>
+                <option value="Çırak">Çırak</option>
+                <option value="Dönemsel">Dönemsel</option>
+            </select>
+            <span asp-validation-for="EmploymentType" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Şirket adı</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="CompanyName" placeholder="Örn: Microsoft" class="form-control text-info" />
+            <span asp-validation-for="CompanyName" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Konum</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="Location" placeholder="Örn: İstanbul, Türkiye" class="form-control text-info" />
+            <span asp-validation-for="Location" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-9">
+            <label>
+                <input type="checkbox" name="Statu" @(ViewBag.Statu ? "checked" : "")> Şu an bu pozisyonda çalışıyorum
+            </label>
+            <span asp-validation-for="Statu" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Başlama tarihi</label>
+        <div class="col-md-9">
+            <input type="date" asp-for="StartDate" class="form-control text-info" />
+            <span asp-validation-for="StartDate" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Bitiş tarihi</label>
+        <div class="col-md-9">
+            <input type="date" asp-for="EndDate" class="form-control text-info" id="endDate" />
+            <span asp-validation-for="EndDate" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Sektör</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="Industry" placeholder="Örn: Perakende" class="form-control text-info" />
+            <span asp-validation-for="Industry" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Açıklama</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="Description" class="form-control text-info" />
+            <span asp-validation-for="Description" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Profil başlığı</label>
+        <div class="col-md-9">
+            <input type="text" asp-for="ProfileHeadline" class="form-control text-info" />
+            <span asp-validation-for="ProfileHeadline" class="text-danger" id="txtKotrol"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-default guncellemebuton" style="margin-left: 5px; border: 2px solid #4db3ff;" id="btnAdd">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-plus-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z" />
+                </svg>&nbsp; Kaydet
+            </button>
+        </div>
+    </div>
+</form>
+
+<a asp-action="GetList" class="btn btn-outline-warning mb-2 ml-2" asp-route-Page="0" asp-route-PageSize="15">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-btn-fill" viewBox="0 0 16 16">
+        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.21-6.907L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407z" />
+    </svg> Geri Dön
+</a>
+
+<script>
+    // Eğer Statu true ise Bitiş tarihi alanını disable yap
+    window.onload = function () {
+        var checkBox = document.querySelector('input[name="Statu"]');
+        var endDate = document.querySelector('#endDate');
+
+        if (checkBox.checked) {
+            endDate.disabled = true;
+        }
+
+        checkBox.addEventListener('change', function () {
+            endDate.disabled = this.checked;
+        });
+    };
+
+    // Sayfa ilk açıldığında statüyü true atadıktan sonra kaydederken doğru kaydetmesi için kullanıldı
+    var checkBox = document.querySelector('input[name="Statu"]');
+    if (checkBox.checked) {
+        checkBox.value = true;
+    } else {
+        checkBox.value = false;
+    }
+</script>
