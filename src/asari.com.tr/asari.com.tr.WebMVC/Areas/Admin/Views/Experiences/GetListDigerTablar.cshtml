@@ -1,0 +1,41 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Experiences.Queries.GetList.GetListExperienceListItemDto>
+
+@{
+    ViewData["Title"] = "Deneyimler";
+    Layout = null;
+
+}
+
+<script>
+
+    function openPopup(url) {
+        var width = 800;
+        var height = 1000;
+        var left = (window.innerWidth - width) / 2;
+        var top = (window.innerHeight - height) / 2;
+        var options = "width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+        window.open(url, "", options);
+    }
+
+    function showConfirmationModal(id, name) {
+        var modal = $('#silmeIslemiOnayModal_' + id);
+        modal.modal('show');
+    }
+</script>
+
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+
+
+
+@* Tablodaki Verileri göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/Experiences/_PartialViewExperienceList.cshtml")
+
+
+
+
+@* SAYFALAMA İÇİN KULLANILMIŞTIR. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/Experiences/_PartialViewDigerSayfalarIcinExperienceSayfalama.cshtml")

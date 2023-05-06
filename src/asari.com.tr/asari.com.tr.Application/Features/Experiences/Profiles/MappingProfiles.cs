@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Experiences.Commands.Create;
+﻿using asari.com.tr.Application.Features.Experiences.Queries.GetById;
+using asari.com.tr.Application.Features.Experiences.Commands.Create;
 using asari.com.tr.Application.Features.Experiences.Commands.Delete;
 using asari.com.tr.Application.Features.Experiences.Commands.Update;
 using asari.com.tr.Application.Features.Experiences.Queries.GetList;
@@ -15,6 +16,10 @@ public class MappingProfiles : Profile
         #region Get List
         CreateMap<IPaginate<Experience>, GetListResponse<GetListExperienceListItemDto>>().ReverseMap();
         CreateMap<Experience, GetListExperienceListItemDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<Experience, GetByIdExperienceGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create
