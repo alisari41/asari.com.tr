@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
+﻿using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetById;
+using asari.com.tr.Application.Features.ExperienceSkills.Commands.Create;
 using asari.com.tr.Application.Features.ExperienceSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ExperienceSkills.Commands.Update;
 using asari.com.tr.Application.Features.ExperienceSkills.Queries.GetList;
@@ -18,6 +19,13 @@ public class ExperienceSkillsController : BaseController
         GetListExperienceSkillQuery getListExperienceSkillQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListExperienceSkillListItemDto> result = await Mediator.Send(getListExperienceSkillQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdExperienceSkillQuery getByIdExperienceSkillQuery)
+    {
+        var result = await Mediator.Send(getByIdExperienceSkillQuery);
         return Ok(result);
     }
 

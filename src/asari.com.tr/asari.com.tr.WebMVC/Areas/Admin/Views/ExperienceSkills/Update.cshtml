@@ -1,0 +1,171 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.ExperienceSkills.Commands.Update.UpdateExperienceSkillCommand;
+
+@{
+    ViewData["Title"] = "Deneyim Yeteneği Bilgilerini Güncelle";
+}
+
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+@{
+    if (!(ViewBag.AuthorizationErrorMessage != null || ViewBag.AuthorizationErrorStackTrace != null
+    || ViewBag.BusinessErrorMessage != null || ViewBag.BusinessErrorStackTrace != null
+    || ViewBag.NotFoundErrorMessage != null || ViewBag.NotFoundErrorStackTrace != null
+    || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null
+    || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null))
+    {
+        <h2>Deneyim Yeteneği Bilgilerini Güncelle</h2>
+        <hr />
+
+        <!-- Experience Modal -->
+        <div class="modal fade" id="ExperienceModal" tabindex="-1" role="dialog" aria-labelledby="ExperienceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ExperienceModalLabel">Select an Experience</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="ExperienceTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Experiences/_PartialViewExperienceList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Experiences.Queries.GetList.GetListExperienceListItemDto>)ViewBag.ExperienceList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Experiences/_PartialViewDigerSayfalarIcinExperienceSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Experiences.Queries.GetList.GetListExperienceListItemDto>)ViewBag.ExperienceList)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Deneyim
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" class="form-control text-info" id="selectedExperienceName" placeholder="Deneyim Seç 'Örn: Düzce Üniversitesi...'" value="@ViewBag.ExperienceName" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#ExperienceModal" data-controller="Experiences">
+                        Deneyim Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Skill Modal -->
+        <div class="modal fade" id="SkillModal" tabindex="-1" role="dialog" aria-labelledby="SkillModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="SkillModalLabel">Select an Skill</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="skillTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Skills/_PartialViewSkillList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Skills.Queries.GetList.GetListSkillListItemDto>)ViewBag.SkillList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Skills/_PartialViewDigerSayfalarIcinSkillSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Skills.Queries.GetList.GetListSkillListItemDto>)ViewBag.SkillList)
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Yetenek
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" class="form-control text-info" id="selectedSkillName" placeholder="Yetenek Seç 'Örn: c#, c++, asp.net core...'" value="@ViewBag.SkillName" readonly>
+                @*<input type="hidden" id="selectedSkillId">*@
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#SkillModal" data-controller="Skills">
+                        Yetenek Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <form asp-action="Update" asp-route-Id="@Model.Id" method="post" class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="input-group ">
+                <input type="hidden" asp-for="ExperienceId" class="form-control" id="selectedExperienceId" placeholder="Deneyim Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="ExperienceId" class="text-danger" id="txtKotrol"></span>
+            </div>
+            <div class="input-group ">
+                <input type="hidden" asp-for="SkillId" class="form-control" id="selectedSkillId" placeholder="Yetenek Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="SkillId" class="text-danger" id="txtKotrol"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-outline-success" style="margin-left: 5px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                        </svg> Deneyim Yeteneği Bilgilerini Güncelle
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+}
+
+
+
+
+<a asp-action="GetList" class="btn btn-outline-warning mb-2 ml-2" asp-route-Page="0" asp-route-PageSize="15">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-btn-fill" viewBox="0 0 16 16">
+        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.21-6.907L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407z" />
+    </svg> Geri Dön
+</a>
+
+
+<script>
+    // Experience Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.Experience-item', function () {
+            var ExperienceName = $(this).text();
+            var ExperienceId = $(this).data('id');
+            //var ExperienceId = $(this).closest('tr').attr('data-id');
+            $('#selectedExperienceName').val(ExperienceName);
+            $('#selectedExperienceId').val(ExperienceId);
+            $('#ExperienceModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedExperienceName', function () {
+            $('#selectedExperienceName').html('<p>' + $('#selectedExperienceName').val() + '</p>');
+        });
+    });
+
+    // Skill Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.skill-item', function () {
+            var SkillName = $(this).text();
+            var SkillId = $(this).data('id');
+            $('#selectedSkillName').val(SkillName);
+            $('#selectedSkillId').val(SkillId);
+            $('#SkillModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedSkillName', function () {
+            $('#selectedSkillName').html('<p>' + $('#selectedSkillName').val() + '</p>');
+        });
+    });
+</script>
