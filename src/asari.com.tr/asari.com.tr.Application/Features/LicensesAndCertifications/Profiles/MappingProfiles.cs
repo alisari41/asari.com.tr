@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetById;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -15,6 +16,10 @@ public class MappingProfiles : Profile
         #region Get List
         CreateMap<IPaginate<LicenseAndCertification>, GetListResponse<GetListLicenseAndCertificationListItemDto>>().ReverseMap();
         CreateMap<LicenseAndCertification, GetListLicenseAndCertificationListItemDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<LicenseAndCertification, GetByIdLicenseAndCertificationGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create

@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetById;
 using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -18,6 +19,13 @@ public class LicensesAndCertificationsController : BaseController
         GetListLicenseAndCertificationQuery getListLicenseAndCertificationQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListLicenseAndCertificationListItemDto> result = await Mediator.Send(getListLicenseAndCertificationQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdLicenseAndCertificationQuery getByIdLicenseAndCertificationQuery)
+    {
+        var result = await Mediator.Send(getByIdLicenseAndCertificationQuery);
         return Ok(result);
     }
 

@@ -1,13 +1,12 @@
-﻿using asari.com.tr.Application.Features.Experiences.Commands.Update;
-using asari.com.tr.Application.Features.Experiences.Queries.GetById;
-using asari.com.tr.Application.Features.Experiences.Commands.Create;
-using asari.com.tr.Application.Features.Experiences.Queries.GetList;
+﻿using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Update;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetById;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Create;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetList;
 using Core.Application.Requests;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Persistence.Paging;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using asari.com.tr.Application.Features.Experiences.Commands.Delete;
+using asari.com.tr.Application.Features.LicensesAndCertifications.Commands.Delete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -15,9 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 namespace asari.com.tr.WebMVC.Areas.Admin.Controllers;
 
 [Area("Admin")]
-public class ExperiencesController : BaseController
+public class LicensesAndCertificationsController : BaseController
 {
-    [HttpGet("/Experiences/GetList")]
+    [HttpGet("/LicensesAndCertifications/GetList")]
     public async Task<IActionResult> GetList(PageRequest pageRequest)
     {
         try
@@ -26,9 +25,9 @@ public class ExperiencesController : BaseController
             pageRequest.Page = pageRequest.Page != 0 ? pageRequest.Page : 0;
             pageRequest.PageSize = pageRequest.PageSize != 0 ? pageRequest.PageSize : 15;
 
-            GetListExperienceQuery getListExperienceQuery = new() { PageRequest = pageRequest };
+            GetListLicenseAndCertificationQuery getListLicenseAndCertificationQuery = new() { PageRequest = pageRequest };
 
-            GetListResponse<GetListExperienceListItemDto> result = await Mediator.Send(getListExperienceQuery);
+            GetListResponse<GetListLicenseAndCertificationListItemDto> result = await Mediator.Send(getListLicenseAndCertificationQuery);
 
             // Verileri görüntülemek için view'e gönderilir
             return View(result);
@@ -42,7 +41,7 @@ public class ExperiencesController : BaseController
         }
     }
 
-    [HttpGet("/Experiences/GetListDigerTablar")]
+    [HttpGet("/LicensesAndCertifications/GetListDigerTablar")]
     public async Task<IActionResult> GetListDigerTablar(PageRequest pageRequest)
     {
         try
@@ -51,9 +50,9 @@ public class ExperiencesController : BaseController
             pageRequest.Page = pageRequest.Page != 0 ? pageRequest.Page : 0;
             pageRequest.PageSize = pageRequest.PageSize != 0 ? pageRequest.PageSize : 15;
 
-            GetListExperienceQuery getListExperienceQuery = new() { PageRequest = pageRequest };
+            GetListLicenseAndCertificationQuery getListLicenseAndCertificationQuery = new() { PageRequest = pageRequest };
 
-            GetListResponse<GetListExperienceListItemDto> result = await Mediator.Send(getListExperienceQuery);
+            GetListResponse<GetListLicenseAndCertificationListItemDto> result = await Mediator.Send(getListLicenseAndCertificationQuery);
 
             // Verileri görüntülemek için view'e gönderilir
             return View(result);
@@ -73,12 +72,12 @@ public class ExperiencesController : BaseController
         return View();
     }
 
-    [HttpPost("/Experiences/Add")]
-    public async Task<IActionResult> Add(CreateExperienceCommand createExperienceCommand)
+    [HttpPost("/LicensesAndCertifications/Add")]
+    public async Task<IActionResult> Add(CreateLicenseAndCertificationCommand createLicenseAndCertificationCommand)
     {
         try
         {
-            CreatedExperienceResponse result = await Mediator.Send(createExperienceCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
+            CreatedLicenseAndCertificationResponse result = await Mediator.Send(createLicenseAndCertificationCommand); // Command'i de Madiator aracığılıyla handler'ını bulması için görevlendiriyoruz.
             //ViewBag.Success = "Kaydetme İşlemi Başarılı";
 
             return RedirectToAction("GetList");
@@ -120,34 +119,31 @@ public class ExperiencesController : BaseController
         }
     }
 
-    public async Task<IActionResult> Update(GetByIdExperienceQuery getByIdExperienceQuery)
+    public async Task<IActionResult> Update(GetByIdLicenseAndCertificationQuery getByIdLicenseAndCertificationQuery)
     {
-        GetByIdExperienceGetByIdResponse result = await Mediator.Send(getByIdExperienceQuery);
+        GetByIdLicenseAndCertificationGetByIdResponse result = await Mediator.Send(getByIdLicenseAndCertificationQuery);
 
-        UpdateExperienceCommand updateExperienceCommand = new UpdateExperienceCommand
+        UpdateLicenseAndCertificationCommand updateLicensesAndCertificationCommand = new UpdateLicenseAndCertificationCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.
             Id = result.Id,
-            Title = result.Title,
-            EmploymentType = result.EmploymentType,
-            CompanyName = result.CompanyName,
-            Location = result.Location,
-            Statu = result.Statu,
-            StartDate = result.StartDate,
-            EndDate = result.EndDate,
-            Industry = result.Industry,
-            Description = result.Description,
-            ProfileHeadline = result.ProfileHeadline
+            Name = result.Name,
+            IssuingOrganization = result.IssuingOrganization,
+            IssueDate = result.IssueDate,
+            ExpirationDate = result.ExpirationDate,
+            ImagegUrl = result.ImagegUrl,
+            CredentialId = result.CredentialId,
+            CredentialUrl = result.CredentialUrl,
         };
 
-        return View(updateExperienceCommand);
+        return View(updateLicensesAndCertificationCommand);
     }
 
-    [HttpPost("/Experiences/Update")]
-    public async Task<IActionResult> Update(UpdateExperienceCommand updateExperienceCommand)
+    [HttpPost("/LicensesAndCertifications/Update")]
+    public async Task<IActionResult> Update(UpdateLicenseAndCertificationCommand updateLicenseAndCertificationCommand)
     {
         try
         {
-            UpdatedExperienceResponse result = await Mediator.Send(updateExperienceCommand);
+            UpdatedLicenseAndCertificationResponse result = await Mediator.Send(updateLicenseAndCertificationCommand);
             return RedirectToAction("GetList");
         }
         catch (AuthorizationException authorizationException)
@@ -155,42 +151,42 @@ public class ExperiencesController : BaseController
             ViewBag.AuthorizationErrorMessage = authorizationException.Message;
             ViewBag.AuthorizationErrorStackTrace = authorizationException.StackTrace;
 
-            return View(updateExperienceCommand); // Hata MEsajı aldığımda geriye updateExperienceCommand'i döndürmezsem Form içerisinde @Model.Id boş muş gibi hata veriyor
+            return View(updateLicenseAndCertificationCommand); // Hata MEsajı aldığımda geriye updateLicensesAndCertificationCommand'i döndürmezsem Form içerisinde @Model.Id boş muş gibi hata veriyor
         }
         catch (BusinessException businessException)
         {
             ViewBag.BusinessErrorMessage = businessException.Message;
             ViewBag.BusinessErrorStackTrace = businessException.StackTrace;
 
-            return View(updateExperienceCommand);
+            return View(updateLicenseAndCertificationCommand);
         }
         catch (NotFoundException notFoundException)
         {
             ViewBag.NotFoundErrorMessage = notFoundException.Message;
             ViewBag.NotFoundErrorStackTrace = notFoundException.StackTrace;
 
-            return View(updateExperienceCommand);
+            return View(updateLicenseAndCertificationCommand);
         }
         catch (ValidationException validationException)
         {
             ViewBag.ValidationErrorMessage = validationException.Message;
             ViewBag.ValidationErrorStackTrace = validationException.StackTrace;
 
-            return View(updateExperienceCommand);
+            return View(updateLicenseAndCertificationCommand);
         }
         catch (Exception exception)
         {
             ViewBag.ExceptionErrorMessage = exception.Message;
             ViewBag.ExceptionErrorStackTrace = exception.StackTrace;
 
-            return View(updateExperienceCommand);
+            return View(updateLicenseAndCertificationCommand);
         }
     }
 
-    [HttpPost("/Experiences/Delete")]
-    public async Task<IActionResult> Delete(DeleteExperienceCommand deleteExperienceCommand)
+    [HttpPost("/LicensesAndCertifications/Delete")]
+    public async Task<IActionResult> Delete(DeleteLicenseAndCertificationCommand deleteLicenseAndCertificationCommand)
     {
-        DeletedExperienceResponse result = await Mediator.Send(deleteExperienceCommand);
+        DeletedLicenseAndCertificationResponse result = await Mediator.Send(deleteLicenseAndCertificationCommand);
         return RedirectToAction("GetList");
     }
 
