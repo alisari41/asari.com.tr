@@ -32,9 +32,10 @@ public class GetListExperienceSkillQuery : IRequest<GetListResponse<GetListExper
 
         public async Task<GetListResponse<GetListExperienceSkillListItemDto>> Handle(GetListExperienceSkillQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ExperienceSkill> experienceSkill = await _experienceSkillRepository.GetListAsync(include: x =>
+            IPaginate<ExperienceSkill> experienceSkill = await _experienceSkillRepository.GetListAsync(orderBy: x =>
                                                                     x.Include(c => c.Experience)
-                                                                     .Include(c => c.Skill),
+                                                                     .Include(c => c.Skill)
+                                                                     .OrderBy(c => c.Experience.Title),
                                                                     index: request.PageRequest.Page,
                                                                     size: request.PageRequest.PageSize);
 

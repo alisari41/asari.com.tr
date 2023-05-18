@@ -32,9 +32,10 @@ public class GetListLicenseAndCertificationSkillQuery : IRequest<GetListResponse
 
         public async Task<GetListResponse<GetListLicenseAndCertificationSkillListItemDto>> Handle(GetListLicenseAndCertificationSkillQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<LicenseAndCertificationSkill> licenseAndCertificationSkill = await _licenseAndCertificationSkillRepository.GetListAsync(include: x =>
+            IPaginate<LicenseAndCertificationSkill> licenseAndCertificationSkill = await _licenseAndCertificationSkillRepository.GetListAsync(orderBy: x =>
                                                                                                         x.Include(c => c.LicenseAndCertification)
-                                                                                                         .Include(c => c.Skill),
+                                                                                                         .Include(c => c.Skill)
+                                                                                                         .OrderBy(c => c.LicenseAndCertification.Name),
                                                                                                         index: request.PageRequest.Page,
                                                                                                         size: request.PageRequest.PageSize);
 

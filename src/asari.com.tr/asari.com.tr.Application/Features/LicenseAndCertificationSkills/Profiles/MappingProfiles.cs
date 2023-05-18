@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Create;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Delete;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Command.Update;
+using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetById;
 using asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -25,6 +26,18 @@ public class MappingProfiles : Profile
         #endregion
         #endregion
         CreateMap<IPaginate<LicenseAndCertificationSkill>, GetListResponse<GetListLicenseAndCertificationSkillListItemDto>>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<LicenseAndCertificationSkill, GetByIdLicenseAndCertificationSkillGetByIdResponse>()
+        #region Lisans ve Sertifika
+                        .ForMember(x => x.LicenseAndCertificationId, opt => opt.MapFrom(x => x.LicenseAndCertification.Id))
+                        .ForMember(x => x.LicenseAndCertificationName, opt => opt.MapFrom(x => x.LicenseAndCertification.Name))
+        #endregion
+        #region Yetenek
+                        .ForMember(x => x.SkillId, opt => opt.MapFrom(x => x.Skill.Id))
+                        .ForMember(x => x.SkillName, opt => opt.MapFrom(x => x.Skill.Name)).ReverseMap();
+        #endregion
         #endregion
 
         #region Create

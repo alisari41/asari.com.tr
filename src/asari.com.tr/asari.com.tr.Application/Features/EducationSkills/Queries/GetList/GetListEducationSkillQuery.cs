@@ -35,7 +35,7 @@ public class GetListEducationSkillQuery : IRequest<GetListResponse<GetListEducat
             IPaginate<EducationSkill> educationSkill = await _educationSkillRepository.GetListAsync(orderBy: o =>
                                                                                                             o.Include(c => c.Education)
                                                                                                              .Include(c => c.Skill)
-                                                                                                             .OrderByDescending(c => c.Education.Name),
+                                                                                                             .OrderBy(c => c.Education.Name),
                                                                                                             index: request.PageRequest.Page,
                                                                                                             size: request.PageRequest.PageSize);
 
