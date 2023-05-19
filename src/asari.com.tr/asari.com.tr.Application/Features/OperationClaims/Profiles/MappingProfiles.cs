@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
+﻿using asari.com.tr.Application.Features.OperationClaims.Queries.GetById;
+using asari.com.tr.Application.Features.OperationClaims.Commands.Create;
 using asari.com.tr.Application.Features.OperationClaims.Commands.Delete;
 using asari.com.tr.Application.Features.OperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
@@ -13,8 +14,12 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         #region Get List
-        CreateMap<IPaginate<OperationClaim>, GetListResponse<OperationClaimListItemDto>>().ReverseMap(); // OperationClaimListModel sınıfı IPaginate sınıfıyla Maplenir
-        CreateMap<OperationClaim, OperationClaimListItemDto>().ReverseMap();
+        CreateMap<IPaginate<OperationClaim>, GetListResponse<GetListOperationClaimListItemDto>>().ReverseMap(); // OperationClaimListModel sınıfı IPaginate sınıfıyla Maplenir
+        CreateMap<OperationClaim, GetListOperationClaimListItemDto>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<OperationClaim, GetByIdOperationClaimGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create

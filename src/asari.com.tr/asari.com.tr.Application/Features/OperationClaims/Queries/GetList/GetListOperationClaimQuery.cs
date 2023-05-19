@@ -8,7 +8,7 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Queries.GetList;
 
-public class GetListOperationClaimQuery : IRequest<GetListResponse<OperationClaimListItemDto>>,ICachableRequest
+public class GetListOperationClaimQuery : IRequest<GetListResponse<GetListOperationClaimListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
 
@@ -18,7 +18,7 @@ public class GetListOperationClaimQuery : IRequest<GetListResponse<OperationClai
 
     public TimeSpan? SlidingExpiration { get; }
 
-    public class GetListOperationClaimQueryHandler : IRequestHandler<GetListOperationClaimQuery, GetListResponse<OperationClaimListItemDto>>
+    public class GetListOperationClaimQueryHandler : IRequestHandler<GetListOperationClaimQuery, GetListResponse<GetListOperationClaimListItemDto>>
     {
         private readonly IOperationClaimRepository _operationClaimRepository;
         private readonly IMapper _mapper;
@@ -29,11 +29,12 @@ public class GetListOperationClaimQuery : IRequest<GetListResponse<OperationClai
             _mapper = mapper;
         }
 
-        public async Task<GetListResponse<OperationClaimListItemDto>> Handle(GetListOperationClaimQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetListOperationClaimListItemDto>> Handle(GetListOperationClaimQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<OperationClaim> operationClaims = await _operationClaimRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<OperationClaim> operationClaims = await _operationClaimRepository.GetListAsync(orderBy: o => o.OrderBy(c => c.Name),
+                                                                                                        index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
-            var mappedOperationClaimListModel = _mapper.Map<GetListResponse<OperationClaimListItemDto>>(operationClaims); // Dbden aldıklarını modeldaki Page kısmına atıyorum
+            var mappedOperationClaimListModel = _mapper.Map<GetListResponse<GetListOperationClaimListItemDto>>(operationClaims); // Dbden aldıklarını modeldaki Page kısmına atıyorum
 
             return mappedOperationClaimListModel;
         }
