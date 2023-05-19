@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Delete;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetById;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -28,8 +29,17 @@ public class MappingProfiles : Profile
 
         #endregion
 
+        #region Get By Id
+        CreateMap<ProgrammingLanguageTechnology, GetByIdProgrammingLanguageTechnologyGetByIdResponse>()
+        #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
+                                    .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguage.Name)) // ProgrammingLanguageName'i map işlemi yapamayacağı için biz verdik
+                                    .ForMember(x => x.ProgrammingLanguageId, opt => opt.MapFrom(x => x.ProgrammingLanguage.Id)) // ProgrammingLanguageName'i map işlemi yapamayacağı için biz verdik
+                                    .ReverseMap();
+        #endregion
+        #endregion
+
         #region Create
-        CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyReponse>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyResponse>().ReverseMap();
         CreateMap<ProgrammingLanguageTechnology, CreateProgrammingLanguageTechnologyCommand>().ReverseMap();
         #endregion
 

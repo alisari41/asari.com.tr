@@ -10,7 +10,7 @@ using static asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.C
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
 
-public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgrammingLanguageTechnologyReponse>, ISecuredRequest, ICacheRemoverRequest
+public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgrammingLanguageTechnologyResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     // Son kullanıcının bize göndereceği son dataları içeren yapı
     public int ProgrammingLanguageId { get; set; }
@@ -22,7 +22,7 @@ public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgra
 
     public string[] Roles => new[] { Admin, Write, Add };
 
-    public class CreateProgrammingLanguageTechnologyCommandHandler : IRequestHandler<CreateProgrammingLanguageTechnologyCommand, CreatedProgrammingLanguageTechnologyReponse>
+    public class CreateProgrammingLanguageTechnologyCommandHandler : IRequestHandler<CreateProgrammingLanguageTechnologyCommand, CreatedProgrammingLanguageTechnologyResponse>
     {
         private readonly IProgrammingLanguageTechnologyRepository _programmingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
@@ -37,14 +37,14 @@ public class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgra
             _programmingLanguageRules = programmingLanguageRules;
         }
 
-        public async Task<CreatedProgrammingLanguageTechnologyReponse> Handle(CreateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedProgrammingLanguageTechnologyResponse> Handle(CreateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
         {
             await _programmingLanguageTechnologyRules.ProgrammingLanguageTechnologyNameCanNotBeDuplicatedWhenIserted(request.Name);
             await _programmingLanguageRules.ProgrammingLanguageShouldExistWhenRequested(request.ProgrammingLanguageId);
 
             ProgrammingLanguageTechnology mappedProgrammingLanguageTechnology = _mapper.Map<ProgrammingLanguageTechnology>(request);
             ProgrammingLanguageTechnology createdProgrammingLanguageTechnology = await _programmingLanguageTechnologyRepository.AddAsync(mappedProgrammingLanguageTechnology);
-            CreatedProgrammingLanguageTechnologyReponse mappedCreatedProgrammingLanguageTechnologyDto = _mapper.Map<CreatedProgrammingLanguageTechnologyReponse>(createdProgrammingLanguageTechnology);
+            CreatedProgrammingLanguageTechnologyResponse mappedCreatedProgrammingLanguageTechnologyDto = _mapper.Map<CreatedProgrammingLanguageTechnologyResponse>(createdProgrammingLanguageTechnology);
 
             return mappedCreatedProgrammingLanguageTechnologyDto;
         }

@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
+﻿using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetById;
+using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Delete;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Update;
 using asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList;
@@ -22,6 +23,13 @@ public class ProgrammingLanguageTechnologiesController : BaseController
                                                                                                                                  // getListBrandQuery.PageRequest = pageRequest;
 
         GetListResponse<GetListProgrammingLanguageTechnologyListItemDto> result = await Mediator.Send(getListPrgrammingLanguageTecnologyQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingLanguageTechnologyQuery getByIdProgrammingLanguageTechnologyQuery)
+    {
+        var result = await Mediator.Send(getByIdProgrammingLanguageTechnologyQuery);
         return Ok(result);
     }
 

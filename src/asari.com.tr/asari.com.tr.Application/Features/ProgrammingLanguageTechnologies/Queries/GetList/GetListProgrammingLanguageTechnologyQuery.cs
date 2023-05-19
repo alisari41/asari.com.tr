@@ -34,8 +34,9 @@ public class GetListProgrammingLanguageTechnologyQuery : IRequest<GetListRespons
 
         public async Task<GetListResponse<GetListProgrammingLanguageTechnologyListItemDto>> Handle(GetListProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ProgrammingLanguageTechnology> programmingLanguageTechnologies = await _programmingLanguageTechnolojyRepository.GetListAsync(include:
-                                                                                            x => x.Include(c => c.ProgrammingLanguage),   // Include işlemi ilişkilendirme için
+            IPaginate<ProgrammingLanguageTechnology> programmingLanguageTechnologies = await _programmingLanguageTechnolojyRepository.GetListAsync(orderBy:
+                                                                                            x => x.Include(c => c.ProgrammingLanguage)
+                                                                                                   .OrderBy(c => c.ProgrammingLanguage.Name), // Programlama dili adına göre sırala // Include işlemi ilişkilendirme için
                                                                                             index: request.PageRequest.Page,
                                                                                             size: request.PageRequest.PageSize); // Birden fazla ilişkide yapılabilir. Github Projesinden bakılabilir. Linkedinde paylaşıldı.
 

@@ -1,0 +1,113 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Commands.Create.CreateProgrammingLanguageTechnologyCommand;
+
+
+@{
+    ViewData["Title"] = "Programlama dili teknolojisi Ekle";
+}
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+
+<br />
+<h2>Programlama dili teknolojisi Ekle</h2>
+<hr />
+
+@{
+    if (!(ViewBag.AuthorizationErrorMessage != null || ViewBag.AuthorizationErrorStackTrace != null
+    || ViewBag.BusinessErrorMessage != null || ViewBag.BusinessErrorStackTrace != null
+    || ViewBag.NotFoundErrorMessage != null || ViewBag.NotFoundErrorStackTrace != null
+    || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null
+    || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null))
+    {
+        <!-- ProgrammingLanguage Modal -->
+        <div class="modal fade" id="ProgrammingLanguageModal" tabindex="-1" role="dialog" aria-labelledby="ProgrammingLanguageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ProgrammingLanguageModalLabel">Select an ProgrammingLanguage</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="ProgrammingLanguageTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/ProgrammingLanguages/_PartialViewProgrammingLanguageList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetList.GetListProgrammingLanguageListItemDto>)ViewBag.ProgrammingLanguageList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/ProgrammingLanguages/_PartialViewDigerSayfalarIcinProgrammingLanguageSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetList.GetListProgrammingLanguageListItemDto>)ViewBag.ProgrammingLanguageList)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Programlama Dili
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" asp-for="ProgrammingLanguageId" class="form-control text-info" id="selectedProgrammingLanguageName" placeholder="Programlama Dili Seç 'Örn: c#, c++, java...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#ProgrammingLanguageModal" data-controller="ProgrammingLanguages">
+                        Programlama Dili Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <form asp-action="Add" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Adı</label>
+                <div class="col-md-9">
+                    <input type="text" asp-for="Name" placeholder="Örn: .net, .net Core..." class="form-control text-info" />
+                    <span asp-validation-for="Name" class="text-danger" id="txtKotrol"></span>
+                </div>
+            </div>
+            <div class="input-group ">
+                <input type="hidden" asp-for="ProgrammingLanguageId" class="form-control" id="selectedProgrammingLanguageId" placeholder="Programlama Dili Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="ProgrammingLanguageId" class="text-danger" id="txtKotrol"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-default guncellemebuton" style="margin-left: 5px; border: 2px solid #4db3ff;" id="btnAdd">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-plus-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z" />
+                        </svg>&nbsp; Kaydet
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+}
+
+<a asp-action="GetList" class="btn btn-outline-warning mb-2 ml-2" asp-route-Page="0" asp-route-PageSize="15">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-btn-fill" viewBox="0 0 16 16">
+        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.21-6.907L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407z" />
+    </svg> Geri Dön
+</a>
+
+<script>
+    // ProgrammingLanguage Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.ProgrammingLanguage-item', function () {
+            var ProgrammingLanguageName = $(this).text();
+            var ProgrammingLanguageId = $(this).data('id');
+            //var ProgrammingLanguageId = $(this).closest('tr').attr('data-id');
+            $('#selectedProgrammingLanguageName').val(ProgrammingLanguageName);
+            $('#selectedProgrammingLanguageId').val(ProgrammingLanguageId);
+            $('#ProgrammingLanguageModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedProgrammingLanguageName', function () {
+            $('#selectedProgrammingLanguageName').html('<p>' + $('#selectedProgrammingLanguageName').val() + '</p>');
+        });
+    });
+</script>
