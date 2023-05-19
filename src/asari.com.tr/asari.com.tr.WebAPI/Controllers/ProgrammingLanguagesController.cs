@@ -11,7 +11,7 @@ namespace asari.com.tr.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PrgrammingLanguagesController : BaseController
+public class ProgrammingLanguagesController : BaseController
 {
     [HttpGet("getList")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
