@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
 
-public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>, ICachableRequest
+public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>>, ICachableRequest
 {
     // Mediator da IRequest
     public PageRequest PageRequest { get; set; } // Bir listeleme yapılacağı için bir Request üzerinden geçekleştirilecek
@@ -20,7 +20,7 @@ public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetList
 
     public TimeSpan? SlidingExpiration { get; }
 
-    public class GetListProjectProgrammingLanguageTechnologyQueryHandler : IRequestHandler<GetListProjectProgrammingLanguageTechnologyQuery, GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>
+    public class GetListProjectProgrammingLanguageTechnologyQueryHandler : IRequestHandler<GetListProjectProgrammingLanguageTechnologyQuery, GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>>
     {
         public readonly IProjectProgrammingLanguageTechnologyRepository _projectProgrammingLanguageTechnologyRepository;
         public readonly IMapper _mapper;
@@ -31,7 +31,7 @@ public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetList
             _mapper = mapper;
         }
 
-        public async Task<GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>> Handle(GetListProjectProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>> Handle(GetListProjectProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
             IPaginate<ProjectProgrammingLanguageTechnology> projectProgrammingLanguageTechnologies = await _projectProgrammingLanguageTechnologyRepository.GetListAsync(include: x =>
                                                                                                                    x.Include(c => c.Project)
@@ -40,7 +40,7 @@ public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetList
                                                                                                             index: request.PageRequest.Page,
                                                                                                             size: request.PageRequest.PageSize); // Birden fazla ilişkide yapılabilir. Github Projesinden bakılabilir. Linkedinde paylaşıldı.
 
-            GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto> mappedProjectProgrammingLanguageTechnologyListModel = _mapper.Map<GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto>>(projectProgrammingLanguageTechnologies);
+            GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto> mappedProjectProgrammingLanguageTechnologyListModel = _mapper.Map<GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>>(projectProgrammingLanguageTechnologies);
 
             return mappedProjectProgrammingLanguageTechnologyListModel;
         }

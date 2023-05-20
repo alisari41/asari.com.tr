@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Delete;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Update;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetById;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
@@ -19,7 +20,14 @@ namespace asari.com.tr.WebAPI.Controllers
                                                                                                                                                      // GetListBrandQuery getListBrandQuery = new GetListBrandQuery();
                                                                                                                                                      // getListBrandQuery.PageRequest = pageRequest;
 
-            GetListResponse<GetListProjectProgrammingLanguageTechnologyListDto> result = await Mediator.Send(getListProjectProgrammingLanguageTechnologyQuery);
+            GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto> result = await Mediator.Send(getListProjectProgrammingLanguageTechnologyQuery);
+            return Ok(result);
+        }
+
+        [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+        public async Task<IActionResult> GetById([FromRoute] GetByIdProjectProgrammingLanguageTechnologyQuery getByIdProjectProgrammingLanguageTechnologyQuery)
+        {
+            var result = await Mediator.Send(getByIdProjectProgrammingLanguageTechnologyQuery);
             return Ok(result);
         }
 

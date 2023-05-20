@@ -1,0 +1,165 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create.CreateProjectProgrammingLanguageTechnologyCommand;
+@*@model Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Projects.Queries.GetList.GetListProjectListItemDto>*@
+
+
+@{
+    ViewData["Title"] = "Proje Yeteneği Yeteneği Ekle";
+}
+
+<br />
+<h2>Proje Yeteneği Ekle</h2>
+<hr />
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+@{
+    if (!(ViewBag.AuthorizationErrorMessage != null || ViewBag.AuthorizationErrorStackTrace != null
+    || ViewBag.BusinessErrorMessage != null || ViewBag.BusinessErrorStackTrace != null
+    || ViewBag.NotFoundErrorMessage != null || ViewBag.NotFoundErrorStackTrace != null
+    || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null
+    || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null))
+    {
+        <!-- Project Modal -->
+        <div class="modal fade" id="ProjectModal" tabindex="-1" role="dialog" aria-labelledby="ProjectModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ProjectModalLabel">Select an Project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="ProjectTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Projects/_PartialViewProjectList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Projects.Queries.GetList.GetListProjectListItemDto>)ViewBag.ProjectList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Projects/_PartialViewDigerSayfalarIcinProjectSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Projects.Queries.GetList.GetListProjectListItemDto>)ViewBag.ProjectList)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Proje
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" asp-for="ProjectId" class="form-control text-info" id="selectedProjectName" placeholder="Proje Seç 'Örn: Kişisel Web Sitesi'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#ProjectModal" data-controller="Projects">
+                        Proje Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ProgrammingLanguageTechnology Modal -->
+        <div class="modal fade" id="ProgrammingLanguageTechnologyModal" tabindex="-1" role="dialog" aria-labelledby="ProgrammingLanguageTechnologyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ProgrammingLanguageTechnologyModalLabel">Select an ProgrammingLanguageTechnology</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="ProgrammingLanguageTechnologyTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/ProgrammingLanguageTechnologies/_PartialViewProgrammingLanguageTechnologyList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList.GetListProgrammingLanguageTechnologyListItemDto>)ViewBag.ProgrammingLanguageTechnologyList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/ProgrammingLanguageTechnologies/_PartialViewDigerSayfalarIcinProgrammingLanguageTechnologySayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetList.GetListProgrammingLanguageTechnologyListItemDto>)ViewBag.ProgrammingLanguageTechnologyList)
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Programlama Dili Teknoloji
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" asp-for="ProjectId" class="form-control text-info" id="selectedProgrammingLanguageTechnologyName" placeholder="Programlama Dili Teknolojisi Seç 'Örn: asp.net core...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                @*<input type="hidden" id="selectedProgrammingLanguageTechnologyId">*@
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#ProgrammingLanguageTechnologyModal" data-controller="ProgrammingLanguageTechnologies">
+                        Programlama Dili Teknolojisi Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <form asp-action="Add" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="input-group ">
+                <input type="hidden" asp-for="ProjectId" class="form-control" id="selectedProjectId" placeholder="Proje Yeteneği Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="ProjectId" class="text-danger" id="txtKotrol"></span>
+            </div>
+            <div class="input-group ">
+                <input type="hidden" asp-for="ProgrammingLanguageTechnologyId" class="form-control" id="selectedProgrammingLanguageTechnologyId" placeholder="Programlama Dili Teknoloji Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="ProgrammingLanguageTechnologyId" class="text-danger" id="txtKotrol"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-default guncellemebuton" style="margin-left: 5px; border: 2px solid #4db3ff;" id="btnAdd">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-plus-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z" />
+                        </svg>&nbsp; Kaydet
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+}
+
+<a asp-action="GetList" class="btn btn-outline-warning mb-2 ml-2" asp-route-Page="0" asp-route-PageSize="15">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-btn-fill" viewBox="0 0 16 16">
+        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.21-6.907L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407z" />
+    </svg> Geri Dön
+</a>
+
+<script>
+    // Project Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.Project-item', function () {
+            var ProjectName = $(this).text();
+            var ProjectId = $(this).data('id');
+            //var ProjectId = $(this).closest('tr').attr('data-id');
+            $('#selectedProjectName').val(ProjectName);
+            $('#selectedProjectId').val(ProjectId);
+            $('#ProjectModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedProjectName', function () {
+            $('#selectedProjectName').html('<p>' + $('#selectedProjectName').val() + '</p>');
+        });
+    });
+
+    // ProgrammingLanguageTechnology Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.ProgrammingLanguageTechnology-item', function () {
+            var ProgrammingLanguageTechnologyName = $(this).text();
+            var ProgrammingLanguageTechnologyId = $(this).data('id');
+            $('#selectedProgrammingLanguageTechnologyName').val(ProgrammingLanguageTechnologyName);
+            $('#selectedProgrammingLanguageTechnologyId').val(ProgrammingLanguageTechnologyId);
+            $('#ProgrammingLanguageTechnologyModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedProgrammingLanguageTechnologyName', function () {
+            $('#selectedProgrammingLanguageTechnologyName').html('<p>' + $('#selectedProgrammingLanguageTechnologyName').val() + '</p>');
+        });
+    });
+</script>
