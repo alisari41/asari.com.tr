@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
+﻿using asari.com.tr.Application.Features.ProjectSkills.Queries.GetById;
+using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Update;
 using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
@@ -19,6 +20,13 @@ public class ProjectSkillsController : BaseController
         GetListProjectSkillQuery getListProjectSkillQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListProjectSkillListItemDto> result = await Mediator.Send(getListProjectSkillQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdProjectSkillQuery getByIdProjectSkillQuery)
+    {
+        var result = await Mediator.Send(getByIdProjectSkillQuery);
         return Ok(result);
     }
 

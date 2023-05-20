@@ -1,6 +1,7 @@
 ﻿using asari.com.tr.Application.Features.ProjectSkills.Commands.Create;
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Delete;
 using asari.com.tr.Application.Features.ProjectSkills.Commands.Update;
+using asari.com.tr.Application.Features.ProjectSkills.Queries.GetById;
 using asari.com.tr.Application.Features.ProjectSkills.Queries.GetList;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
@@ -25,6 +26,18 @@ public class MappingProfiles : Profile
         #endregion
         #endregion
         CreateMap<IPaginate<ProjectSkill>, GetListResponse<GetListProjectSkillListItemDto>>().ReverseMap();
+        #endregion
+
+        #region Get By Id
+        CreateMap<ProjectSkill, GetByIdProjectSkillGetByIdResponse>()
+        #region Project
+                        .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
+                        .ForMember(x => x.ProjectTitle, opt => opt.MapFrom(x => x.Project.Title))
+        #endregion
+        #region Yetenek
+                        .ForMember(x => x.SkillId, opt => opt.MapFrom(x => x.Skill.Id))
+                        .ForMember(x => x.SkillName, opt => opt.MapFrom(x => x.Skill.Name)).ReverseMap();
+        #endregion
         #endregion
 
         #region Create

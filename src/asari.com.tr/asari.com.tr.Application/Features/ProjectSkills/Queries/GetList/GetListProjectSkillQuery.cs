@@ -32,9 +32,10 @@ public class GetListProjectSkillQuery : IRequest<GetListResponse<GetListProjectS
 
         public async Task<GetListResponse<GetListProjectSkillListItemDto>> Handle(GetListProjectSkillQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ProjectSkill> projectSkills = await _projectSkillRepository.GetListAsync(include: x =>
+            IPaginate<ProjectSkill> projectSkills = await _projectSkillRepository.GetListAsync(orderBy: x =>
                                                                     x.Include(c => c.Project)
-                                                                     .Include(c => c.Skill),
+                                                                     .Include(c => c.Skill)
+                                                                     .OrderBy(c => c.Project.Title),
                                                                     index: request.PageRequest.Page,
                                                                     size: request.PageRequest.PageSize);
 

@@ -33,10 +33,11 @@ public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetList
 
         public async Task<GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>> Handle(GetListProjectProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ProjectProgrammingLanguageTechnology> projectProgrammingLanguageTechnologies = await _projectProgrammingLanguageTechnologyRepository.GetListAsync(include: x =>
+            IPaginate<ProjectProgrammingLanguageTechnology> projectProgrammingLanguageTechnologies = await _projectProgrammingLanguageTechnologyRepository.GetListAsync(orderBy: x =>
                                                                                                                    x.Include(c => c.Project)
                                                                                                                     .Include(c => c.ProgrammingLanguageTechnology)
-                                                                                                                    .Include(c => c.ProgrammingLanguageTechnology.ProgrammingLanguage), // Include işlemi ilişkilendirme için
+                                                                                                                    .Include(c => c.ProgrammingLanguageTechnology.ProgrammingLanguage)
+                                                                                                                    .OrderBy(c => c.Project.Title), // Include işlemi ilişkilendirme için
                                                                                                             index: request.PageRequest.Page,
                                                                                                             size: request.PageRequest.PageSize); // Birden fazla ilişkide yapılabilir. Github Projesinden bakılabilir. Linkedinde paylaşıldı.
 
