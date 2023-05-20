@@ -25,7 +25,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<Project, GetByIdProjectResponse>().ReverseMap();
+        CreateMap<Project, GetByIdProjectGetByIdResponse>().ReverseMap();
         #endregion
 
         #region Create
@@ -34,7 +34,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Update
-        CreateMap<Project, UpdatedProjectReponse>().ReverseMap();
+        CreateMap<Project, UpdatedProjectResponse>().ReverseMap();
         CreateMap<Project, UpdateProjectCommand>().ReverseMap();
         #endregion
 

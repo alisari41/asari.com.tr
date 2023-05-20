@@ -10,7 +10,7 @@ using static asari.com.tr.Application.Features.Projects.Constants.ProjectsOperat
 
 namespace asari.com.tr.Application.Features.Projects.Commands.Update;
 
-public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>, ISecuredRequest, ICacheRemoverRequest
+public class UpdateProjectCommand : IRequest<UpdatedProjectResponse>, ISecuredRequest, ICacheRemoverRequest
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -27,7 +27,7 @@ public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>, ISecuredReq
 
     public string[] Roles => new[] { Admin, Write, ProjectsOperationClaims.Update };
 
-    public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, UpdatedProjectReponse>
+    public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, UpdatedProjectResponse>
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
@@ -40,7 +40,7 @@ public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>, ISecuredReq
             _projectRules = projectRules;
         }
 
-        public async Task<UpdatedProjectReponse> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
+        public async Task<UpdatedProjectResponse> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
             Project? project = await _projectRepository.GetAsync(x => x.Id == request.Id);
 
@@ -50,7 +50,7 @@ public class UpdateProjectCommand : IRequest<UpdatedProjectReponse>, ISecuredReq
             await _projectRules.ProjectTitleConNotBeDuplicatedWhenUpdated(project); // Mapleme işleminden sonra kullanılır.
 
             Project updatedProject = await _projectRepository.UpdateAsync(project);
-            UpdatedProjectReponse mappedUpdatedProjectDto = _mapper.Map<UpdatedProjectReponse>(updatedProject);
+            UpdatedProjectResponse mappedUpdatedProjectDto = _mapper.Map<UpdatedProjectResponse>(updatedProject);
 
             return mappedUpdatedProjectDto;
         }
