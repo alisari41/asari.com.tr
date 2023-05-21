@@ -20,7 +20,7 @@ public class UpdateTechnologyProjectCommand : IRequest<UpdatedTechnologyProjectR
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.TechnologyProjectCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.TechnologyProjectCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, TechnologyProjectsOperationClaims.Update };
 

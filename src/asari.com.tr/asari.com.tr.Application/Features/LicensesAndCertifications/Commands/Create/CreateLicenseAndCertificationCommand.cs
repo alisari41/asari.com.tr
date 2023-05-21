@@ -21,7 +21,7 @@ public class CreateLicenseAndCertificationCommand : IRequest<CreatedLicenseAndCe
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.LicensesAndCertificationCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.LicensesAndCertificationCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
 

@@ -12,6 +12,7 @@ public class GetListTechnologyProjectListItemDto : IDto
     #endregion
 
     #region Teknoloji Tablosundan Alınacaklar
+    public int TechnologyId{ get; set; }
     public string TechnologyTitle { get; set; }
     public string TechnologyDescription { get; set; }
     public string? TechnologyImageUrl { get; set; }
@@ -19,6 +20,7 @@ public class GetListTechnologyProjectListItemDto : IDto
     #endregion
 
     #region Project Tablosundan Alınacaklar
+    public int ProjectId{ get; set; }
     public string ProjectTitle { get; set; }
     public string ProjectDescription { get; set; }
     public string ProjectImageUrl { get; set; }

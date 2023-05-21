@@ -18,7 +18,7 @@ public class CreateTechnologyCommand : IRequest<CreatedTechnologyResponse>, ISec
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.TechnologyCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.TechnologyCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
 

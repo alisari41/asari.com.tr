@@ -16,7 +16,7 @@ public class DeleteLicenseAndCertificationSkillCommand : IRequest<DeletedLicense
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.LicenseAndCertificationSkillCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.LicenseAndCertificationSkillCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, LicenseAndCertificationSkillsOperationClaims.Delete };
 

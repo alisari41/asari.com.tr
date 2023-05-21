@@ -16,7 +16,7 @@ public class DeleteUserOperationClaimCommand : IRequest<DeletedUserOperationClai
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.UserOperationClaimCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.UserOperationClaimCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, UserOperationClaimsOperationClaims.Delete };
 

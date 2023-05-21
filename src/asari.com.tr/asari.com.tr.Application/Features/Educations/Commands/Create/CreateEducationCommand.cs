@@ -24,7 +24,7 @@ public class CreateEducationCommand : IRequest<CreatedEducationResponse>, ISecur
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.EducationCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.EducationCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
 

@@ -1,14 +1,14 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model asari.com.tr.Application.Features.EducationSkills.Commands.Create.CreateEducationSkillCommand;
-@*@model Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Educations.Queries.GetList.GetListEducationListItemDto>*@
+@model asari.com.tr.Application.Features.TechnologyProjects.Commands.Create.CreateTechnologyProjectCommand;
+@*@model Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Technologies.Queries.GetList.GetListTechnologyListItemDto>*@
 
 
 @{
-    ViewData["Title"] = "Eğitim Yeteneği Yeteneği Ekle";
+    ViewData["Title"] = "Teknoloji Yeteneği Yeteneği Ekle";
 }
 
 <br />
-<h2>Eğitim Yeteneği Ekle</h2>
+<h2>Teknoloji Yeteneği Ekle</h2>
 <hr />
 
 @* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
@@ -21,21 +21,21 @@
     || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null
     || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null))
     {
-        <!-- Education Modal -->
-        <div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModalLabel" aria-hidden="true">
+        <!-- Technology Modal -->
+        <div class="modal fade" id="TechnologyModal" tabindex="-1" role="dialog" aria-labelledby="TechnologyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="educationModalLabel">Select an Education</h5>
+                        <h5 class="modal-title" id="TechnologyModalLabel">Select an Technology</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
-                        <div id="educationTable">
-                            @await Html.PartialAsync("~/Areas/Admin/Views/Educations/_PartialViewEducationList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Educations.Queries.GetList.GetListEducationListItemDto>)ViewBag.EducationList)
+                        <div id="TechnologyTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Technologies/_PartialViewTechnologyList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Technologies.Queries.GetList.GetListTechnologyListItemDto>)ViewBag.TechnologyList)
 
-                            @await Html.PartialAsync("~/Areas/Admin/Views/Educations/_PartialViewDigerSayfalarIcinEducationSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Educations.Queries.GetList.GetListEducationListItemDto>)ViewBag.EducationList)
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Technologies/_PartialViewDigerSayfalarIcinTechnologySayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Technologies.Queries.GetList.GetListTechnologyListItemDto>)ViewBag.TechnologyList)
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -47,33 +47,33 @@
 
         <div class="form-group">
             <label class="control-label col-md-3">
-                Eğitim
+                Teknoloji
             </label>
             <div class="input-group mb-1 col-md-9">
-                <input type="text" asp-for="EducationId" class="form-control text-info" id="selectedEducationName" placeholder="Eğitim Seç 'Örn: Düzce Üniversitesi...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <input type="text" asp-for="TechnologyId" class="form-control text-info" id="selectedTechnologyName" placeholder="Teknoloji Seç 'Örn: Düzce Üniversitesi...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#educationModal" data-controller="Educations">
-                        Eğitim Seç
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#TechnologyModal" data-controller="Technologies">
+                        Teknoloji Seç
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Skill Modal -->
-        <div class="modal fade" id="SkillModal" tabindex="-1" role="dialog" aria-labelledby="SkillModalLabel" aria-hidden="true">
+        <!-- Project Modal -->
+        <div class="modal fade" id="ProjectModal" tabindex="-1" role="dialog" aria-labelledby="ProjectModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="SkillModalLabel">Select an Skill</h5>
+                        <h5 class="modal-title" id="ProjectModalLabel">Select an Project</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
-                        <div id="skillTable">
-                            @await Html.PartialAsync("~/Areas/Admin/Views/Skills/_PartialViewSkillList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Skills.Queries.GetList.GetListSkillListItemDto>)ViewBag.SkillList)
+                        <div id="ProjectTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Projects/_PartialViewProjectList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Projects.Queries.GetList.GetListProjectListItemDto>)ViewBag.ProjectList)
 
-                            @await Html.PartialAsync("~/Areas/Admin/Views/Skills/_PartialViewDigerSayfalarIcinSkillSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Skills.Queries.GetList.GetListSkillListItemDto>)ViewBag.SkillList)
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Projects/_PartialViewDigerSayfalarIcinProjectSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Projects.Queries.GetList.GetListProjectListItemDto>)ViewBag.ProjectList)
 
                         </div>
                     </div>
@@ -86,14 +86,14 @@
 
         <div class="form-group">
             <label class="control-label col-md-3">
-                Yetenek
+                Proje
             </label>
             <div class="input-group mb-1 col-md-9">
-                <input type="text" asp-for="EducationId" class="form-control text-info" id="selectedSkillName" placeholder="Yetenek Seç 'Örn: c#, c++, asp.net core...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                @*<input type="hidden" id="selectedSkillId">*@
+                <input type="text" asp-for="TechnologyId" class="form-control text-info" id="selectedProjectName" placeholder="Proje Seç 'Örn: c#, c++, asp.net core...'" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                @*<input type="hidden" id="selectedProjectId">*@
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#SkillModal" data-controller="Skills">
-                        Yetenek Seç
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#ProjectModal" data-controller="Projects">
+                        Proje Seç
                     </button>
                 </div>
             </div>
@@ -104,12 +104,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="input-group ">
-                <input type="hidden" asp-for="EducationId" class="form-control" id="selectedEducationId" placeholder="Eğitim Yeteneği Seç" aria-describedby="basic-addon2" readonly>
-                <span asp-validation-for="EducationId" class="text-danger" id="txtKotrol"></span>
+                <input type="hidden" asp-for="TechnologyId" class="form-control" id="selectedTechnologyId" placeholder="Teknoloji Yeteneği Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="TechnologyId" class="text-danger" id="txtKotrol"></span>
             </div>
             <div class="input-group ">
-                <input type="hidden" asp-for="SkillId" class="form-control" id="selectedSkillId" placeholder="Yetenek Seç" aria-describedby="basic-addon2" readonly>
-                <span asp-validation-for="SkillId" class="text-danger" id="txtKotrol"></span>
+                <input type="hidden" asp-for="ProjectId" class="form-control" id="selectedProjectId" placeholder="Proje Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="ProjectId" class="text-danger" id="txtKotrol"></span>
             </div>
 
             <div class="form-group">
@@ -140,34 +140,34 @@
 
 
 <script>
-    // Education Tablodan veri seçmek için buraya dokunma
+    // Technology Tablodan veri seçmek için buraya dokunma
     $(document).ready(function () {
-        $(document).on('click', '.education-item', function () {
-            var educationName = $(this).text();
-            var educationId = $(this).data('id');
-            //var educationId = $(this).closest('tr').attr('data-id');
-            $('#selectedEducationName').val(educationName);
-            $('#selectedEducationId').val(educationId);
-            $('#educationModal').modal('hide');
+        $(document).on('click', '.Technology-item', function () {
+            var TechnologyName = $(this).text();
+            var TechnologyId = $(this).data('id');
+            //var TechnologyId = $(this).closest('tr').attr('data-id');
+            $('#selectedTechnologyName').val(TechnologyName);
+            $('#selectedTechnologyId').val(TechnologyId);
+            $('#TechnologyModal').modal('hide');
         });
 
-        $(document).on('change', '#selectedEducationName', function () {
-            $('#selectedEducationName').html('<p>' + $('#selectedEducationName').val() + '</p>');
+        $(document).on('change', '#selectedTechnologyName', function () {
+            $('#selectedTechnologyName').html('<p>' + $('#selectedTechnologyName').val() + '</p>');
         });
     });
 
-    // Skill Tablodan veri seçmek için buraya dokunma
+    // Project Tablodan veri seçmek için buraya dokunma
     $(document).ready(function () {
-        $(document).on('click', '.skill-item', function () {
-            var SkillName = $(this).text();
-            var SkillId = $(this).data('id');
-            $('#selectedSkillName').val(SkillName);
-            $('#selectedSkillId').val(SkillId);
-            $('#SkillModal').modal('hide');
+        $(document).on('click', '.Project-item', function () {
+            var ProjectName = $(this).text();
+            var ProjectId = $(this).data('id');
+            $('#selectedProjectName').val(ProjectName);
+            $('#selectedProjectId').val(ProjectId);
+            $('#ProjectModal').modal('hide');
         });
 
-        $(document).on('change', '#selectedSkillName', function () {
-            $('#selectedSkillName').html('<p>' + $('#selectedSkillName').val() + '</p>');
+        $(document).on('change', '#selectedProjectName', function () {
+            $('#selectedProjectName').html('<p>' + $('#selectedProjectName').val() + '</p>');
         });
     });
 </script>

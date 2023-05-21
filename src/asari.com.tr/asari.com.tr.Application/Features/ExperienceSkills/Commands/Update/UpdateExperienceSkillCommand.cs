@@ -20,7 +20,7 @@ public class UpdateExperienceSkillCommand : IRequest<UpdatedExperienceSkillRespo
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.EducationSkillCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.EducationSkillCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Update };
 

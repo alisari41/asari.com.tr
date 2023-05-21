@@ -20,7 +20,7 @@ public class UpdateProgrammingLanguageTechnologyCommand : IRequest<UpdatedProgra
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageTechnologyCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProgrammingLanguageTechnologyCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ProgrammingLanguageTechnologiesOperationClaims.Update };
 

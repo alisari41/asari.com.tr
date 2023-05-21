@@ -26,7 +26,7 @@ public class UpdateExperienceCommand : IRequest<UpdatedExperienceResponse>, ISec
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ExperienceCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ExperienceCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ExperiencesOperationClaims.Update };
 

@@ -15,7 +15,7 @@ public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLangu
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
 

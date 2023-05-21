@@ -21,7 +21,7 @@ public class UpdateProjectProgrammingLanguageTechnologyCommand : IRequest<Update
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProjectProgrammingLanguageTechnologyCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProjectProgrammingLanguageTechnologyCacheGroupKey, CacheGroupKeyValue.TechnologyProjectCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ProjectProgrammingLanguageTechnologiesOperationClaims.Update };
 

@@ -22,7 +22,7 @@ public class CreateProjectCommand : IRequest<CreatedProjectResponse>, ISecuredRe
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProjectCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProjectCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, CreatedProjectResponse>

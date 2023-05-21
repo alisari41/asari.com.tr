@@ -16,7 +16,7 @@ public class DeleteEducationSkillCommand : IRequest<DeletedEducationSkillRespons
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.EducationSkillCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.EducationSkillCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, EducationSkillsOperationClaims.Delete };
 

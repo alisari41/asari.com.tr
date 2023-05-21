@@ -18,7 +18,7 @@ public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLangu
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProgrammingLanguageCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ProgrammingLanguagesOperationClaims.Update };
 

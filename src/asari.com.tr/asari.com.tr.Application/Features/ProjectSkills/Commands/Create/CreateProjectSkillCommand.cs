@@ -18,7 +18,7 @@ public class CreateProjectSkillCommand : IRequest<CreatedProjectSkillResponse>, 
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProjectSkillCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProjectSkillCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, Add };
 

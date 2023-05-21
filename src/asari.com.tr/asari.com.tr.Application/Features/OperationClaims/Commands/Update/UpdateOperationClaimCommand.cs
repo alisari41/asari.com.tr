@@ -17,7 +17,7 @@ public class UpdateOperationClaimCommand : IRequest<UpdatedOperationClaimRespons
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.OperationClaimCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.OperationClaimCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, OperationClaimsOperationClaims.Update };
 

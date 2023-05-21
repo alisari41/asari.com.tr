@@ -22,6 +22,7 @@ public class MappingProfiles : Profile
         #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
         #region Teknolojiler
         CreateMap<TechnologyProject, GetListTechnologyProjectListItemDto>()
+                        .ForMember(x => x.TechnologyId, opt => opt.MapFrom(x => x.Technology.Id))
                         .ForMember(x => x.TechnologyTitle, opt => opt.MapFrom(x => x.Technology.Title))
                         .ForMember(x => x.TechnologyDescription, opt => opt.MapFrom(x => x.Technology.Description))
                         .ForMember(x => x.TechnologyImageUrl, opt => opt.MapFrom(x => x.Technology.ImageUrl))
@@ -29,6 +30,7 @@ public class MappingProfiles : Profile
 
         #endregion
         #region Project
+                        .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
                         .ForMember(x => x.ProjectTitle, opt => opt.MapFrom(x => x.Project.Title))
                         .ForMember(x => x.ProjectDescription, opt => opt.MapFrom(x => x.Project.Description))
                         .ForMember(x => x.ProjectImageUrl, opt => opt.MapFrom(x => x.Project.ImageUrl))
@@ -50,6 +52,7 @@ public class MappingProfiles : Profile
         #region Get By Id / İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
         #region Teknolojiler
         CreateMap<TechnologyProject, GetByIdTechnologyProjectResponse>()
+                        .ForMember(x => x.TechnologyId, opt => opt.MapFrom(x => x.Technology.Id))
                         .ForMember(x => x.TechnologyTitle, opt => opt.MapFrom(x => x.Technology.Title))
                         .ForMember(x => x.TechnologyDescription, opt => opt.MapFrom(x => x.Technology.Description))
                         .ForMember(x => x.TechnologyImageUrl, opt => opt.MapFrom(x => x.Technology.ImageUrl))
@@ -57,6 +60,7 @@ public class MappingProfiles : Profile
 
         #endregion
         #region Project
+                        .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
                         .ForMember(x => x.ProjectTitle, opt => opt.MapFrom(x => x.Project.Title))
                         .ForMember(x => x.ProjectDescription, opt => opt.MapFrom(x => x.Project.Description))
                         .ForMember(x => x.ProjectImageUrl, opt => opt.MapFrom(x => x.Project.ImageUrl))

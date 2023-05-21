@@ -16,7 +16,7 @@ public class DeleteProjectProgrammingLanguageTechnologyCommand : IRequest<Delete
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProjectProgrammingLanguageTechnologyCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProjectProgrammingLanguageTechnologyCacheGroupKey, CacheGroupKeyValue.TechnologyProjectCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ProjectProgrammingLanguageTechnologiesOperationClaims.Delete };
 

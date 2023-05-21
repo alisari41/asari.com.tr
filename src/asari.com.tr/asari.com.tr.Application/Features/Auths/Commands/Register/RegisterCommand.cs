@@ -17,7 +17,7 @@ public class RegisterCommand : IRequest<RegisteredResponse>, ICacheRemoverReques
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.UserCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.UserCacheGroupKey };
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredResponse>
     {

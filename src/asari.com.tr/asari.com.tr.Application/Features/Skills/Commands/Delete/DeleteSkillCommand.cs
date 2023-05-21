@@ -16,7 +16,7 @@ public class DeleteSkillCommand : IRequest<DeletedSkillResponse>, ISecuredReques
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.SkillCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.SkillCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, SkillsOperationClaims.Delete };
 

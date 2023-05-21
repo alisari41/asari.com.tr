@@ -17,7 +17,7 @@ public class DeleteProjectCommand : IRequest<DeletedProjectResponse>, ISecuredRe
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
-    public string? CacheGroupKey => CacheGroupKeyValue.ProjectCacheGroupKey;
+    public string[] CacheGroupKey => new[] { CacheGroupKeyValue.ProjectCacheGroupKey };
 
     public string[] Roles => new[] { Admin, Write, ProjectsOperationClaims.Delete };
 
