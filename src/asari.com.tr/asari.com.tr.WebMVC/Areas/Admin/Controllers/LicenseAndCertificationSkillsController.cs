@@ -143,7 +143,7 @@ public class LicenseAndCertificationSkillsController : BaseController
         #endregion
 
 
-        GetByIdLicenseAndCertificationSkillGetByIdResponse result = await Mediator.Send(getByIdLicenseAndCertificationSkillQuery);
+        GetByIdLicenseAndCertificationSkillResponse result = await Mediator.Send(getByIdLicenseAndCertificationSkillQuery);
 
         ViewBag.LicenseAndCertificationName = result.LicenseAndCertificationName;
         ViewBag.SkillName = result.SkillName;

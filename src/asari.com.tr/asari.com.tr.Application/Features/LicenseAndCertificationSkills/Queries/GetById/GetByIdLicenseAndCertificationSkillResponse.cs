@@ -1,6 +1,6 @@
-﻿namespace asari.com.tr.Application.Features.ExperienceSkills.Queries.GetById;
+﻿namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetById;
 
-public class GetByIdExperienceSkillGetByIdResponse
+public class GetByIdLicenseAndCertificationSkillResponse
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
 
@@ -8,9 +8,9 @@ public class GetByIdExperienceSkillGetByIdResponse
     public int Id { get; set; }
     #endregion
 
-    #region Deneyim Tablosundan Alınacaklar
-    public int ExperienceId { get; set; }
-    public string ExperienceTitle { get; set; }
+    #region Lisans ve Sertifika Tablosundan Alınacaklar
+    public int LicenseAndCertificationId { get; set; }
+    public string LicenseAndCertificationName { get; set; }
     #endregion
 
     #region Yetenek Tablosundan Alınacaklar

@@ -120,7 +120,7 @@ public class ProjectsController : BaseController
 
     public async Task<IActionResult> Update(GetByIdProjectQuery getByIdProjectQuery)
     {
-        GetByIdProjectGetByIdResponse result = await Mediator.Send(getByIdProjectQuery);
+        GetByIdProjectResponse result = await Mediator.Send(getByIdProjectQuery);
 
         UpdateProjectCommand updateProjectCommand = new UpdateProjectCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.

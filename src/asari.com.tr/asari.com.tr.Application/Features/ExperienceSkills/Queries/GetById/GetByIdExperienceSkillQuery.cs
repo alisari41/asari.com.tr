@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ExperienceSkills.Queries.GetById;
 
-public class GetByIdExperienceSkillQuery : IRequest<GetByIdExperienceSkillGetByIdResponse>
+public class GetByIdExperienceSkillQuery : IRequest<GetByIdExperienceSkillResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdExperienceSkillQueryHandler : IRequestHandler<GetByIdExperienceSkillQuery, GetByIdExperienceSkillGetByIdResponse>
+    public class GetByIdExperienceSkillQueryHandler : IRequestHandler<GetByIdExperienceSkillQuery, GetByIdExperienceSkillResponse>
     {
         private readonly IExperienceSkillRepository _experienceSkillRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class GetByIdExperienceSkillQuery : IRequest<GetByIdExperienceSkillGetByI
             _experienceSkillBusinessRules = experienceSkillBusinessRules;
         }
 
-        public async Task<GetByIdExperienceSkillGetByIdResponse> Handle(GetByIdExperienceSkillQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdExperienceSkillResponse> Handle(GetByIdExperienceSkillQuery request, CancellationToken cancellationToken)
         {
             ExperienceSkill? experienceSkill = await _experienceSkillRepository.GetAsync(x => x.Id == request.Id,
                                                                                        include: i =>
@@ -33,7 +33,7 @@ public class GetByIdExperienceSkillQuery : IRequest<GetByIdExperienceSkillGetByI
 
             _experienceSkillBusinessRules.ExperienceSkillShouldExistWhenRequested(experienceSkill);
 
-            GetByIdExperienceSkillGetByIdResponse mappedGetByIdExperienceSkillGetByIdResponse = _mapper.Map<GetByIdExperienceSkillGetByIdResponse>(experienceSkill);
+            GetByIdExperienceSkillResponse mappedGetByIdExperienceSkillGetByIdResponse = _mapper.Map<GetByIdExperienceSkillResponse>(experienceSkill);
 
             return mappedGetByIdExperienceSkillGetByIdResponse;
         }

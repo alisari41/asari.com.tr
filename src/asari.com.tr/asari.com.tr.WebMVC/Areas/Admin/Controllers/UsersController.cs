@@ -7,12 +7,65 @@ using Microsoft.AspNetCore.Mvc;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using System.Net;
 using Core.Security.Entities;
+using asari.com.tr.Application.Features.Users.Queries.GetList;
+using Core.Application.Requests;
+using Core.Persistence.Paging;
+using asari.com.tr.Application.Features.Users.Queries.GetList;
 
 namespace asari.com.tr.WebMVC.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public class UsersController : BaseController
 {
+    [HttpGet("/Users/GetList")]
+    public async Task<IActionResult> GetList(PageRequest pageRequest)
+    {
+        try
+        {
+            // Sayfa boyutu ve sayfa sayısı hesaplanır. 
+            pageRequest.Page = pageRequest.Page != 0 ? pageRequest.Page : 0;
+            pageRequest.PageSize = pageRequest.PageSize != 0 ? pageRequest.PageSize : 15;
+
+            GetListUserQuery getListUserQuery = new() { PageRequest = pageRequest };
+
+            GetListResponse<GetListUserListItemDto> result = await Mediator.Send(getListUserQuery);
+
+            // Verileri görüntülemek için view'e gönderilir
+            return View(result);
+        }
+        catch (Exception exception)
+        {
+            ViewBag.ExceptionErrorMessage = exception.Message;
+            ViewBag.ExceptionErrorStackTrace = exception.StackTrace;
+
+            return View();
+        }
+    }
+
+    [HttpGet("/Users/GetListDigerTablar")]
+    public async Task<IActionResult> GetListDigerTablar(PageRequest pageRequest)
+    {
+        try
+        {
+            // Sayfa boyutu ve sayfa sayısı hesaplanır. 
+            pageRequest.Page = pageRequest.Page != 0 ? pageRequest.Page : 0;
+            pageRequest.PageSize = pageRequest.PageSize != 0 ? pageRequest.PageSize : 15;
+
+            GetListUserQuery getListUserQuery = new() { PageRequest = pageRequest };
+
+            GetListResponse<GetListUserListItemDto> result = await Mediator.Send(getListUserQuery);
+
+            // Verileri görüntülemek için view'e gönderilir
+            return View(result);
+        }
+        catch (Exception exception)
+        {
+            ViewBag.ExceptionErrorMessage = exception.Message;
+            ViewBag.ExceptionErrorStackTrace = exception.StackTrace;
+
+            return View();
+        }
+    }
     public IActionResult Register()
     {
         return View();

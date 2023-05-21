@@ -149,7 +149,7 @@ public class EducationSkillsController : BaseController
         #endregion
 
 
-        GetByIdEducationSkillGetByIdResponse result = await Mediator.Send(getByIdEducationSkillQuery);
+        GetByIdEducationSkillResponse result = await Mediator.Send(getByIdEducationSkillQuery);
 
         ViewBag.EducationName = result.EducationName;
         ViewBag.SkillName = result.SkillName;

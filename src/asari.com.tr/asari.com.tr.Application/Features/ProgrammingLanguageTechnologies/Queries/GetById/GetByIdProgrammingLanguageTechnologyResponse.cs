@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.ProgrammingLanguageTechnologies.Queries.GetById;
 
-public class GetByIdProgrammingLanguageTechnologyGetByIdResponse
+public class GetByIdProgrammingLanguageTechnologyResponse
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
     public int Id { get; set; }

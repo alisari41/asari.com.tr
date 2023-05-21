@@ -122,7 +122,7 @@ public class ExperiencesController : BaseController
 
     public async Task<IActionResult> Update(GetByIdExperienceQuery getByIdExperienceQuery)
     {
-        GetByIdExperienceGetByIdResponse result = await Mediator.Send(getByIdExperienceQuery);
+        GetByIdExperienceResponse result = await Mediator.Send(getByIdExperienceQuery);
 
         UpdateExperienceCommand updateExperienceCommand = new UpdateExperienceCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.

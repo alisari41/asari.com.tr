@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.Skills.Queries.GetById;
 
-public class GetByIdSkillGetByIdResponse
+public class GetByIdSkillResponse
 {
     public int Id { get; set; }
     public string Name { get; set; }

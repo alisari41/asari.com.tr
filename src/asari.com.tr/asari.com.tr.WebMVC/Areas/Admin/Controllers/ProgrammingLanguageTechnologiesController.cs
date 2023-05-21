@@ -148,7 +148,7 @@ public class ProgrammingLanguageTechnologiesController : BaseController
         #endregion
 
 
-        GetByIdProgrammingLanguageTechnologyGetByIdResponse result = await Mediator.Send(getByIdProgrammingLanguageTechnologyQuery);
+        GetByIdProgrammingLanguageTechnologyResponse result = await Mediator.Send(getByIdProgrammingLanguageTechnologyQuery);
         ViewBag.ProgrammingLanguageName = result.ProgrammingLanguageName;
 
 

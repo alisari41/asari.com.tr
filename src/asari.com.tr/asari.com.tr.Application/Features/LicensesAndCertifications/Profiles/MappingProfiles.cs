@@ -19,7 +19,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<LicenseAndCertification, GetByIdLicenseAndCertificationGetByIdResponse>().ReverseMap();
+        CreateMap<LicenseAndCertification, GetByIdLicenseAndCertificationResponse>().ReverseMap();
         #endregion
 
         #region Create

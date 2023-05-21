@@ -29,7 +29,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<ProjectSkill, GetByIdProjectSkillGetByIdResponse>()
+        CreateMap<ProjectSkill, GetByIdProjectSkillResponse>()
         #region Project
                         .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
                         .ForMember(x => x.ProjectTitle, opt => opt.MapFrom(x => x.Project.Title))

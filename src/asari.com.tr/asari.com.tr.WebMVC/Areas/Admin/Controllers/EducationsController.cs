@@ -128,7 +128,7 @@ public class EducationsController : BaseController
 
     public async Task<IActionResult> Update(GetByIdEducationQuery getByIdEducationQuery)
     {
-        GetByIdEducationGetByIdResponse result = await Mediator.Send(getByIdEducationQuery);
+        GetByIdEducationResponse result = await Mediator.Send(getByIdEducationQuery);
 
 
         string myDoubleStr = result.Degree.ToString();

@@ -25,7 +25,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<Skill, GetByIdSkillGetByIdResponse>().ReverseMap();
+        CreateMap<Skill, GetByIdSkillResponse>().ReverseMap();
         #endregion
 
         #region Create

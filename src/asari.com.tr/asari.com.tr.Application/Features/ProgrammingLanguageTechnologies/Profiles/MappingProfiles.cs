@@ -30,7 +30,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<ProgrammingLanguageTechnology, GetByIdProgrammingLanguageTechnologyGetByIdResponse>()
+        CreateMap<ProgrammingLanguageTechnology, GetByIdProgrammingLanguageTechnologyResponse>()
         #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
                                     .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguage.Name)) // ProgrammingLanguageName'i map işlemi yapamayacağı için biz verdik
                                     .ForMember(x => x.ProgrammingLanguageId, opt => opt.MapFrom(x => x.ProgrammingLanguage.Id)) // ProgrammingLanguageName'i map işlemi yapamayacağı için biz verdik

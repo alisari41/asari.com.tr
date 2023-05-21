@@ -143,7 +143,7 @@ public class ProjectSkillsController : BaseController
         #endregion
 
 
-        GetByIdProjectSkillGetByIdResponse result = await Mediator.Send(getByIdProjectSkillQuery);
+        GetByIdProjectSkillResponse result = await Mediator.Send(getByIdProjectSkillQuery);
 
         ViewBag.ProjectName = result.ProjectTitle;
         ViewBag.SkillName = result.SkillName;

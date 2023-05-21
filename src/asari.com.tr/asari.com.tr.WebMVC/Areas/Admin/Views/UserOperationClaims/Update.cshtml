@@ -1,0 +1,171 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.UserOperationClaims.Commands.Update.UpdateUserOperationClaimCommand;
+
+@{
+    ViewData["Title"] = "Kullanıcı Rolleri Bilgilerini Güncelle";
+}
+
+
+@* Hata Mesajlarını göstermek için farklı bir cshtml dosyası kullanılmıştır. *@
+@await Html.PartialAsync("~/Areas/Admin/Views/PartialView_GenelKullanilanKodlar/_PartialViewError.cshtml")
+
+@{
+    if (!(ViewBag.AuthorizationErrorMessage != null || ViewBag.AuthorizationErrorStackTrace != null
+    || ViewBag.BusinessErrorMessage != null || ViewBag.BusinessErrorStackTrace != null
+    || ViewBag.NotFoundErrorMessage != null || ViewBag.NotFoundErrorStackTrace != null
+    || ViewBag.ExceptionErrorMessage != null || ViewBag.ExceptionErrorStackTrace != null
+    || ViewBag.ValidationErrorMessage != null || ViewBag.ValidationErrorStackTrace != null))
+    {
+        <h2>Kullanıcı Rolleri Bilgilerini Güncelle</h2>
+        <hr />
+
+        <!-- User Modal -->
+        <div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="UserModalLabel">Select an User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="UserTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Users/_PartialViewUserList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Users.Queries.GetList.GetListUserListItemDto>)ViewBag.UserList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/Users/_PartialViewDigerSayfalarIcinUserSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.Users.Queries.GetList.GetListUserListItemDto>)ViewBag.UserList)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Kullanıcı
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" class="form-control text-info" id="selectedUserName" placeholder="Kullanıcı Seç 'Örn: Ali SARI...'" value="@ViewBag.UserName" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#UserModal" data-controller="Users">
+                        Kullanıcı Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- OperationClaim Modal -->
+        <div class="modal fade" id="OperationClaimModal" tabindex="-1" role="dialog" aria-labelledby="OperationClaimModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="OperationClaimModalLabel">Select an OperationClaim</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body " style="max-height: 500px; overflow-y: auto;">
+                        <div id="OperationClaimTable">
+                            @await Html.PartialAsync("~/Areas/Admin/Views/OperationClaims/_PartialViewOperationClaimList.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.OperationClaims.Queries.GetList.GetListOperationClaimListItemDto>)ViewBag.OperationClaimList)
+
+                            @await Html.PartialAsync("~/Areas/Admin/Views/OperationClaims/_PartialViewDigerSayfalarIcinOperationClaimSayfalama.cshtml",(Core.Persistence.Paging.GetListResponse<asari.com.tr.Application.Features.OperationClaims.Queries.GetList.GetListOperationClaimListItemDto>)ViewBag.OperationClaimList)
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                Rol
+            </label>
+            <div class="input-group mb-1 col-md-9">
+                <input type="text" class="form-control text-info" id="selectedOperationClaimName" placeholder="Rol Seç 'Örn: Admin...'" value="@ViewBag.OperationClaimName" readonly>
+                @*<input type="hidden" id="selectedOperationClaimId">*@
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#OperationClaimModal" data-controller="OperationClaims">
+                        Rol Seç
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <form asp-action="Update" asp-route-Id="@Model.Id" method="post" class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="input-group ">
+                <input type="hidden" asp-for="UserId" class="form-control" id="selectedUserId" placeholder="Kullanıcı Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="UserId" class="text-danger" id="txtKotrol"></span>
+            </div>
+            <div class="input-group ">
+                <input type="hidden" asp-for="OperationClaimId" class="form-control" id="selectedOperationClaimId" placeholder="Rol Seç" aria-describedby="basic-addon2" readonly>
+                <span asp-validation-for="OperationClaimId" class="text-danger" id="txtKotrol"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-outline-success" style="margin-left: 5px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                        </svg> Kullanıcı Rolleri Bilgilerini Güncelle
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+}
+
+
+
+
+<a asp-action="GetList" class="btn btn-outline-warning mb-2 ml-2" asp-route-Page="0" asp-route-PageSize="15">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-backward-btn-fill" viewBox="0 0 16 16">
+        <path d="M0 12V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.21-6.907L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407z" />
+    </svg> Geri Dön
+</a>
+
+
+<script>
+    // User Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.User-item', function () {
+            var UserName = $(this).text();
+            var UserId = $(this).data('id');
+            //var UserId = $(this).closest('tr').attr('data-id');
+            $('#selectedUserName').val(UserName);
+            $('#selectedUserId').val(UserId);
+            $('#UserModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedUserName', function () {
+            $('#selectedUserName').html('<p>' + $('#selectedUserName').val() + '</p>');
+        });
+    });
+
+    // OperationClaim Tablodan veri seçmek için buraya dokunma
+    $(document).ready(function () {
+        $(document).on('click', '.OperationClaim-item', function () {
+            var OperationClaimName = $(this).text();
+            var OperationClaimId = $(this).data('id');
+            $('#selectedOperationClaimName').val(OperationClaimName);
+            $('#selectedOperationClaimId').val(OperationClaimId);
+            $('#OperationClaimModal').modal('hide');
+        });
+
+        $(document).on('change', '#selectedOperationClaimName', function () {
+            $('#selectedOperationClaimName').html('<p>' + $('#selectedOperationClaimName').val() + '</p>');
+        });
+    });
+</script>

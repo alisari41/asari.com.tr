@@ -6,11 +6,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Projects.Queries.GetById;
 
-public class GetByIdProjectQuery : IRequest<GetByIdProjectGetByIdResponse>
+public class GetByIdProjectQuery : IRequest<GetByIdProjectResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdProjectQueryHandler : IRequestHandler<GetByIdProjectQuery, GetByIdProjectGetByIdResponse>
+    public class GetByIdProjectQueryHandler : IRequestHandler<GetByIdProjectQuery, GetByIdProjectResponse>
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
@@ -23,13 +23,13 @@ public class GetByIdProjectQuery : IRequest<GetByIdProjectGetByIdResponse>
             _projectRules = projectRules;
         }
 
-        public async Task<GetByIdProjectGetByIdResponse> Handle(GetByIdProjectQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdProjectResponse> Handle(GetByIdProjectQuery request, CancellationToken cancellationToken)
         {
             Project? projects = await _projectRepository.GetAsync(x => x.Id == request.Id);
 
             await _projectRules.ProjectShouldExistWhenRequested(request.Id);
 
-            GetByIdProjectGetByIdResponse mappedProjectGetByIdDto = _mapper.Map<GetByIdProjectGetByIdResponse>(projects);
+            GetByIdProjectResponse mappedProjectGetByIdDto = _mapper.Map<GetByIdProjectResponse>(projects);
 
             return mappedProjectGetByIdDto;
         }

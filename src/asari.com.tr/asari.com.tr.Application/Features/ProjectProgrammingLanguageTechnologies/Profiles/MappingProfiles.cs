@@ -41,7 +41,7 @@ public class MappingProfiles : Profile
 
         #region Get By Id
         #region Project
-        CreateMap<ProjectProgrammingLanguageTechnology, GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse>()
+        CreateMap<ProjectProgrammingLanguageTechnology, GetByIdProjectProgrammingLanguageTechnologyResponse>()
                         .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
                         .ForMember(x => x.ProjectTitle, opt => opt.MapFrom(x => x.Project.Title))
                         .ForMember(x => x.ProjectDescription, opt => opt.MapFrom(x => x.Project.Description))

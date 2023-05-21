@@ -6,11 +6,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Experiences.Queries.GetById;
 
-public class GetByIdExperienceQuery : IRequest<GetByIdExperienceGetByIdResponse>
+public class GetByIdExperienceQuery : IRequest<GetByIdExperienceResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdExperienceQueryHandler : IRequestHandler<GetByIdExperienceQuery, GetByIdExperienceGetByIdResponse>
+    public class GetByIdExperienceQueryHandler : IRequestHandler<GetByIdExperienceQuery, GetByIdExperienceResponse>
     {
         private readonly IExperienceRepository _experienceRepository;
         private readonly IMapper _mapper;
@@ -23,12 +23,12 @@ public class GetByIdExperienceQuery : IRequest<GetByIdExperienceGetByIdResponse>
             _experienceBusinessRules = experienceBusinessRules;
         }
 
-        public async Task<GetByIdExperienceGetByIdResponse> Handle(GetByIdExperienceQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdExperienceResponse> Handle(GetByIdExperienceQuery request, CancellationToken cancellationToken)
         {
             Experience? experience = await _experienceRepository.GetAsync(x => x.Id == request.Id);
             _experienceBusinessRules.ExperienceShouldExistWhenRequested(experience);
 
-            GetByIdExperienceGetByIdResponse mappedGetByIdExperienceGetByIdResponse = _mapper.Map<GetByIdExperienceGetByIdResponse>(experience);
+            GetByIdExperienceResponse mappedGetByIdExperienceGetByIdResponse = _mapper.Map<GetByIdExperienceResponse>(experience);
 
             return mappedGetByIdExperienceGetByIdResponse;
         }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetById;
 
-public class GetByIdLicenseAndCertificationSkillQuery : IRequest<GetByIdLicenseAndCertificationSkillGetByIdResponse>
+public class GetByIdLicenseAndCertificationSkillQuery : IRequest<GetByIdLicenseAndCertificationSkillResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdLicenseAndCertificationSkillQueryHandler : IRequestHandler<GetByIdLicenseAndCertificationSkillQuery, GetByIdLicenseAndCertificationSkillGetByIdResponse>
+    public class GetByIdLicenseAndCertificationSkillQueryHandler : IRequestHandler<GetByIdLicenseAndCertificationSkillQuery, GetByIdLicenseAndCertificationSkillResponse>
     {
         private readonly ILicenseAndCertificationSkillRepository _licenseAndCertificationSkillRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class GetByIdLicenseAndCertificationSkillQuery : IRequest<GetByIdLicenseA
             _licenseAndCertificationSkillBusinessRules = licenseAndCertificationSkillBusinessRules;
         }
 
-        public async Task<GetByIdLicenseAndCertificationSkillGetByIdResponse> Handle(GetByIdLicenseAndCertificationSkillQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdLicenseAndCertificationSkillResponse> Handle(GetByIdLicenseAndCertificationSkillQuery request, CancellationToken cancellationToken)
         {
             LicenseAndCertificationSkill? LicenseAndCertificationSkill = await _licenseAndCertificationSkillRepository.GetAsync(x => x.Id == request.Id,
                                                                                        include: i =>
@@ -33,7 +33,7 @@ public class GetByIdLicenseAndCertificationSkillQuery : IRequest<GetByIdLicenseA
 
             _licenseAndCertificationSkillBusinessRules.LicenseAndCertificationSkillShouldExistWhenRequested(LicenseAndCertificationSkill);
 
-            GetByIdLicenseAndCertificationSkillGetByIdResponse mappedGetByIdLicenseAndCertificationSkillGetByIdResponse = _mapper.Map<GetByIdLicenseAndCertificationSkillGetByIdResponse>(LicenseAndCertificationSkill);
+            GetByIdLicenseAndCertificationSkillResponse mappedGetByIdLicenseAndCertificationSkillGetByIdResponse = _mapper.Map<GetByIdLicenseAndCertificationSkillResponse>(LicenseAndCertificationSkill);
 
             return mappedGetByIdLicenseAndCertificationSkillGetByIdResponse;
         }

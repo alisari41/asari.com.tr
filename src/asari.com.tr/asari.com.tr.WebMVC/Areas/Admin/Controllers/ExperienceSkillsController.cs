@@ -143,7 +143,7 @@ public class ExperienceSkillsController : BaseController
         #endregion
 
 
-        GetByIdExperienceSkillGetByIdResponse result = await Mediator.Send(getByIdExperienceSkillQuery);
+        GetByIdExperienceSkillResponse result = await Mediator.Send(getByIdExperienceSkillQuery);
 
         ViewBag.ExperienceName = result.ExperienceTitle;
         ViewBag.SkillName = result.SkillName;

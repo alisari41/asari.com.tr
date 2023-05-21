@@ -6,11 +6,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.ProgrammingLanguages.Queries.GetById;
 
-public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLanguageGetByIdResponse>
+public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLanguageResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, GetByIdProgrammingLanguageGetByIdResponse>
+    public class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, GetByIdProgrammingLanguageResponse>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
@@ -23,12 +23,12 @@ public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLangua
             _programmingLanguageRules = programmingLanguageRules;
         }
 
-        public async Task<GetByIdProgrammingLanguageGetByIdResponse> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdProgrammingLanguageResponse> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken)
         {
             ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(x => x.Id == request.Id); // Aranan Id'e göre tüm liste gelmesi istendiği için bu şekilde kullanıldı
             _programmingLanguageRules.ProgrammingLanguageShouldExistWhenRequested(programmingLanguage);
 
-            GetByIdProgrammingLanguageGetByIdResponse mappedPrgrammingLanguageGetByIdResponse = _mapper.Map<GetByIdProgrammingLanguageGetByIdResponse>(programmingLanguage);
+            GetByIdProgrammingLanguageResponse mappedPrgrammingLanguageGetByIdResponse = _mapper.Map<GetByIdProgrammingLanguageResponse>(programmingLanguage);
 
             return mappedPrgrammingLanguageGetByIdResponse;
         }

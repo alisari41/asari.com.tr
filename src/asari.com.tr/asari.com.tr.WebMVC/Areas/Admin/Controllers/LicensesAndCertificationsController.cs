@@ -121,7 +121,7 @@ public class LicensesAndCertificationsController : BaseController
 
     public async Task<IActionResult> Update(GetByIdLicenseAndCertificationQuery getByIdLicenseAndCertificationQuery)
     {
-        GetByIdLicenseAndCertificationGetByIdResponse result = await Mediator.Send(getByIdLicenseAndCertificationQuery);
+        GetByIdLicenseAndCertificationResponse result = await Mediator.Send(getByIdLicenseAndCertificationQuery);
 
         UpdateLicenseAndCertificationCommand updateLicensesAndCertificationCommand = new UpdateLicenseAndCertificationCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.

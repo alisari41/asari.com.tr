@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetById;
 
-public class GetByIdProjectProgrammingLanguageTechnologyQuery : IRequest<GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse>
+public class GetByIdProjectProgrammingLanguageTechnologyQuery : IRequest<GetByIdProjectProgrammingLanguageTechnologyResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdProjectProgrammingLanguageTechnologyQueryHandler : IRequestHandler<GetByIdProjectProgrammingLanguageTechnologyQuery, GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse>
+    public class GetByIdProjectProgrammingLanguageTechnologyQueryHandler : IRequestHandler<GetByIdProjectProgrammingLanguageTechnologyQuery, GetByIdProjectProgrammingLanguageTechnologyResponse>
     {
         private readonly IProjectProgrammingLanguageTechnologyRepository _projectProgrammingLanguageTechnologyRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class GetByIdProjectProgrammingLanguageTechnologyQuery : IRequest<GetById
             _projectProgrammingLanguageTechnologyBusinessRules = projectProgrammingLanguageTechnologyRules;
         }
 
-        public async Task<GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse> Handle(GetByIdProjectProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdProjectProgrammingLanguageTechnologyResponse> Handle(GetByIdProjectProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
             ProjectProgrammingLanguageTechnology? ProjectProgrammingLanguageTechnology = await _projectProgrammingLanguageTechnologyRepository.GetAsync(x => x.Id == request.Id,
                                                                                                                    include: i =>
@@ -34,7 +34,7 @@ public class GetByIdProjectProgrammingLanguageTechnologyQuery : IRequest<GetById
 
             _projectProgrammingLanguageTechnologyBusinessRules.ProjectProgrammingLanguageTechnologyShouldExistWhenRequested(ProjectProgrammingLanguageTechnology);
 
-            GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse mappedGetByIdProjectProgrammingLanguageTechnologyGetByIdResponse = _mapper.Map<GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse>(ProjectProgrammingLanguageTechnology);
+            GetByIdProjectProgrammingLanguageTechnologyResponse mappedGetByIdProjectProgrammingLanguageTechnologyGetByIdResponse = _mapper.Map<GetByIdProjectProgrammingLanguageTechnologyResponse>(ProjectProgrammingLanguageTechnology);
 
             return mappedGetByIdProjectProgrammingLanguageTechnologyGetByIdResponse;
         }

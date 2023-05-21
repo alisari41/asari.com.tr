@@ -1,6 +1,6 @@
-﻿namespace asari.com.tr.Application.Features.LicenseAndCertificationSkills.Queries.GetById;
+﻿namespace asari.com.tr.Application.Features.ProjectSkills.Queries.GetById;
 
-public class GetByIdLicenseAndCertificationSkillGetByIdResponse
+public class GetByIdProjectSkillResponse
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
 
@@ -8,9 +8,9 @@ public class GetByIdLicenseAndCertificationSkillGetByIdResponse
     public int Id { get; set; }
     #endregion
 
-    #region Lisans ve Sertifika Tablosundan Alınacaklar
-    public int LicenseAndCertificationId { get; set; }
-    public string LicenseAndCertificationName { get; set; }
+    #region Project Tablosundan Alınacaklar
+    public int ProjectId { get; set; }
+    public string ProjectTitle { get; set; }
     #endregion
 
     #region Yetenek Tablosundan Alınacaklar

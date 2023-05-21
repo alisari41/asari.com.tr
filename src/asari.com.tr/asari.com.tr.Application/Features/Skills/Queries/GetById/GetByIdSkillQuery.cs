@@ -6,11 +6,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Skills.Queries.GetById;
 
-public class GetByIdSkillQuery : IRequest<GetByIdSkillGetByIdResponse>
+public class GetByIdSkillQuery : IRequest<GetByIdSkillResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdSkillQueryHandler : IRequestHandler<GetByIdSkillQuery, GetByIdSkillGetByIdResponse>
+    public class GetByIdSkillQueryHandler : IRequestHandler<GetByIdSkillQuery, GetByIdSkillResponse>
     {
         private readonly ISkillRepository _skillRepository;
         private readonly IMapper _mapper;
@@ -23,12 +23,12 @@ public class GetByIdSkillQuery : IRequest<GetByIdSkillGetByIdResponse>
             _skillBusinessRules = skillBusinessRules;
         }
 
-        public async Task<GetByIdSkillGetByIdResponse> Handle(GetByIdSkillQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdSkillResponse> Handle(GetByIdSkillQuery request, CancellationToken cancellationToken)
         {
             Skill? skill = await _skillRepository.GetAsync(x => x.Id == request.Id);
             _skillBusinessRules.SkillShouldExistWhenRequested(skill);
 
-            GetByIdSkillGetByIdResponse mappedGetByIdSkillGetByIdResponse = _mapper.Map<GetByIdSkillGetByIdResponse>(skill);
+            GetByIdSkillResponse mappedGetByIdSkillGetByIdResponse = _mapper.Map<GetByIdSkillResponse>(skill);
 
             return mappedGetByIdSkillGetByIdResponse;
         }

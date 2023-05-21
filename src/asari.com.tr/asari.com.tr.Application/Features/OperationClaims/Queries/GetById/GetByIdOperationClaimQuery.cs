@@ -9,11 +9,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.OperationClaims.Queries.GetById;
 
-public class GetByIdOperationClaimQuery:IRequest<GetByIdOperationClaimGetByIdResponse>
+public class GetByIdOperationClaimQuery : IRequest<GetByIdOperationClaimResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdOperationClaimQueryHandler : IRequestHandler<GetByIdOperationClaimQuery, GetByIdOperationClaimGetByIdResponse>
+    public class GetByIdOperationClaimQueryHandler : IRequestHandler<GetByIdOperationClaimQuery, GetByIdOperationClaimResponse>
     {
         private readonly IOperationClaimRepository _operationClaimRepository;
         private readonly IMapper _mapper;
@@ -26,12 +26,12 @@ public class GetByIdOperationClaimQuery:IRequest<GetByIdOperationClaimGetByIdRes
             _operationClaimBusinessRules = operationClaimRules;
         }
 
-        public async Task<GetByIdOperationClaimGetByIdResponse> Handle(GetByIdOperationClaimQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdOperationClaimResponse> Handle(GetByIdOperationClaimQuery request, CancellationToken cancellationToken)
         {
             OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(x => x.Id == request.Id);
             _operationClaimBusinessRules.OperationClaimShouldExistWhenRequested(operationClaim);
 
-            GetByIdOperationClaimGetByIdResponse mappedGetByIdOperationClaimGetByIdResponse = _mapper.Map<GetByIdOperationClaimGetByIdResponse>(operationClaim);
+            GetByIdOperationClaimResponse mappedGetByIdOperationClaimGetByIdResponse = _mapper.Map<GetByIdOperationClaimResponse>(operationClaim);
 
             return mappedGetByIdOperationClaimGetByIdResponse;
         }

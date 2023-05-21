@@ -1,6 +1,6 @@
-﻿namespace asari.com.tr.Application.Features.ProjectSkills.Queries.GetById;
+﻿namespace asari.com.tr.Application.Features.EducationSkills.Queries.GetById;
 
-public class GetByIdProjectSkillGetByIdResponse
+public class GetByIdEducationSkillResponse
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
 
@@ -8,9 +8,9 @@ public class GetByIdProjectSkillGetByIdResponse
     public int Id { get; set; }
     #endregion
 
-    #region Project Tablosundan Alınacaklar
-    public int ProjectId { get; set; }
-    public string ProjectTitle { get; set; }
+    #region Eğitim Tablosundan Alınacaklar
+    public int EducationId { get; set; }
+    public string EducationName { get; set; }
     #endregion
 
     #region Yetenek Tablosundan Alınacaklar

@@ -32,9 +32,10 @@ public class GetListUserOperationClaimQuery : IRequest<GetListResponse<GetListUs
 
         public async Task<GetListResponse<GetListUserOperationClaimListItemDto>> Handle(GetListUserOperationClaimQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<UserOperationClaim> userOperationClaim = await _userOperationClaimRepository.GetListAsync(include: x =>
+            IPaginate<UserOperationClaim> userOperationClaim = await _userOperationClaimRepository.GetListAsync(orderBy: x =>
                                                                                 x.Include(c => c.User)
-                                                                                 .Include(c => c.OperationClaim),
+                                                                                 .Include(c => c.OperationClaim)
+                                                                                 .OrderBy(c => c.User.Email),
                                                                                 index: request.PageRequest.Page,
                                                                                 size: request.PageRequest.PageSize);
 

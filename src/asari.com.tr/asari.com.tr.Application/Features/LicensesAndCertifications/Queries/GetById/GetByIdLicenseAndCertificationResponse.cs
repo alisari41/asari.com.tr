@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.LicensesAndCertifications.Queries.GetById;
 
-public class GetByIdLicenseAndCertificationGetByIdResponse
+public class GetByIdLicenseAndCertificationResponse
 {
     public int Id { get; set; }
     public string Name { get; set; }

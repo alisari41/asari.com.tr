@@ -19,7 +19,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<OperationClaim, GetByIdOperationClaimGetByIdResponse>().ReverseMap();
+        CreateMap<OperationClaim, GetByIdOperationClaimResponse>().ReverseMap();
         #endregion
 
         #region Create

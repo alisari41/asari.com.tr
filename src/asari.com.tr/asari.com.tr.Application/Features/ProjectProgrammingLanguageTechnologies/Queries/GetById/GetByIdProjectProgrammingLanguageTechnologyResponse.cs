@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetById;
 
-public class GetByIdProjectProgrammingLanguageTechnologyGetByIdResponse
+public class GetByIdProjectProgrammingLanguageTechnologyResponse
 {
     // Join İşlemi için kullanacağım sınıf. Hangi Dataları koymak istiyorsak onları yazıyoruz
     #region Tablo Id

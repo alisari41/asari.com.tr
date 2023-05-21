@@ -121,7 +121,7 @@ public class ProgrammingLanguagesController : BaseController
 
     public async Task<IActionResult> Update(GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
     {
-        GetByIdProgrammingLanguageGetByIdResponse result = await Mediator.Send(getByIdProgrammingLanguageQuery);
+        GetByIdProgrammingLanguageResponse result = await Mediator.Send(getByIdProgrammingLanguageQuery);
 
         UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand = new UpdateProgrammingLanguageCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.

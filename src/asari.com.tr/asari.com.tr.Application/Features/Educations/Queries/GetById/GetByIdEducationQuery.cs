@@ -6,11 +6,11 @@ using MediatR;
 
 namespace asari.com.tr.Application.Features.Educations.Queries.GetById;
 
-public class GetByIdEducationQuery : IRequest<GetByIdEducationGetByIdResponse>
+public class GetByIdEducationQuery : IRequest<GetByIdEducationResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdEducationQueryHandler : IRequestHandler<GetByIdEducationQuery, GetByIdEducationGetByIdResponse>
+    public class GetByIdEducationQueryHandler : IRequestHandler<GetByIdEducationQuery, GetByIdEducationResponse>
     {
         private readonly IEducationRepository _educationRepository;
         private readonly IMapper _mapper;
@@ -23,12 +23,12 @@ public class GetByIdEducationQuery : IRequest<GetByIdEducationGetByIdResponse>
             _educationBusinessRules = educationBusinessRules;
         }
 
-        public async Task<GetByIdEducationGetByIdResponse> Handle(GetByIdEducationQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdEducationResponse> Handle(GetByIdEducationQuery request, CancellationToken cancellationToken)
         {
             Education? education = await _educationRepository.GetAsync(x => x.Id == request.Id);
             _educationBusinessRules.EducationShouldExistWhenRequested(education);
 
-            GetByIdEducationGetByIdResponse mappedGetByIdEducationGetByIdResponse = _mapper.Map<GetByIdEducationGetByIdResponse>(education);
+            GetByIdEducationResponse mappedGetByIdEducationGetByIdResponse = _mapper.Map<GetByIdEducationResponse>(education);
 
             return mappedGetByIdEducationGetByIdResponse;
         }

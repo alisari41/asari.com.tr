@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.Projects.Queries.GetById;
 
-public class GetByIdProjectGetByIdResponse
+public class GetByIdProjectResponse
 {
     public int Id { get; set; }
     public string Title { get; set; }

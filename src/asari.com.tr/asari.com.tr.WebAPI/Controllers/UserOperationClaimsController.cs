@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
+﻿using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetById;
+using asari.com.tr.Application.Features.UserOperationClaims.Commands.Create;
 using asari.com.tr.Application.Features.UserOperationClaims.Commands.Delete;
 using asari.com.tr.Application.Features.UserOperationClaims.Commands.Update;
 using asari.com.tr.Application.Features.UserOperationClaims.Queries.GetList;
@@ -18,6 +19,13 @@ public class UserOperationClaimsController : BaseController
         GetListUserOperationClaimQuery getListUserOperationClaimQuery = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListUserOperationClaimListItemDto> result = await Mediator.Send(getListUserOperationClaimQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("getbyid/{Id}")] // Id parametresine ihtiyacımız olduğu için yapılıyor. route dan alacağı için FromRoute kullanılır
+    public async Task<IActionResult> GetById([FromRoute] GetByIdUserOperationClaimQuery getByIdUserOperationClaimQuery)
+    {
+        var result = await Mediator.Send(getByIdUserOperationClaimQuery);
         return Ok(result);
     }
 

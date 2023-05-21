@@ -29,7 +29,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<ExperienceSkill, GetByIdExperienceSkillGetByIdResponse>()
+        CreateMap<ExperienceSkill, GetByIdExperienceSkillResponse>()
         #region Deneyim
                         .ForMember(x => x.ExperienceId, opt => opt.MapFrom(x => x.Experience.Id))
                         .ForMember(x => x.ExperienceTitle, opt => opt.MapFrom(x => x.Experience.Title))

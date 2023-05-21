@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.ProjectSkills.Queries.GetById;
 
-public class GetByIdProjectSkillQuery : IRequest<GetByIdProjectSkillGetByIdResponse>
+public class GetByIdProjectSkillQuery : IRequest<GetByIdProjectSkillResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdProjectSkillQueryHandler : IRequestHandler<GetByIdProjectSkillQuery, GetByIdProjectSkillGetByIdResponse>
+    public class GetByIdProjectSkillQueryHandler : IRequestHandler<GetByIdProjectSkillQuery, GetByIdProjectSkillResponse>
     {
         private readonly IProjectSkillRepository _projectSkillRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class GetByIdProjectSkillQuery : IRequest<GetByIdProjectSkillGetByIdRespo
             _projectSkillBusinessRules = projectSkillBusinessRules;
         }
 
-        public async Task<GetByIdProjectSkillGetByIdResponse> Handle(GetByIdProjectSkillQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdProjectSkillResponse> Handle(GetByIdProjectSkillQuery request, CancellationToken cancellationToken)
         {
             ProjectSkill? ProjectSkill = await _projectSkillRepository.GetAsync(x => x.Id == request.Id,
                                                                                        include: x =>
@@ -33,7 +33,7 @@ public class GetByIdProjectSkillQuery : IRequest<GetByIdProjectSkillGetByIdRespo
 
             _projectSkillBusinessRules.ProjectSkillShouldExistWhenRequested(ProjectSkill);
 
-            GetByIdProjectSkillGetByIdResponse mappedGetByIdProjectSkillGetByIdResponse = _mapper.Map<GetByIdProjectSkillGetByIdResponse>(ProjectSkill);
+            GetByIdProjectSkillResponse mappedGetByIdProjectSkillGetByIdResponse = _mapper.Map<GetByIdProjectSkillResponse>(ProjectSkill);
 
             return mappedGetByIdProjectSkillGetByIdResponse;
 

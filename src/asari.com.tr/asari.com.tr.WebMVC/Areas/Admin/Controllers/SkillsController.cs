@@ -128,7 +128,7 @@ public class SkillsController : BaseController
 
     public async Task<IActionResult> Update(GetByIdSkillQuery getByIdSkillQuery)
     {
-        GetByIdSkillGetByIdResponse result = await Mediator.Send(getByIdSkillQuery);
+        GetByIdSkillResponse result = await Mediator.Send(getByIdSkillQuery);
 
         string myDoubleStr = result.Degree.ToString();
         double myDegree = Double.Parse(myDoubleStr.Replace('.', ','));

@@ -1,6 +1,6 @@
 ﻿namespace asari.com.tr.Application.Features.Experiences.Queries.GetById;
 
-public class GetByIdExperienceGetByIdResponse
+public class GetByIdExperienceResponse
 {
     public int Id { get; set; }
     public string Title { get; set; }

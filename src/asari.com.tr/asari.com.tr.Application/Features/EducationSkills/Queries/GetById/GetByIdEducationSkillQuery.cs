@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.EducationSkills.Queries.GetById;
 
-public class GetByIdEducationSkillQuery : IRequest<GetByIdEducationSkillGetByIdResponse>
+public class GetByIdEducationSkillQuery : IRequest<GetByIdEducationSkillResponse>
 {
     public int Id { get; set; }
 
-    public class GetByIdEducationSkillQueryHandler : IRequestHandler<GetByIdEducationSkillQuery, GetByIdEducationSkillGetByIdResponse>
+    public class GetByIdEducationSkillQueryHandler : IRequestHandler<GetByIdEducationSkillQuery, GetByIdEducationSkillResponse>
     {
         private readonly IEducationSkillRepository _educationSkillRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class GetByIdEducationSkillQuery : IRequest<GetByIdEducationSkillGetByIdR
             _educationSkillBusinessRules = educationSkillBusinessRules;
         }
 
-        public async Task<GetByIdEducationSkillGetByIdResponse> Handle(GetByIdEducationSkillQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdEducationSkillResponse> Handle(GetByIdEducationSkillQuery request, CancellationToken cancellationToken)
         {
             EducationSkill? educationSkill = await _educationSkillRepository.GetAsync(x => x.Id == request.Id,
                                                                                        include: i =>
@@ -33,7 +33,7 @@ public class GetByIdEducationSkillQuery : IRequest<GetByIdEducationSkillGetByIdR
 
             _educationSkillBusinessRules.EducationSkillShouldExistWhenRequested(educationSkill);
 
-            GetByIdEducationSkillGetByIdResponse mappedGetByIdEducationSkillGetByIdResponse = _mapper.Map<GetByIdEducationSkillGetByIdResponse>(educationSkill);
+            GetByIdEducationSkillResponse mappedGetByIdEducationSkillGetByIdResponse = _mapper.Map<GetByIdEducationSkillResponse>(educationSkill);
 
             return mappedGetByIdEducationSkillGetByIdResponse;
         }

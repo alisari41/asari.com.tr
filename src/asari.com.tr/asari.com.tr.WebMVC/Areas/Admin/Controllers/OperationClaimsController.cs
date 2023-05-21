@@ -121,7 +121,7 @@ public class OperationClaimsController : BaseController
 
     public async Task<IActionResult> Update(GetByIdOperationClaimQuery getByIdOperationClaimQuery)
     {
-        GetByIdOperationClaimGetByIdResponse result = await Mediator.Send(getByIdOperationClaimQuery);
+        GetByIdOperationClaimResponse result = await Mediator.Send(getByIdOperationClaimQuery);
 
         UpdateOperationClaimCommand updateOperationClaimCommand = new UpdateOperationClaimCommand
         { // Update metodundan geriye sadece Result döndürdüğümüzde hata vermektedir.

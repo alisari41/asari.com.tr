@@ -29,7 +29,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<LicenseAndCertificationSkill, GetByIdLicenseAndCertificationSkillGetByIdResponse>()
+        CreateMap<LicenseAndCertificationSkill, GetByIdLicenseAndCertificationSkillResponse>()
         #region Lisans ve Sertifika
                         .ForMember(x => x.LicenseAndCertificationId, opt => opt.MapFrom(x => x.LicenseAndCertification.Id))
                         .ForMember(x => x.LicenseAndCertificationName, opt => opt.MapFrom(x => x.LicenseAndCertification.Name))

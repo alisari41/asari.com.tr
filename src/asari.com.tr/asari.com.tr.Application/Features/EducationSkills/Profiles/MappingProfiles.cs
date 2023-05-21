@@ -29,7 +29,7 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<EducationSkill, GetByIdEducationSkillGetByIdResponse>()
+        CreateMap<EducationSkill, GetByIdEducationSkillResponse>()
         #region Project
                         .ForMember(x => x.EducationId, opt => opt.MapFrom(x => x.Education.Id))
                         .ForMember(x => x.EducationName, opt => opt.MapFrom(x => x.Education.Name))
