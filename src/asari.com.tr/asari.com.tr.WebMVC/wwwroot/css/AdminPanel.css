@@ -30,3 +30,137 @@
     background-color: red;
     color: white;
 }
+#btnAdd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    border: solid 3px transparent;
+    background-clip: padding-box;
+    box-shadow: 0px 0px 0px 3px #ffffff00;
+    color: white;
+    min-height: 43px;
+    padding: 0 13px 0 13px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all .5s ease;
+}
+
+    #btnAdd:active {
+        transform: scale(.9);
+        transition: all 100ms ease;
+    }
+
+    #btnAdd:hover {
+        box-shadow: 0px 0px 0px 3px #30a1b8;
+    }
+
+    #btnAdd svg {
+        width: 16px;
+    }
+
+
+#btnDelete {
+    position: relative;
+    width: 110px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #cc0000;
+    background-color: #e50000;
+    overflow: hidden;
+}
+
+#btnDelete, #btnDelete__icon, #btnDelete__text {
+    transition: all 0.3s;
+}
+
+    #btnDelete #btnDelete__text {
+        transform: translateX(15px);
+        color: #fff;
+        font-weight: 600;
+    }
+
+    #btnDelete #btnDelete__icon {
+        position: absolute;
+        transform: translateX(70px);
+        height: 100%;
+        width: 39px;
+        background-color: #cc0000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #btnDelete .svg {
+        width: 20px;
+    }
+
+    #btnDelete:hover {
+        background: #cc0000;
+    }
+
+        #btnDelete:hover #btnDelete__text {
+            color: transparent;
+        }
+
+        #btnDelete:hover #btnDelete__icon {
+            width: 90px;
+            transform: translateX(0);
+        }
+
+    #btnDelete:active #btnDelete__icon {
+        background-color: #b20000;
+    }
+
+    #btnDelete:active {
+        border: 1px solid #b20000;
+    }
+
+#btnEdit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 125px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: rgb(168, 38, 255);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px rgb(140, 32, 212);
+    transition-duration: .3s;
+}
+
+#svgEdit{
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: .3s;
+}
+
+#btnEdit:hover {
+    color: transparent;
+}
+
+    #btnEdit:hover svg {
+        right: 43%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        transition-duration: .3s;
+    }
+
+#btnEdit:active {
+    transform: translate(3px, 3px);
+    transition-duration: .3s;
+    box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
