@@ -5,6 +5,7 @@ using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.Experiences.Queries.GetList;
 
@@ -31,7 +32,10 @@ public class GetListExperienceQuery : IRequest<GetListResponse<GetListExperience
 
         public async Task<GetListResponse<GetListExperienceListItemDto>> Handle(GetListExperienceQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Experience> experiences = await _experienceRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<Experience> experiences = await _experienceRepository.GetListAsync(orderBy:
+                                                                                                x => x.Include(c => c.ExperienceSkills).ThenInclude(d => d.Skill)
+                                                                                                       .OrderByDescending(c => c.StartDate),
+                                                                                                index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
             GetListResponse<GetListExperienceListItemDto> mappedGetListExperienceListItemDto = _mapper.Map<GetListResponse<GetListExperienceListItemDto>>(experiences);
 

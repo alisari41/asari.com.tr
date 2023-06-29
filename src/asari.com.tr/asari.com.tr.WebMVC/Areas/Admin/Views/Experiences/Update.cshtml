@@ -88,7 +88,7 @@
     <div class="form-group">
         <label class="control-label col-md-3">Açıklama</label>
         <div class="col-md-9">
-            <input type="text" asp-for="Description" class="form-control text-info" />
+            <textarea asp-for="Description" class="form-control text-info" id="editorid"></textarea> @* CKEditor  id="editorid" *@
             <span asp-validation-for="Description" class="text-danger" id="txtKotrol"></span>
         </div>
     </div>
@@ -132,4 +132,9 @@
             endDate.disabled = this.checked;
         });
     };
+
+
+    $(document).ready(function () {
+        CKEDITOR.replace('editorid'); @* CKEditor  id="editorid" *@
+                });
 </script>

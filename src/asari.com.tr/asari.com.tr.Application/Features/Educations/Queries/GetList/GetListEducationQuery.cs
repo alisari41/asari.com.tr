@@ -31,7 +31,9 @@ public class GetListEducationQuery : IRequest<GetListResponse<GetListEducationLi
 
         public async Task<GetListResponse<GetListEducationListItemDto>> Handle(GetListEducationQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Education> education = await _educationRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<Education> education = await _educationRepository.GetListAsync(orderBy:
+                                                                                        x=>x.OrderByDescending(c => c.StartDate),
+                                                                                        index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
             GetListResponse<GetListEducationListItemDto> mappedGetListEducationListItemDto = _mapper.Map<GetListResponse<GetListEducationListItemDto>>(education);
 
