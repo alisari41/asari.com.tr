@@ -15,6 +15,8 @@ public static class SkillMessages
         #endregion
         #region Max Karakter Uzunluğu
         public const string NameMaxKarakter = "'Yetenek Adı' en fazla 250 karakter olmalıdır.";
+        public const string DegreeVirguldenSonraMaxKarakter = "'Yetenek Derecesi' virgülden sonra sadece 1 rakam içermelidir.";
+        public const string DegreeMaxKarakter = "'Yetenek Derecesi' en fazla 10 değerini olmalıdır.";
         #endregion
     #endregion
 }

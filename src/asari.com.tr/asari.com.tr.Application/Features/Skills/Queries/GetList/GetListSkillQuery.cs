@@ -5,6 +5,7 @@ using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.Skills.Queries.GetList;
 
@@ -31,7 +32,10 @@ public class GetListSkillQuery : IRequest<GetListResponse<GetListSkillListItemDt
 
         public async Task<GetListResponse<GetListSkillListItemDto>> Handle(GetListSkillQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Skill> skills = await _skillRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<Skill> skills = await _skillRepository.GetListAsync(include: x =>
+                                                                                 x.Include(c => c.ProjectSkills).ThenInclude(d => d.Project)
+                                                                                  .Include(c => c.LicenseAndCertificationSkills).ThenInclude(d => d.LicenseAndCertification),
+                                                                                  index: request.PageRequest.Page, size: request.PageRequest.PageSize);
 
             GetListResponse<GetListSkillListItemDto> mappedGetListSkillListItemDto = _mapper.Map<GetListResponse<GetListSkillListItemDto>>(skills);
 
