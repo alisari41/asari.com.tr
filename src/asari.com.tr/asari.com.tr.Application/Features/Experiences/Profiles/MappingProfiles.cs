@@ -42,6 +42,7 @@ public class MappingProfiles : Profile
         CreateMap<Experience, DeleteExperienceCommand>().ReverseMap();
         #endregion
     }
+
     #region Get List - ICollection Mapleme
     private static List<GetListExperienceListItemDto.SkillDto> GetListProjects(ICollection<ExperienceSkill> srcExperienceSkills)
     {

@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Projects.Commands.Create;
+﻿using asari.com.tr.Application.Features.Experiences.Queries.GetList;
+using asari.com.tr.Application.Features.Projects.Commands.Create;
 using asari.com.tr.Application.Features.Projects.Commands.Delete;
 using asari.com.tr.Application.Features.Projects.Commands.Update;
 using asari.com.tr.Application.Features.Projects.Queries.GetById;
@@ -25,7 +26,14 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<Project, GetByIdProjectResponse>().ReverseMap();
+        CreateMap<Project, GetByIdProjectResponse>()
+        #region Teknoloji
+                        .ForMember(x => x.TechnologyDtos, opt => opt.MapFrom(src => GetListTeknologies(src.TecgnologyProjects)))
+        #endregion
+        #region Skill
+                        .ForMember(x => x.SkillDtos, opt => opt.MapFrom(src => GetListSkills(src.ProjectSkills)))
+                        .ReverseMap();
+        #endregion
         #endregion
 
         #region Create
@@ -43,4 +51,32 @@ public class MappingProfiles : Profile
         CreateMap<Project, DeleteProjectCommand>().ReverseMap();
         #endregion
     }
+
+    #region Get List - ICollection Mapleme
+    private static List<GetByIdProjectResponse.SkillDto> GetListSkills(ICollection<ProjectSkill> srcProjectSkills)
+    {
+        var getListSkillListItemDto = new List<GetByIdProjectResponse.SkillDto>();
+        foreach (var item in srcProjectSkills)
+            getListSkillListItemDto.Add(new GetByIdProjectResponse.SkillDto
+            {
+                SkillId = item.Skill.Id,
+                SkillName = item.Skill.Name
+            });
+
+        return getListSkillListItemDto;
+    }
+
+    private static List<GetByIdProjectResponse.TechnologyDto> GetListTeknologies(ICollection<TechnologyProject> srcProjectTechnologies)
+    {
+        var getListTechnologyListItemDto = new List<GetByIdProjectResponse.TechnologyDto>();
+        foreach (var item in srcProjectTechnologies)
+            getListTechnologyListItemDto.Add(new GetByIdProjectResponse.TechnologyDto
+            {
+                TechnologyId = item.Technology.Id,
+                TechnologyTitle = item.Technology.Title
+            });
+
+        return getListTechnologyListItemDto;
+    }
+    #endregion
 }

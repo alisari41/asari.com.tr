@@ -10,4 +10,23 @@ public class GetByIdProjectResponse
     public string? GithubLink { get; set; }
     public string? FolderUrl { get; set; }
     public DateTime? CreateDate { get; set; }
+
+
+    #region Teknoloji Tablosundan Alınacaklar
+    public ICollection<TechnologyDto> TechnologyDtos { get; set; }
+    public class TechnologyDto
+    {
+        public int TechnologyId { get; set; } // ( Diğer Tablodan Alacağız)   İstediklerimi verebiliriz.
+        public string TechnologyTitle { get; set; }
+    }
+    #endregion
+
+    #region Yetenek Tablosundan Alınacaklar
+    public ICollection<SkillDto> SkillDtos { get; set; }
+    public class SkillDto
+    {
+        public int SkillId { get; set; } // ( Diğer Tablodan Alacağız)   İstediklerimi verebiliriz.
+        public string SkillName { get; set; }
+    }
+    #endregion
 }

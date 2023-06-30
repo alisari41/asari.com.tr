@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
+﻿using asari.com.tr.Application.Features.Experiences.Queries.GetList;
+using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Create;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Delete;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Commands.Update;
 using asari.com.tr.Application.Features.ProjectProgrammingLanguageTechnologies.Queries.GetById;
@@ -21,6 +22,7 @@ public class MappingProfiles : Profile
             #region İlişkili Tabloda Mapleme işlemi gerçekleştirmesi
                 #region Project
                 CreateMap<ProjectProgrammingLanguageTechnology, GetListProjectProgrammingLanguageTechnologyListItemDto>()
+                                .ForMember(x => x.ProjectId, opt => opt.MapFrom(x => x.Project.Id))
                                 .ForMember(x => x.Title, opt => opt.MapFrom(x => x.Project.Title))
                                 .ForMember(x => x.Description, opt => opt.MapFrom(x => x.Project.Description))
                                 .ForMember(x => x.ImageUrl, opt => opt.MapFrom(x => x.Project.ImageUrl))
@@ -30,10 +32,16 @@ public class MappingProfiles : Profile
                                 .ForMember(x => x.CreateDate, opt => opt.MapFrom(x => x.Project.CreateDate))
                 #endregion
                 #region Programlama Dili
+                                .ForMember(x => x.ProgrammingLanguageId, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.ProgrammingLanguage.Id))
                                 .ForMember(x => x.ProgrammingLanguageName, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.ProgrammingLanguage.Name))
                 #endregion
                 #region Programlama Dili Teknolojileri
-                                .ForMember(x => x.ProgrammingLanguageTechnologyName, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.Name)).ReverseMap();
+                                .ForMember(x => x.ProgrammingLanguageTechnologyId, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.Id))
+                                .ForMember(x => x.ProgrammingLanguageTechnologyName, opt => opt.MapFrom(x => x.ProgrammingLanguageTechnology.Name))
+                #endregion
+                #region Skill - Yenetenekler        
+                                .ForMember(x => x.SkillDtos, opt => opt.MapFrom(src => GetListProjects(src.Project.ProjectSkills)))
+                                .ReverseMap();
                 #endregion
         #endregion
         CreateMap<IPaginate<ProjectProgrammingLanguageTechnology>, GetListResponse<GetListProjectProgrammingLanguageTechnologyListItemDto>>().ReverseMap();
@@ -75,4 +83,19 @@ public class MappingProfiles : Profile
         CreateMap<ProjectProgrammingLanguageTechnology, DeleteProjectProgrammingLanguageTechnologyCommand>().ReverseMap(); 
         #endregion
     }
+
+    #region Get List - ICollection Mapleme
+    private static List<GetListProjectProgrammingLanguageTechnologyListItemDto.SkillDto> GetListProjects(ICollection<ProjectSkill> srcProjectSkills)
+    {
+        var getListSkillListItemDto = new List<GetListProjectProgrammingLanguageTechnologyListItemDto.SkillDto>();
+        foreach (var item in srcProjectSkills)
+            getListSkillListItemDto.Add(new GetListProjectProgrammingLanguageTechnologyListItemDto.SkillDto
+            {
+                SkillId = item.Skill.Id,
+                SkillName = item.Skill.Name
+            });
+
+        return getListSkillListItemDto;
+    }
+    #endregion
 }

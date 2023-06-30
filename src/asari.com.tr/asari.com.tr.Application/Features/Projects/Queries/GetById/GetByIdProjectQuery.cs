@@ -3,6 +3,7 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.Projects.Queries.GetById;
 
@@ -25,7 +26,10 @@ public class GetByIdProjectQuery : IRequest<GetByIdProjectResponse>
 
         public async Task<GetByIdProjectResponse> Handle(GetByIdProjectQuery request, CancellationToken cancellationToken)
         {
-            Project? projects = await _projectRepository.GetAsync(x => x.Id == request.Id);
+            Project? projects = await _projectRepository.GetAsync(x => x.Id == request.Id,
+                                                                        include: y => y
+                                                                            .Include(c => c.TecgnologyProjects).ThenInclude(d => d.Technology)
+                                                                            .Include(c => c.ProjectSkills).ThenInclude(d => d.Skill));
 
             await _projectRules.ProjectShouldExistWhenRequested(request.Id);
 

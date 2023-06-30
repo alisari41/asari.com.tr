@@ -36,8 +36,10 @@ public class GetListProjectProgrammingLanguageTechnologyQuery : IRequest<GetList
             IPaginate<ProjectProgrammingLanguageTechnology> projectProgrammingLanguageTechnologies = await _projectProgrammingLanguageTechnologyRepository.GetListAsync(orderBy: x =>
                                                                                                                    x.Include(c => c.Project)
                                                                                                                     .Include(c => c.ProgrammingLanguageTechnology)
-                                                                                                                    .Include(c => c.ProgrammingLanguageTechnology.ProgrammingLanguage)
-                                                                                                                    .OrderBy(c => c.Project.Title), // Include işlemi ilişkilendirme için
+                                                                                                                    .Include(c => c.ProgrammingLanguageTechnology.ProgrammingLanguage) 
+                                                                                                                    .Include(c => c.Project.ProjectSkills).ThenInclude(d=>d.Skill) // Include işlemi ilişkilendirme için
+                                                                                                                    .OrderBy(c => c.Project.Title) 
+                                                                                                                    .OrderBy(c => c.ProgrammingLanguageTechnology.ProgrammingLanguage.Name), 
                                                                                                             index: request.PageRequest.Page,
                                                                                                             size: request.PageRequest.PageSize); // Birden fazla ilişkide yapılabilir. Github Projesinden bakılabilir. Linkedinde paylaşıldı.
 
