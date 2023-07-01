@@ -1,4 +1,5 @@
-﻿using asari.com.tr.Application.Features.Technologies.Commands.Create;
+﻿using asari.com.tr.Application.Features.Projects.Queries.GetById;
+using asari.com.tr.Application.Features.Technologies.Commands.Create;
 using asari.com.tr.Application.Features.Technologies.Commands.Delete;
 using asari.com.tr.Application.Features.Technologies.Commands.Update;
 using asari.com.tr.Application.Features.Technologies.Queries.GetById;
@@ -26,7 +27,11 @@ public class MappingProfiles : Profile
         #endregion
 
         #region Get By Id
-        CreateMap<Technology, GetByIdTechnologyResponse>().ReverseMap();
+        CreateMap<Technology, GetByIdTechnologyResponse>()
+        #region Proje
+                        .ForMember(x => x.ProjectDtos, opt => opt.MapFrom(src => GetListProjects(src.TecgnologyProjects)))
+                        .ReverseMap();
+        #endregion
         #endregion
 
         #region Get List By Dynamic
@@ -49,4 +54,19 @@ public class MappingProfiles : Profile
         CreateMap<Technology, DeleteTechnologyCommand>().ReverseMap();
         #endregion
     }
+
+    #region Get List - ICollection Mapleme
+    private static List<GetByIdTechnologyResponse.ProjectDto> GetListProjects(ICollection<TechnologyProject> srcTechnologyProjects)
+    {
+        var getListProjectListItemDto = new List<GetByIdTechnologyResponse.ProjectDto>();
+        foreach (var item in srcTechnologyProjects)
+            getListProjectListItemDto.Add(new GetByIdTechnologyResponse.ProjectDto
+            {
+                ProjectId = item.Project.Id,
+                ProjectTitle = item.Project.Title
+            });
+
+        return getListProjectListItemDto;
+    }
+    #endregion
 }

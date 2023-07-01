@@ -3,6 +3,7 @@ using asari.com.tr.Application.Services.Repositories;
 using asari.com.tr.Domain.Entities;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace asari.com.tr.Application.Features.Technologies.Queries.GetById;
 
@@ -25,7 +26,9 @@ public class GetByIdTechnologyQuery : IRequest<GetByIdTechnologyResponse>
 
         public async Task<GetByIdTechnologyResponse> Handle(GetByIdTechnologyQuery request, CancellationToken cancellationToken)
         {
-            Technology? technology = await _technologyRepository.GetAsync(x => x.Id == request.Id);
+            Technology? technology = await _technologyRepository.GetAsync(x => x.Id == request.Id,
+                                                                                            include: y => y
+                                                                                                .Include(c => c.TecgnologyProjects).ThenInclude(d => d.Project));
 
             _technologyBusinessRules.TechnologyShouldExistWhenRequested(technology);
 

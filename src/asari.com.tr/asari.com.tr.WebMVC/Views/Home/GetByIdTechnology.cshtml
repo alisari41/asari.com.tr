@@ -1,0 +1,35 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model asari.com.tr.Application.Features.Technologies.Queries.GetById.GetByIdTechnologyResponse
+
+<!-- ======= Technology Section ======= -->
+<section id="Technology" class="Technology">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>@Model.Title</h2>
+
+            <img src="@Model.ImageUrl" class="img-fluid" alt="">
+            <br />
+        </div>
+
+        <div class="row">
+            <br />            
+
+            <p>
+                <strong><!---->Teknolojiyi Kullandığım Projeler:<!----></strong>
+
+                @foreach (var projectItem in Model.ProjectDtos)
+                {
+                    <li>
+                        <a href="/Home/GetByIdProject?Id=@projectItem.ProjectId" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i>@projectItem.ProjectTitle</a>
+                    </li>
+                }
+            </p>
+
+            @Html.Raw(Model.Content)
+
+
+        </div>
+
+    </div>
+</section><!-- End Technology Section -->

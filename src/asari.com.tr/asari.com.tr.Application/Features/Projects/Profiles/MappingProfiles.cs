@@ -28,7 +28,7 @@ public class MappingProfiles : Profile
         #region Get By Id
         CreateMap<Project, GetByIdProjectResponse>()
         #region Teknoloji
-                        .ForMember(x => x.TechnologyDtos, opt => opt.MapFrom(src => GetListTeknologies(src.TecgnologyProjects)))
+                        .ForMember(x => x.TechnologyDtos, opt => opt.MapFrom(src => GetListTechnologies(src.TecgnologyProjects)))
         #endregion
         #region Skill
                         .ForMember(x => x.SkillDtos, opt => opt.MapFrom(src => GetListSkills(src.ProjectSkills)))
@@ -66,7 +66,7 @@ public class MappingProfiles : Profile
         return getListSkillListItemDto;
     }
 
-    private static List<GetByIdProjectResponse.TechnologyDto> GetListTeknologies(ICollection<TechnologyProject> srcProjectTechnologies)
+    private static List<GetByIdProjectResponse.TechnologyDto> GetListTechnologies(ICollection<TechnologyProject> srcProjectTechnologies)
     {
         var getListTechnologyListItemDto = new List<GetByIdProjectResponse.TechnologyDto>();
         foreach (var item in srcProjectTechnologies)
