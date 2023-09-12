@@ -72,7 +72,6 @@
     <None Include="wwwroot\Home\assets\vendor\typed.js\typed.umd.js" />
     <None Include="wwwroot\Home\assets\vendor\typed.js\typed.umd.js.map" />
     <None Include="wwwroot\Home\assets\vendor\waypoints\noframework.waypoints.js" />
-    <None Include="wwwroot\Home\forms\contact.php" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
