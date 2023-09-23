@@ -2,39 +2,32 @@
 
 public class Paginate<T> : IPaginate<T>
 {
-    internal Paginate(IEnumerable<T> source, int index, int size, int from)
+    public Paginate(IEnumerable<T> source, int index, int size, int from)
     {
-        var enumerable = source as T[] ?? source.ToArray();
-
         if (from > index)
             throw new ArgumentException($"indexFrom: {from} > pageIndex: {index}, must indexFrom <= pageIndex");
 
-        if (source is IQueryable<T> querable)
-        {
-            Index = index;
-            Size = size;
-            From = from;
-            Count = querable.Count();
-            Pages = (int)Math.Ceiling(Count / (double)Size);
+        Index = index;
+        Size = size;
+        From = from;
+        Pages = (int)Math.Ceiling(Count / (double)Size);
 
-            Items = querable.Skip((Index - From) * Size).Take(Size).ToList();
+        if (source is IQueryable<T> queryable)
+        {
+            Count = queryable.Count();
+            Items = queryable.Skip((Index - From) * Size).Take(Size).ToList();
         }
         else
         {
-            Index = index;
-            Size = size;
-            From = from;
-
+            T[] enumerable = source as T[] ?? source.ToArray();
             Count = enumerable.Count();
-            Pages = (int)Math.Ceiling(Count / (double)Size);
-
             Items = enumerable.Skip((Index - From) * Size).Take(Size).ToList();
         }
     }
 
-    internal Paginate()
+    public Paginate()
     {
-        Items = new T[0];
+        Items = Array.Empty<T>();
     }
 
     public int From { get; set; }

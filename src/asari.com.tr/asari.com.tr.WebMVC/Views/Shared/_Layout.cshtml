@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -48,6 +47,10 @@
                 <li><a href="/Home/Index/#portfolio" class="nav-link scrollto"><i class='bx bx-code-block'></i> <span>Projeler</span></a></li>
                 <li><a href="/Home/Index/#services" class="nav-link scrollto"><i class='bx bx-library'></i> <span>Teknolojiler</span></a></li>
                 <li><a href="/Home/Index/#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>İletişim</span></a></li>
+                @if (!string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    <li><a href="/Admin" class="nav-link scrollto"><i class='bx bx-street-view'></i> <span>Admin</span></a></li>
+                }
             </ul>
         </nav><!-- .nav-menu -->
 
