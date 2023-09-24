@@ -15,6 +15,11 @@ public class UpdateEducationCommandValidator : AbstractValidator<UpdateEducation
         RuleFor(x => x.StartDate).NotEmpty().WithMessage(EducationMessages.StartDateBosOlmamali);
         #endregion
 
+        #region Minimum Karakter Uzunluğu
+        RuleFor(x => x.Name).MinimumLength(3).WithMessage(EducationMessages.NameMinKarakter);
+        RuleFor(x => x.FieldOfStudy).MinimumLength(3).WithMessage(EducationMessages.FieldOfStudyMinKarakter);
+        #endregion  
+
         #region Maximum Karakter Uzunluğu
         RuleFor(x => x.Name).MaximumLength(250).WithMessage(EducationMessages.NameMaxKarakter);
         RuleFor(x => x.FieldOfStudy).MaximumLength(100).WithMessage(EducationMessages.FieldOfStudyMaxKarakter);

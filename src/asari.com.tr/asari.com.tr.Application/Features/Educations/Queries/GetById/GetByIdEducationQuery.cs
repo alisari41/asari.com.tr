@@ -16,11 +16,11 @@ public class GetByIdEducationQuery : IRequest<GetByIdEducationResponse>
         private readonly IMapper _mapper;
         private readonly EducationBusinessRules _educationBusinessRules;
 
-        public GetByIdEducationQueryHandler(IEducationRepository educationRepository, IMapper mapper, EducationBusinessRules educationBusinessRules)
+        public GetByIdEducationQueryHandler(IEducationRepository educationRepository, EducationBusinessRules educationBusinessRules, IMapper mapper)
         {
             _educationRepository = educationRepository;
-            _mapper = mapper;
             _educationBusinessRules = educationBusinessRules;
+            _mapper = mapper;
         }
 
         public async Task<GetByIdEducationResponse> Handle(GetByIdEducationQuery request, CancellationToken cancellationToken)

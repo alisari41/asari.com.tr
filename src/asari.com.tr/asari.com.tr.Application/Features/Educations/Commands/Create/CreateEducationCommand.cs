@@ -15,7 +15,7 @@ public class CreateEducationCommand : IRequest<CreatedEducationResponse>, ISecur
     public string Name { get; set; }
     public string? Grade { get; set; }
     public string FieldOfStudy { get; set; }
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
     public DateTime? EndDateOrExcepted { get; set; }
     public double? Degree { get; set; }
     public string? ActivityAndCommunity { get; set; }

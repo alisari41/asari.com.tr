@@ -13,7 +13,12 @@ public class CreateEducationCommandValidator : AbstractValidator<CreateEducation
         RuleFor(x => x.Degree).NotNull().NotEmpty().WithMessage(EducationMessages.DegreeBosOlmamali);
         RuleFor(x => x.FieldOfStudy).NotEmpty().WithMessage(EducationMessages.FieldOfStudyBosOlmamali);
         RuleFor(x => x.StartDate).NotEmpty().WithMessage(EducationMessages.StartDateBosOlmamali);
-        #endregion
+        #endregion 
+
+        #region Minimum Karakter Uzunluğu
+        RuleFor(x => x.Name).MinimumLength(3).WithMessage(EducationMessages.NameMinKarakter);
+        RuleFor(x => x.FieldOfStudy).MinimumLength(3).WithMessage(EducationMessages.FieldOfStudyMinKarakter);
+        #endregion  
 
         #region Maximum Karakter Uzunluğu
         RuleFor(x => x.Name).MaximumLength(250).WithMessage(EducationMessages.NameMaxKarakter);
@@ -21,6 +26,6 @@ public class CreateEducationCommandValidator : AbstractValidator<CreateEducation
         RuleFor(x => x.Grade).MaximumLength(250).WithMessage(EducationMessages.GradeMaxKarakter);
         RuleFor(x => x.ActivityAndCommunity).MaximumLength(500).WithMessage(EducationMessages.ActivityAndCommunityMaxKarakter);
         RuleFor(x => x.Description).MaximumLength(1000).WithMessage(EducationMessages.DescriptionMaxKarakter);
-        #endregion                
+        #endregion                  
     }
 }
