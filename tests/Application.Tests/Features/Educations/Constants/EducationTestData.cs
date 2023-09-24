@@ -28,4 +28,9 @@ public static class EducationTestData
     public const string UpdateMediaUrl = null;
     #endregion
 
+    #region Delete
+    public const int DeleteId = 1;
+    public const int DeleteBulunmayanId = 41;
+    #endregion
+
 }

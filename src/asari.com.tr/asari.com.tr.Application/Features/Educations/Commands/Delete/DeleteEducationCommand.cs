@@ -12,7 +12,7 @@ namespace asari.com.tr.Application.Features.Educations.Commands.Delete;
 
 public class DeleteEducationCommand : IRequest<DeletedEducationResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

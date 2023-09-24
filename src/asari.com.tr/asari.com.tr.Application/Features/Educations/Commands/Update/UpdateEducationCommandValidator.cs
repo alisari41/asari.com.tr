@@ -8,7 +8,7 @@ public class UpdateEducationCommandValidator : AbstractValidator<UpdateEducation
     public UpdateEducationCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage(EducationMessages.IdBosOlmamali);
+        RuleFor(x => x.Id).NotNull().NotEmpty().WithMessage(EducationMessages.IdBosOlmamali);
         RuleFor(x => x.Name).NotEmpty().WithMessage(EducationMessages.NameBosOlmamali);
         RuleFor(x => x.Degree).NotNull().NotEmpty().WithMessage(EducationMessages.DegreeBosOlmamali);
         RuleFor(x => x.FieldOfStudy).NotEmpty().WithMessage(EducationMessages.FieldOfStudyBosOlmamali);

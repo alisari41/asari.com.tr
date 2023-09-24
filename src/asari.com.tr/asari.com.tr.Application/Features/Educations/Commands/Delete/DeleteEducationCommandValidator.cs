@@ -8,7 +8,7 @@ public class DeleteEducationCommandValidator : AbstractValidator<DeleteEducation
     public DeleteEducationCommandValidator()
     {
         #region Zorunlu Alanlar
-        RuleFor(x => x.Id).NotEmpty().WithMessage(EducationMessages.IdBosOlmamali);
+        RuleFor(x => x.Id).NotNull().NotEmpty().WithMessage(EducationMessages.IdBosOlmamali);
         #endregion
     }
 }
