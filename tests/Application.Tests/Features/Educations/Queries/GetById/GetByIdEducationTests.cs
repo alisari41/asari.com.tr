@@ -1,4 +1,6 @@
-﻿using Application.Tests.Mocks.FakeData;
+﻿using Application.Tests.Constants;
+using Application.Tests.Features.Educations.Constants;
+using Application.Tests.Mocks.FakeData;
 using Application.Tests.Mocks.Repositories;
 using asari.com.tr.Application.Features.Educations.Queries.GetById;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -21,15 +23,16 @@ public class GetByIdEducationTests : EducationMockRepository
     [Fact]
     public async Task EducationIdsineGoreAramaTesti()
     {
-        _query.Id = 1;
+        _query.Id = EducationTestData.UpdateId;
         GetByIdEducationResponse result = await _handler.Handle(_query, CancellationToken.None);
         Assert.Equal(expected: "Derince Ticaret Meslek", result.Name);
     }
 
     [Fact]
+    [Trait(TestCategories.BusinessRulesCategori, TestCategories.OlmayanVeriCategori)]
     public async Task EducationTablosundaOlmayanVeriyiAramaTesti()
     {
-        _query.Id = 41;
+        _query.Id = EducationTestData.UpdateBulunmayanId;
         await Assert.ThrowsAsync<BusinessException>(async () => await _handler.Handle(_query, CancellationToken.None));
     }
 }

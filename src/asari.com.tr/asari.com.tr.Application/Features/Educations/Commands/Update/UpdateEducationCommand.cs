@@ -12,7 +12,7 @@ namespace asari.com.tr.Application.Features.Educations.Commands.Update;
 
 public class UpdateEducationCommand : IRequest<UpdatedEducationResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public string Name { get; set; }
     public double? Degree { get; set; }
     public string FieldOfStudy { get; set; }

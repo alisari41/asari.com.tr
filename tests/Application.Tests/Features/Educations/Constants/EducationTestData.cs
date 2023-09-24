@@ -13,4 +13,19 @@ public static class EducationTestData
     public const string CreateDescription = null;
     public const string CreateMediaUrl = null;
     #endregion
+
+    #region Update
+    public const int UpdateId = 1;
+    public const int UpdateBulunmayanId = 41;
+    public const string UpdateName = "Update - Derince Ticaret Meslek";
+    public const string UpdateFieldOfStudy = "Update - Bilişim Teknolojileri / Veri Tabanı Programcılığı Dalı";
+    public const string UpdateGrade = "Update - Lise";
+    public static readonly DateTime UpdateStartDate = new DateTime(2012, 10, 18);
+    public static readonly DateTime UpdateEndDateOrExcepted = new DateTime(2016, 7, 18);
+    public const double UpdateDegree = 80.41;
+    public const string UpdateActivityAndCommunity = null;
+    public const string UpdateDescription = "Update";
+    public const string UpdateMediaUrl = null;
+    #endregion
+
 }
