@@ -36,8 +36,6 @@
     <Folder Include="Features\Skills\Commands\Create\" />
     <Folder Include="Features\Skills\Commands\Delete\" />
     <Folder Include="Features\Skills\Commands\Update\" />
-    <Folder Include="Features\Skills\Constants\" />
-    <Folder Include="Features\Skills\Queries\GetById\" />
   </ItemGroup>
 
 </Project>

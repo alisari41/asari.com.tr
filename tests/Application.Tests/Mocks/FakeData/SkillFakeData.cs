@@ -18,7 +18,7 @@ public class SkillFakeData : BaseFakeData<Skill>
             new ()
             {
                 Id = 2,
-                Name = "Data Analysis",
+                Name = "Java",
                 Degree = 3.8
             }
         };
