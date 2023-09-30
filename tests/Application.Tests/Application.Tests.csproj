@@ -38,7 +38,6 @@
     <Folder Include="Features\Experiences\Commands\Update\" />
     <Folder Include="Features\Experiences\Constants\" />
     <Folder Include="Features\Experiences\Queries\GetById\" />
-    <Folder Include="Features\Experiences\Queries\GetList\" />
   </ItemGroup>
 
 </Project>

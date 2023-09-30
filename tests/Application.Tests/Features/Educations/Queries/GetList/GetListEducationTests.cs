@@ -1,4 +1,5 @@
-﻿using Application.Tests.Mocks.FakeData;
+﻿using Application.Tests.Constants;
+using Application.Tests.Mocks.FakeData;
 using Application.Tests.Mocks.Repositories;
 using asari.com.tr.Application.Features.Educations.Queries.GetList;
 using Core.Application.Requests;
@@ -20,6 +21,7 @@ public class GetListEducationTests : EducationMockRepository
     }
 
     [Fact]
+    [Trait(TestCategories.BusinessRulesCategori, TestCategories.ToplamVeriCategori)]
     public async Task TumEgitimVerilerininToplamSayiKarsilastirilmaTesti()
     {
         _getListEducationQuery.PageRequest = new PageRequest { Page = 0, PageSize = 15 };
@@ -28,6 +30,7 @@ public class GetListEducationTests : EducationMockRepository
     }
 
     [Fact]
+    [Trait(TestCategories.BusinessRulesCategori, TestCategories.VeriAramaCategori)]
     public async Task EgitimAdinaGoreVeriKontrolTesti()
     {
         _getListEducationQuery.PageRequest = new PageRequest { Page = 0, PageSize = 15 };

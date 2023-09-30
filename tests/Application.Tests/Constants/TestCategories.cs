@@ -24,5 +24,7 @@ public static class TestCategories
 
     #region BusinessRules - İş Kuralı Kategorisi
     public const string OlmayanVeriCategori = "Olmayan Veri Testi";
+    public const string ToplamVeriCategori = "Toplam Veri Testi";
+    public const string VeriAramaCategori = "Veri Arama Testi";
     #endregion
 }

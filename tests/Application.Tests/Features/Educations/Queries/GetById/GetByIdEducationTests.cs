@@ -21,6 +21,7 @@ public class GetByIdEducationTests : EducationMockRepository
     }
 
     [Fact]
+    [Trait(TestCategories.BusinessRulesCategori, TestCategories.VeriAramaCategori)]
     public async Task EducationIdsineGoreAramaTesti()
     {
         _query.Id = EducationTestData.UpdateId;
