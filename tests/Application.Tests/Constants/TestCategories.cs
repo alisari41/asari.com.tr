@@ -26,5 +26,6 @@ public static class TestCategories
     public const string OlmayanVeriCategori = "Olmayan Veri Testi";
     public const string ToplamVeriCategori = "Toplam Veri Testi";
     public const string VeriAramaCategori = "Veri Arama Testi";
+    public const string DuplicateVeriCategori = "Duplicate Veri Testi";
     #endregion
 }

@@ -3,14 +3,15 @@
 public static class SkillTestData
 {
     #region Create
-    public const string CreateName = "C#";
-    public const double CreateDegree = 90.5;
+    public const string CreateName = "C++";
+    public const string CreateVarolanName = "C#";
+    public const double CreateDegree = 4.5;
     #endregion
 
     #region Update
     public const int UpdateId = 1;
-    public const string UpdateName = "Uğdated - C#";
-    public const double UpdateDegree = 85.0;
+    public const string UpdateName = "Updated - C#";
+    public const double UpdateDegree = 5.0;
     #endregion
 
     #region Delete

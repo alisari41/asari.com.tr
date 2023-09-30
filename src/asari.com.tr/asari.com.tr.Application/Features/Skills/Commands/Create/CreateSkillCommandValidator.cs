@@ -28,12 +28,12 @@ public class CreateSkillCommandValidator : AbstractValidator<CreateSkillCommand>
 
         string stringValue = value.ToString();
 
-        if (!stringValue.Contains("."))
+        if (!stringValue.Contains(","))
         {
             return true; // Virgül yoksa, kabul et
         }
 
-        string[] parts = stringValue.Split('.');
+        string[] parts = stringValue.Split(',');
 
         if (parts[1].Length != 1)
         {

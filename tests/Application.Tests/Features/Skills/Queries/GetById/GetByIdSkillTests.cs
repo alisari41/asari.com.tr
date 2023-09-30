@@ -28,7 +28,7 @@ public class GetByIdSkillTests : SkillMockRepository
     {
         _query.Id = SkillTestData.UpdateId;
         GetByIdSkillResponse result = await _handler.Handle(_query, CancellationToken.None);
-        Assert.Equal(expected: SkillTestData.CreateName, result.Name);
+        Assert.Equal(expected: SkillTestData.CreateVarolanName, result.Name);
     }
 
     [Fact]
