@@ -33,6 +33,12 @@
 
   <ItemGroup>
     <Folder Include="Features\Educations\Queries\GetById\" />
+    <Folder Include="Features\Experiences\Commands\Create\" />
+    <Folder Include="Features\Experiences\Commands\Delete\" />
+    <Folder Include="Features\Experiences\Commands\Update\" />
+    <Folder Include="Features\Experiences\Constants\" />
+    <Folder Include="Features\Experiences\Queries\GetById\" />
+    <Folder Include="Features\Experiences\Queries\GetList\" />
   </ItemGroup>
 
 </Project>

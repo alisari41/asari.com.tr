@@ -18,6 +18,7 @@ public static class EducationServiceRegistration
         services.AddTransient<UpdateEducationCommand>();
         services.AddTransient<GetByIdEducationQuery>();
         services.AddTransient<GetListEducationQuery>();
+
         #region FluentValidation
         services.AddTransient<CreateEducationCommandValidator>();
         services.AddTransient<DeleteEducationCommandValidator>();
