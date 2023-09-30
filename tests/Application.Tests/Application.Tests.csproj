@@ -34,7 +34,6 @@
   <ItemGroup>
     <Folder Include="Features\Educations\Queries\GetById\" />
     <Folder Include="Features\Experiences\Commands\Delete\" />
-    <Folder Include="Features\Experiences\Commands\Update\" />
   </ItemGroup>
 
 </Project>
