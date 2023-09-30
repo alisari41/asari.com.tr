@@ -33,7 +33,7 @@ public class GetByIdEducationTests : EducationMockRepository
     [Trait(TestCategories.BusinessRulesCategori, TestCategories.OlmayanVeriCategori)]
     public async Task EducationTablosundaOlmayanVeriyiAramaTesti()
     {
-        _query.Id = EducationTestData.UpdateBulunmayanId;
+        _query.Id = EducationTestData.NonexistentId;
         await Assert.ThrowsAsync<BusinessException>(async () => await _handler.Handle(_query, CancellationToken.None));
     }
 }

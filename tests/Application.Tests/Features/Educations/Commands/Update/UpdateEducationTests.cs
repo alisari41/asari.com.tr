@@ -206,7 +206,7 @@ public class UpdateEducationTests : EducationMockRepository
     [Trait(TestCategories.BusinessRulesCategori, TestCategories.OlmayanVeriCategori)]
     public async Task EducationTablosundaOlmayanVeriyiGuncellemeTesti()
     {
-        _command.Id = EducationTestData.UpdateBulunmayanId;
+        _command.Id = EducationTestData.NonexistentId;
         _command.Name = EducationTestData.UpdateName;
         _command.FieldOfStudy = EducationTestData.UpdateFieldOfStudy;
         _command.Grade = EducationTestData.UpdateGrade;

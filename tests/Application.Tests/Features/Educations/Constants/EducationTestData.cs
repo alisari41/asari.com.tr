@@ -16,21 +16,23 @@ public static class EducationTestData
 
     #region Update
     public const int UpdateId = 1;
-    public const int UpdateBulunmayanId = 41;
-    public const string UpdateName = "Update - Derince Ticaret Meslek";
-    public const string UpdateFieldOfStudy = "Update - Bilişim Teknolojileri / Veri Tabanı Programcılığı Dalı";
-    public const string UpdateGrade = "Update - Lise";
+    public const string UpdateName = "Updated - Derince Ticaret Meslek";
+    public const string UpdateFieldOfStudy = "Updated - Bilişim Teknolojileri / Veri Tabanı Programcılığı Dalı";
+    public const string UpdateGrade = "Updated - Lise";
     public static readonly DateTime UpdateStartDate = new DateTime(2012, 10, 18);
     public static readonly DateTime UpdateEndDateOrExcepted = new DateTime(2016, 7, 18);
     public const double UpdateDegree = 80.41;
-    public const string UpdateActivityAndCommunity = null;
-    public const string UpdateDescription = "Update";
-    public const string UpdateMediaUrl = null;
+    public const string UpdateActivityAndCommunity = "Updated - Activities";
+    public const string UpdateDescription = "Updated - Description";
+    public const string UpdateMediaUrl = "Updated - MediaUrl";
     #endregion
 
     #region Delete
     public const int DeleteId = 1;
-    public const int DeleteBulunmayanId = 41;
+    #endregion
+
+    #region Tabloda Bulunmayan Id
+    public const int NonexistentId = 41;
     #endregion
 
 }

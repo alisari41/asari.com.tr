@@ -1,7 +1,6 @@
 ﻿using Application.Tests.Constants;
 using Application.Tests.Mocks.FakeData;
 using Application.Tests.Mocks.Repositories;
-using asari.com.tr.Application.Features.Educations.Queries.GetList;
 using asari.com.tr.Application.Features.Experiences.Queries.GetList;
 using Core.Application.Requests;
 using Core.Persistence.Paging;

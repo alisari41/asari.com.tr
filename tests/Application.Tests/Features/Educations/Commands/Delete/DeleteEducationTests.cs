@@ -54,7 +54,7 @@ public class DeleteEducationTests : EducationMockRepository
     [Trait(TestCategories.BusinessRulesCategori, TestCategories.OlmayanVeriCategori)]
     public async Task EducationTablosundaOlmayanVeriyiSilmeTesti()
     {
-        _command.Id = EducationTestData.DeleteBulunmayanId;
+        _command.Id = EducationTestData.NonexistentId;
 
         await Assert.ThrowsAsync<BusinessException>(async () => await _handler.Handle(_command, CancellationToken.None));
     }
