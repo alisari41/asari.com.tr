@@ -24,16 +24,16 @@ public class ExperienceFakeData : BaseFakeData<Experience>
             },
             new () {
                 Id = 2,
-                Title = "Data Analyst", // Deneyim başlığı
-                EmploymentType = "Contract", // İş türü
-                CompanyName = "XYZ Data Solutions", // Şirket adı
-                Location = "San Francisco", // Konum
-                Statu = false, // Durum (Aktif değil)
-                StartDate = DateTime.Parse("2021-09-01"), // Başlangıç tarihi
-                EndDate = DateTime.Parse("2022-06-30"), // Bitiş tarihi
-                Industry = "Data Analysis", // Endüstri
-                Description = "Performed data analysis and generated reports.", // Açıklama
-                ProfileHeadline = "Experienced Data Analyst" // Profil başlığı
+                Title = "Data Analyst",
+                EmploymentType = "Contract",
+                CompanyName = "XYZ Data Solutions",
+                Location = "San Francisco",
+                Statu = false,
+                StartDate = DateTime.Parse("2021-09-01"),
+                EndDate = DateTime.Parse("2022-06-30"),
+                Industry = "Data Analysis",
+                Description = "Performed data analysis and generated reports.",
+                ProfileHeadline = "Experienced Data Analyst"
             }
         };
         return data;

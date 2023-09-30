@@ -10,7 +10,7 @@ namespace Application.Tests.DependencyResolvers;
 
 public static class ExperienceServiceRegistration
 {
-    public static void AddExperienceSerives(this IServiceCollection services)
+    public static void AddExperienceServices(this IServiceCollection services)
     {
         services.AddTransient<ExperienceFakeData>();
         services.AddTransient<CreateExperienceCommand>();
