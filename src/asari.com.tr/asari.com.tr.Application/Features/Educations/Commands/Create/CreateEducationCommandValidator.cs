@@ -1,5 +1,4 @@
 ﻿using asari.com.tr.Application.Features.Educations.Constants;
-using asari.com.tr.Application.Services.Repositories;
 using FluentValidation;
 
 namespace asari.com.tr.Application.Features.Educations.Commands.Create;

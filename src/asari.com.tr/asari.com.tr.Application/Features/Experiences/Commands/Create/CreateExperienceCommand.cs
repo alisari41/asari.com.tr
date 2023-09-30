@@ -16,7 +16,7 @@ public class CreateExperienceCommand : IRequest<CreatedExperienceResponse>, ISec
     public string CompanyName { get; set; }
     public string Location { get; set; }
     public bool Statu { get; set; }
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public string Industry { get; set; }
     public string Description { get; set; }

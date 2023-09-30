@@ -25,5 +25,12 @@ public static class ExperienceMessages
         public const string LocationMaxKarakter = "'Konum' en fazla 250 karakter olmalıdır.";
         public const string IndustryMaxKarakter = "'Sektör alanı' en fazla 250 karakter olmalıdır.";
         #endregion
+        #region Min Karakter Uzunluğu
+        public const string TitleMinKarakter = "Deneyim 'Title' alanı en az 3 karakter olmalıdır.";
+        public const string EmploymentTypeMinKarakter = "Deneyim 'EmploymentType' alanı en az 3 karakter olmalıdır.";
+        public const string CompanyNameMinKarakter = "Deneyim 'CompanyName' alanı en az 3 karakter olmalıdır.";
+        public const string LocationMinKarakter = "Deneyim 'Location' alanı en az 3 karakter olmalıdır.";
+        public const string IndustryMinKarakter = "Deneyim 'Industry' alanı en az 3 karakter olmalıdır.";
+        #endregion
     #endregion
 }

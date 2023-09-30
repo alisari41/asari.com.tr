@@ -5,7 +5,6 @@ using Application.Tests.Mocks.Repositories;
 using asari.com.tr.Application.Features.Educations.Commands.Create;
 using Core.Test.Application.Constants;
 using FluentValidation.Results;
-using System.Diagnostics;
 using Xunit;
 using static asari.com.tr.Application.Features.Educations.Commands.Create.CreateEducationCommand;
 
