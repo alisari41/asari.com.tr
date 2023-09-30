@@ -12,7 +12,7 @@ namespace asari.com.tr.Application.Features.Experiences.Commands.Delete;
 
 public class DeleteExperienceCommand : IRequest<DeletedExperienceResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
