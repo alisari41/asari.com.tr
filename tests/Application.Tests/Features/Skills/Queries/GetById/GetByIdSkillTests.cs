@@ -1,9 +1,7 @@
 ﻿using Application.Tests.Constants;
 using Application.Tests.Mocks.FakeData;
 using asari.com.tr.Application.Features.Skills.Queries.GetById;
-using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
-using Moq;
 using static asari.com.tr.Application.Features.Skills.Queries.GetById.GetByIdSkillQuery;
 using Xunit;
 using Application.Tests.Mocks.Repositories;
@@ -38,5 +36,4 @@ public class GetByIdSkillTests : SkillMockRepository
         _query.Id = SkillTestData.NonexistentId;
         await Assert.ThrowsAsync<BusinessException>(async () => await _handler.Handle(_query, CancellationToken.None));
     }
-
 }
