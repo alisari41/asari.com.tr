@@ -87,7 +87,7 @@ public class UpdateSkillTests : SkillMockRepository
     #endregion
 
 
-    [Fact(DisplayName = "Yetenek tablosunda olan yeteneği tekrar güncellemek istediğimizde BusinessRules Testi")]
+    [Fact(DisplayName = "Yetenek tablosunda olan yeteneği adında başka veri güncellemek istediğimizde BusinessRules Testi")]
     [Trait(TestCategories.BusinessRulesCategori, TestCategories.DuplicateVeriCategori)]
     public async Task SkillTablosundaOlanIsimdeVerigüncellemeTesti()
     {
@@ -109,5 +109,18 @@ public class UpdateSkillTests : SkillMockRepository
 
         UpdatedSkillResponse result = await _handler.Handle(_command, CancellationToken.None);
         Assert.Equal(expected: SkillTestData.UpdateName, result.Name);
+    }
+
+    [Fact(DisplayName = "Yetenek tablosunda olmayan veriyi güncellemek istediğimizde BusinessRules Testi")]
+    [Trait(TestCategories.BusinessRulesCategori, TestCategories.OlmayanVeriCategori)]
+    public async Task SkillTablosundaOlmayanVeriyiGuncellemeTesti()
+    {
+        _command.Id = SkillTestData.NonexistentId;
+        _command.Name = SkillTestData.UpdateName;
+        _command.Degree = SkillTestData.UpdateDegree;
+
+        var exception = await Assert.ThrowsAsync<BusinessException>(async () => await _handler.Handle(_command, CancellationToken.None));
+
+        Assert.Contains(SkillMessages.YetenekMevcutDegil, exception.Message);
     }
 }

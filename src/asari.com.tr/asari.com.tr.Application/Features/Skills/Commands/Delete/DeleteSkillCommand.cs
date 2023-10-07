@@ -12,7 +12,7 @@ namespace asari.com.tr.Application.Features.Skills.Commands.Delete;
 
 public class DeleteSkillCommand : IRequest<DeletedSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
