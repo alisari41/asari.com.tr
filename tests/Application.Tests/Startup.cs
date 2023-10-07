@@ -8,6 +8,7 @@ public sealed class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddEducationServices();
+        services.AddEducationSkillServices();
         services.AddExperienceServices();
         services.AddSkillServices();
     }

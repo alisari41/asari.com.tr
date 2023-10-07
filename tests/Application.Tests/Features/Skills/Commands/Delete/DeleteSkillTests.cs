@@ -5,7 +5,6 @@ using Application.Tests.Mocks.Repositories;
 using asari.com.tr.Application.Features.Skills.Commands.Delete;
 using asari.com.tr.Application.Features.Skills.Constants;
 using Core.CrossCuttingConcerns.Exceptions.Types;
-using Core.Test.Application.Constants;
 using FluentValidation.Results;
 using Xunit;
 using static asari.com.tr.Application.Features.Skills.Commands.Delete.DeleteSkillCommand;
