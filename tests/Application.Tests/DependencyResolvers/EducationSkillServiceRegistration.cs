@@ -12,7 +12,7 @@ public static class EducationSkillServiceRegistration
 {
     public static void AddEducationSkillServices(this IServiceCollection services)
     {
-        services.AddTransient<SkillFakeData>();
+        services.AddTransient<EducationSkillFakeData>();
         services.AddTransient<CreateEducationSkillCommand>();
         services.AddTransient<DeleteEducationSkillCommand>();
         services.AddTransient<UpdateEducationSkillCommand>();
