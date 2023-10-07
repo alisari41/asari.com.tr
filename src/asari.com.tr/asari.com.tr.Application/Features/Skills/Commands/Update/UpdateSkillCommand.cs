@@ -12,7 +12,7 @@ namespace asari.com.tr.Application.Features.Skills.Commands.Update;
 
 public class UpdateSkillCommand : IRequest<UpdatedSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public string Name { get; set; }
     public double? Degree { get; set; }
 

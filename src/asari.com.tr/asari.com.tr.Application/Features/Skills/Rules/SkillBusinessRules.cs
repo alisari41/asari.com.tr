@@ -21,7 +21,7 @@ public class SkillBusinessRules : BaseBusinessRules
         if (skill == null) throw new BusinessException(SkillMessages.YetenekMevcutDegil);
     }
 
-    public async Task SkillShouldExistWhenRequested(int id)
+    public async Task SkillShouldExistWhenRequested(int? id)
     {
         Skill? result = await _skillRepository.GetAsync(x => x.Id == id, enableTracking: false);
         SkillShouldExistWhenRequested(result);

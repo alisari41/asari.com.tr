@@ -10,6 +10,7 @@ public static class SkillTestData
 
     #region Update
     public const int UpdateId = 1;
+    public const string UpdateVarolanName = "Java";
     public const string UpdateName = "Updated - C#";
     public const double UpdateDegree = 5.0;
     #endregion
