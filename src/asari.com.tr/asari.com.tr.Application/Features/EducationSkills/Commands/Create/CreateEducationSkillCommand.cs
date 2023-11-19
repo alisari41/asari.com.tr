@@ -14,8 +14,8 @@ namespace asari.com.tr.Application.Features.EducationSkills.Commands.Create;
 
 public class CreateEducationSkillCommand : IRequest<CreatedEducationSkillResponse>, ISecuredRequest, ICacheRemoverRequest
 {
-    public int EducationId { get; set; }
-    public int SkillId { get; set; }
+    public int? EducationId { get; set; }
+    public int? SkillId { get; set; }
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

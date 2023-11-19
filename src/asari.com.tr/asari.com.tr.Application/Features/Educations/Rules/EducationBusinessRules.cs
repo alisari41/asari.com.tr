@@ -20,7 +20,7 @@ public class EducationBusinessRules : BaseBusinessRules
         if (education == null) throw new BusinessException(EducationMessages.EgitimMevcutDegil);
     }
 
-    public async Task EducationShouldExistWhenRequested(int id)
+    public async Task EducationShouldExistWhenRequested(int? id)
     {
         Education? result = await _educationRepository.GetAsync(x => x.Id == id, enableTracking: false);
         EducationShouldExistWhenRequested(result);

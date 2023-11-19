@@ -26,7 +26,7 @@ public class EducationSkillBusinessRules : BaseBusinessRules
         EducationSkillShouldExistWhenRequested(result);
     }
 
-    public async Task EducationSkillConNotBeDuplicatedWhenInserted(int educationId, int skillId)
+    public async Task EducationSkillConNotBeDuplicatedWhenInserted(int? educationId, int? skillId)
     {
         EducationSkill? result = await _educationSkillRepository.GetAsync(x => (x.EducationId == educationId) && (x.SkillId == skillId));
         if (result != null) throw new BusinessException(EducationSkillMessages.EgitimYetenegiMevcut);

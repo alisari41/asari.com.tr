@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\EducationSkills\Commands\Create\" />
     <Folder Include="Features\EducationSkills\Commands\Delete\" />
     <Folder Include="Features\EducationSkills\Commands\Update\" />
     <Folder Include="Features\Educations\Queries\GetById\" />
